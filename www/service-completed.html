@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title</title>
+    <!--  CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link href="css/main.css" rel="stylesheet">
+
+    <!-- js-->
+    <script src="jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/fontawesomeV5.js"></script>
+  </head>
+  <body>
+    <!-- Fixed navbar -->
+    <div id='MainNavbar'></div>
+    <div id="services" class="text-center">
+      <!-- Nav tabs -->
+      <div id="myTabs" class=" btn-group btn-group-justified" data-toggle="buttons" role="group" aria-label="...">
+        <div class="btn-group" role="group">
+          <label data-target="#in-pgrogress" class="btn-lg btn tab-btn-custom active" aria-controls="in-pgrogress" data-toggle="tab">
+            <input type="radio" name="service-type" id="InProgress" autocomplete="off"> En progreso
+          </label>
+        </div>
+        <div class="btn-group" role="group">
+          <label data-target="#history" class="btn-lg btn tab-btn-custom" aria-controls="history" data-toggle="tab">
+             <input type="radio" name="service-type" id="History" autocomplete="off"> Historial
+          </label>
+        </div>
+      </div>
+      <!-- Tab panes -->
+      <div class="tab-content container">
+        <div role="tabpanel" class="tab-pane fade in active" id="in-pgrogress">
+          <h1 class="service-completed">100%</h1>
+          <h3>Servicios concluidos.</h3>
+          <h3>Ya puede pasar por su unidad</h3>
+          <div class="row">
+            <div class="col-xs-6 col-xs-offset-3">
+              <form class="form-horizontal">
+                <div class="form-group">
+                  <label  class="col-sm-6 control-label" for="inputUsuario">Fecha de ingreso</label>
+                  <div class="col-sm-6">
+                    <input type="email" id="inputUsuario" class="form-control" placeholder="Usuario" required autofocus>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label  class="col-sm-6 control-label" for="inputUsuario">Fecha de termino</label>
+                  <div class="col-sm-6">
+                    <input type="email" id="inputUsuario" class="form-control" placeholder="Usuario" required autofocus>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-6 col-xs-offset-3">
+              <a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample"></a>
+              <div class="collapse" id="collapseExample">
+                <div class="well">
+                  details
+                </div>
+              </div>
+            </div>
+          </div>
+        <div role="tabpanel" class="tab-pane fade" id="history">
+
+        </div>
+      </div>
+    <div>
+  </body>
+</html>
