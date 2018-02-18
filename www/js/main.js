@@ -197,15 +197,21 @@ function gridDetalleInspeccionItem(){
     }); 
 }
 
-function dialogPrompt() {
-var options = {
-  date: new Date(),
-  mode: 'date'
-};
+function dialogPrompt(){
+    var devicePlatform = device.platform;
+alert(devicePlatform);
+    minDate =new Date();
+    minDate=minDate.getMilliseconds();
+    var options = {
+      date: new Date(),
+      mode: 'date',
+      minDate: minDate,
+      titleText:"Posponer"
+    };
 
-datePicker.show(options, function(date){
-  alert("date result " + date);  
-});
+    datePicker.show(options, function(date){
+      alert("date result " +  [pad(date.getDate()), pad(date.getMonth()+1), date.getFullYear()].join('/'));  
+    });
    /*var message = "Am I Prompt Dialog?";
    var title = "PROMPT";
    var buttonLabels = ["YES","NO"];

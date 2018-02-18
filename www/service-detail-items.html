@@ -37,5 +37,15 @@
     $(document).ready(function() {
         gridDetalleInspeccionItem();
     });  
+    document.addEventListener("deviceready", onDeviceReady, false);
+
+ function onDeviceReady() {
+        var vInfo =  'Device Name: '     + device.name     + '\n' +
+                            'Device Cordova: '  + device.cordova  + '\n' +
+                            'Device Platform: ' + device.platform + '\n' +
+                            'Device UUID: '     + device.uuid     + '\n' +
+                            'Device Version: '  + device.version;
+       alert(vInfo);
+    }
 </script>
 
