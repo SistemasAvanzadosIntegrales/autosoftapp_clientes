@@ -204,6 +204,7 @@ function dialogPrompt(){
     /*alert(minDate.getTime());
     alert(minDate.getDate()+" "+(minDate.getMonth()+1)+" "+minDate.getFullYear());*/
     
+    alert(devicePlatform);
     if(devicePlatform=="Andriod"){
         var options = {
           date: new Date(),
