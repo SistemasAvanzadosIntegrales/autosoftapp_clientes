@@ -198,7 +198,15 @@ function gridDetalleInspeccionItem(){
 }
 
 function dialogPrompt() {
-   var message = "Am I Prompt Dialog?";
+var options = {
+  date: new Date(),
+  mode: 'date'
+};
+
+datePicker.show(options, function(date){
+  alert("date result " + date);  
+});
+   /*var message = "Am I Prompt Dialog?";
    var title = "PROMPT";
    var buttonLabels = ["YES","NO"];
    var defaultText = "Default"
@@ -209,5 +217,5 @@ function dialogPrompt() {
       console.log("You clicked " + result.buttonIndex + " button! \n" + 
          "You entered " +  result.input1);
    }
-	
+*/	
 }
