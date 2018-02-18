@@ -163,5 +163,51 @@ function gridDetalleInspeccion(){
 }
 
 function detalle_inspeccion(id){
-    location.href = 'service-detail-items.html';
+    location.href = 'service-detail-items.html?id='+id;
+}
+
+function gridDetalleInspeccionItem(){    
+		
+    $("#items").html("");
+    var token = localStorage.getItem('token');
+    var inspections_id=14;
+    let params =  (new URL(location)).searchParams;
+	
+    $.ajax({
+        url: ruta_generica+"inspection_detail_item",
+        type: 'POST',
+        dataType: 'JSON',
+        data: {
+            token:      token,
+            vehicle_inspection:     params.get('id')
+        },
+        success:function(resp) {
+            
+            if( resp.status == 'ok' ) {
+               $("#service-detail-items").html(resp.message);
+            }
+            else {		
+                $("#alertaLogin").html(resp.message).show();
+            }
+        }, 
+        error: function(XMLHttpRequest, textStatus, errorThrown) { 
+            console.log("Status: " + textStatus); 
+            console.log("Error: " + errorThrown); 
+        }
+    }); 
+}
+
+function dialogPrompt() {
+   var message = "Am I Prompt Dialog?";
+   var title = "PROMPT";
+   var buttonLabels = ["YES","NO"];
+   var defaultText = "Default"
+   navigator.notification.prompt(message, promptCallback, 
+      title, buttonLabels, defaultText);
+
+   function promptCallback(result) {
+      console.log("You clicked " + result.buttonIndex + " button! \n" + 
+         "You entered " +  result.input1);
+   }
+	
 }
