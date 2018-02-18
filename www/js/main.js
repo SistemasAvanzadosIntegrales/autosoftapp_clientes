@@ -200,9 +200,14 @@ function gridDetalleInspeccionItem(){
 function dialogPrompt(){
     var devicePlatform = device.platform;
 alert(devicePlatform);
+    alert(minDate);
+    
     minDate =new Date();
-    minDate=minDate.getMilliseconds();
-    var options = {
+    alert(minDate.getMilliseconds());
+    alert([pad(date.getDate()), pad(date.getMonth()+1), date.getFullYear()].join('/'));
+    
+    //minDate=minDate.getMilliseconds();
+    /*var options = {
       date: new Date(),
       mode: 'date',
       minDate: minDate,
@@ -225,3 +230,4 @@ alert(devicePlatform);
    }
 */	
 }
+
