@@ -198,24 +198,25 @@ function gridDetalleInspeccionItem(){
 }
 
 function dialogPrompt(){
-    var devicePlatform = device.platform;
-alert(devicePlatform);
-    alert(minDate);
+    var devicePlatform = device.platform;    
     
     minDate =new Date();
-    alert(minDate.getMilliseconds());
-    alert([pad(date.getDate()), pad(date.getMonth()+1), date.getFullYear()].join('/'));
+    /*alert(minDate.getTime());
+    alert(minDate.getDate()+" "+(minDate.getMonth()+1)+" "+minDate.getFullYear());*/
     
-    //minDate=minDate.getMilliseconds();
-    /*var options = {
-      date: new Date(),
-      mode: 'date',
-      minDate: minDate,
-      titleText:"Posponer"
-    };
+    if(devicePlatform=="Andriod"){
+        var options = {
+          date: new Date(),
+          mode: 'date',
+          minDate: minDate.getTime(),
+          titleText:"Posponer",
+          okText:"Aceptar",
+          cancelText:"Cancelar"
+        };
+    }
 
     datePicker.show(options, function(date){
-      alert("date result " +  [pad(date.getDate()), pad(date.getMonth()+1), date.getFullYear()].join('/'));  
+      alert("date result " +  date.getDate()+" "+(date.getMonth()+1)+" "+date.getFullYear());  
     });
    /*var message = "Am I Prompt Dialog?";
    var title = "PROMPT";
