@@ -197,7 +197,7 @@ function gridDetalleInspeccionItem(){
     }); 
 }
 
-function dialogPrompt(){
+function posponer(){
     var devicePlatform = device.platform;    
     
     minDate =new Date();
@@ -205,7 +205,7 @@ function dialogPrompt(){
     /*alert(minDate.getDate()+" "+(minDate.getMonth()+1)+" "+minDate.getFullYear());*/
     
     alert(devicePlatform);
-   // if(devicePlatform=="Andriod"){
+    if(devicePlatform=="Android"){
         var options = {
           date: new Date(),
           mode: 'date',
@@ -214,22 +214,23 @@ function dialogPrompt(){
           okText:"Aceptar",
           cancelText:"Cancelar"
         };
-   // }
+    }
 
     datePicker.show(options, function(date){
       alert("date result " +  date.getDate()+" "+(date.getMonth()+1)+" "+date.getFullYear());  
     });
-   /*var message = "Am I Prompt Dialog?";
-   var title = "PROMPT";
-   var buttonLabels = ["YES","NO"];
-   var defaultText = "Default"
-   navigator.notification.prompt(message, promptCallback, 
-      title, buttonLabels, defaultText);
-
-   function promptCallback(result) {
-      console.log("You clicked " + result.buttonIndex + " button! \n" + 
-         "You entered " +  result.input1);
-   }
-*/	
 }
 
+function rechazar(){
+   var message = "Ingrese motivo para rechazo:";
+   var title = "Rechazar";
+   var buttonLabels = ["Cancelar","Aceptar"];
+    
+   navigator.notification.prompt(message, promptCallback, 
+      title, buttonLabels);
+
+   function promptCallback(result) {
+      alert("You clicked " + result.buttonIndex + " button! \n" + 
+         "You entered " +  result.input1);
+   }
+}
