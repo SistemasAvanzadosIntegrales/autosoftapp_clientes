@@ -234,3 +234,16 @@ function rechazar(){
          "You entered " +  result.input1);
    }
 }
+
+function aceptar(){
+  function onConfirm(buttonIndex) {
+    alert('You selected button ' + buttonIndex);
+}
+
+navigator.notification.confirm(
+    'You are the winner!', // message
+     onConfirm,            // callback to invoke with index of button pressed
+    'Game Over',           // title
+    ['Restart','Exit']     // buttonLabels
+);
+}
