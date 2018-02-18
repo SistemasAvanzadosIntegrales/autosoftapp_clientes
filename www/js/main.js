@@ -201,11 +201,11 @@ function dialogPrompt(){
     var devicePlatform = device.platform;    
     
     minDate =new Date();
-    /*alert(minDate.getTime());
-    alert(minDate.getDate()+" "+(minDate.getMonth()+1)+" "+minDate.getFullYear());*/
+    alert(minDate.getTime());
+    /*alert(minDate.getDate()+" "+(minDate.getMonth()+1)+" "+minDate.getFullYear());*/
     
     alert(devicePlatform);
-    if(devicePlatform=="Andriod"){
+   // if(devicePlatform=="Andriod"){
         var options = {
           date: new Date(),
           mode: 'date',
@@ -214,7 +214,7 @@ function dialogPrompt(){
           okText:"Aceptar",
           cancelText:"Cancelar"
         };
-    }
+   // }
 
     datePicker.show(options, function(date){
       alert("date result " +  date.getDate()+" "+(date.getMonth()+1)+" "+date.getFullYear());  
