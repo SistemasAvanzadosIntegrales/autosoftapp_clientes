@@ -201,7 +201,7 @@ function posponer(){
     var devicePlatform = device.platform;    
     
     minDate =new Date();
-    alert(minDate.getTime());
+    //alert(minDate.getTime());
     /*alert(minDate.getDate()+" "+(minDate.getMonth()+1)+" "+minDate.getFullYear());*/
     
     alert(devicePlatform);
@@ -214,10 +214,20 @@ function posponer(){
           okText:"Aceptar",
           cancelText:"Cancelar"
         };
+    }else{
+        var options = {
+          date: new Date(),
+          mode: 'date',
+          minDate: minDate,
+          titleText:"Posponer",
+          okText:"Aceptar",
+          cancelText:"Cancelar"
+        };        
     }
 
     datePicker.show(options, function(date){
-      alert("date result " +  date.getDate()+" "+(date.getMonth()+1)+" "+date.getFullYear());  
+      alert("date result " +date.getFullYear()+"/"+(date.getMonth()+1)+"/"+date.getDate());
+      //madarResultado(2,0,0);
     });
 }
 
@@ -230,20 +240,55 @@ function rechazar(){
       title, buttonLabels);
 
    function promptCallback(result) {
-      alert("You clicked " + result.buttonIndex + " button! \n" + 
-         "You entered " +  result.input1);
+       if(result.buttonIndex==2){
+            alert('rechazaste por '+result.input1);
+             //madarResultado(3,0,0);
+        }      
    }
 }
 
 function aceptar(){
-  function onConfirm(buttonIndex) {
-    alert('You selected button ' + buttonIndex);
+    function onConfirm(buttonIndex) {
+        if(buttonIndex==1){
+            alert('Aceptaste');
+             //madarResultado(1,0,0);
+        }
+    }
+    navigator.notification.confirm(
+        '¿Desea que sea reparado?', // message
+         onConfirm,            // callback to invoke with index of button pressed
+        'Aprobar',           // title
+        ['Aprobar','Cancelar']     // buttonLabels
+    );
 }
 
-navigator.notification.confirm(
-    'You are the winner!', // message
-     onConfirm,            // callback to invoke with index of button pressed
-    'Game Over',           // title
-    ['Restart','Exit']     // buttonLabels
-);
+function madarResultado(status,fecha,motivo){
+    
+    	
+    var token = localStorage.getItem('token');
+    let params =  (new URL(location)).searchParams;
+	
+    $.ajax({
+        url: ruta_generica+"inspection_client_result",
+        type: 'POST',
+        dataType: 'JSON',
+        data: {
+            token:      token,
+            vehicle_inspection:     params.get('id')
+        },
+        success:function(resp) {
+            
+            if( resp.status == 'ok' ) {
+               $("#service-detail-items").html(resp.message);
+            }
+            else {		
+                $("#alertaLogin").html(resp.message).show();
+            }
+        }, 
+        error: function(XMLHttpRequest, textStatus, errorThrown) { 
+            console.log("Status: " + textStatus); 
+            console.log("Error: " + errorThrown); 
+        }
+    }); 
+    
 }
