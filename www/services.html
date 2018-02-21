@@ -14,6 +14,7 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>    <link href="css/main.css" rel="stylesheet">
     <script src="js/main.js"></script>
+    <script src="js/push.js"></script>
     <link href="css/main.css" rel="stylesheet">
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
   </head> 
@@ -40,65 +41,18 @@
       <!-- Tab panes -->
       <div class="tab-content">
         <div role="tabpanel" class="tab-pane fade in active" id="in-pgrogress">
-          <div class="list-group">
-            <a href="service-details.html" class="list-group-item ">
-              <h4 class="list-group-item-heading">Chevrolet Aveo
-                <small>STD 2018 JJKL34A</small>
-                <i class="fas fa-angle-right pull-right"></i>
-              </h4> 
-            </a>
-            <a href="service-details.html" class="list-group-item">
-              <h4 class="list-group-item-heading">Nissan Mach
-                <small>RTX 2017 AKL14A</small>
-                <i class="fas fa-angle-right pull-right"></i>
-              </h4>
-            </a>
-            <a href="service-details.html#" class="list-group-item">
-              <h4 class="list-group-item-heading">BMW 532WS
-                <small>LS 2017 MSHF892</small>
-                <i class="fas fa-angle-right pull-right"></i>
-              </h4>
-            </a>
-            <a href="service-details.html#" class="list-group-item">
-              <h4 class="list-group-item-heading">Audi A3
-                <small>SS 2018 2344D</small>
-                <i class="fas fa-angle-right pull-right"></i>
-              </h4>
-            </a>
+          <div class="list-group" id="table-services-progress" name="table-services-progress">
           </div>
         </div>
         <div role="tabpanel" class="tab-pane fade" id="history">
-          <div class="list-group">
-            <a href="service-details.html" class="list-group-item">
-              <h4 class="list-group-item-heading">Chevrolet Aveo
-                <small>2STD 2018 JJKL34A</small>
-                <i class="fas fa-angle-right pull-right"></i>
-              </h4>
-            </a>
-            <a href="service-details.html" class="list-group-item">
-              <h4 class="list-group-item-heading">Nissan Mach
-                <small>2RTX 2017 AKL14A</small>
-                <i class="fas fa-angle-right pull-right"></i>
-              </h4>
-            </a>
-            <a href="service-details.html#" class="list-group-item">
-              <h4 class="list-group-item-heading">BMW 532WS
-                <small>2LS 2017 MSHF892</small>
-                <i class="fas fa-angle-right pull-right"></i> 
-              </h4>
-            </a>
-            <a href="service-details.html#" class="list-group-item">
-              <h4 class="list-group-item-heading">Audi A3
-                <small>2SS 2018 2344D</small>
-                <i class="fas fa-angle-right pull-right"></i>
-              </h4>
-            </a>
+          <div class="list-group" id="table-services-history" name="table-services-history">
           </div>
         </div>
       </div>
     <div>
 	<script>
 		apariencia();
+		getservices();
 	</script>
   </body>
 </html>

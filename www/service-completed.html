@@ -10,10 +10,11 @@
     <link href="css/main.css" rel="stylesheet">
 
     <!-- js-->
-    <script src="jquery.min.js"></script>
+    <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/fontawesomeV5.js"></script>
+    <script src="js/servicio-completo.js"></script>
   </head>
   <body>
     <!-- Fixed navbar -->
@@ -42,27 +43,27 @@
             <div class="col-xs-6 col-xs-offset-3">
               <form class="form-horizontal">
                 <div class="form-group">
-                  <label  class="col-sm-6 control-label" for="inputUsuario">Fecha de ingreso</label>
-                  <div class="col-sm-6">
-                    <input type="email" id="inputUsuario" class="form-control" placeholder="Usuario" required autofocus>
+                  <label  class="col-xs-12 text-center" for="inputUsuario">Fecha de ingreso</label>
+                  <div class="col-xs-12"
+                    <p id="in-date" class="form-control-static">2018-12-12</p>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label  class="col-sm-6 control-label" for="inputUsuario">Fecha de termino</label>
-                  <div class="col-sm-6">
-                    <input type="email" id="inputUsuario" class="form-control" placeholder="Usuario" required autofocus>
+                  <label  class="col-xs-12 text-center" for="inputUsuario">Fecha de termino</label>
+                  <div class="col-xs-12">
+                    <p id="out-date" class="form-control-static">2018-12-12</p>
                   </div>
                 </div>
               </form>
             </div>
           </div>
           <div class="row">
-            <div class="col-xs-6 col-xs-offset-3">
-              <a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample"></a>
-              <div class="collapse" id="collapseExample">
-                <div class="well">
-                  details
-                </div>
+            <div class="col-xs-12">
+              <a class="btn btn-link" role="button" data-toggle="collapse" href="#detalles" aria-expanded="false" aria-controls="detalles">
+                Ver detalles <i class="fas fa-angle-down"></i>
+              </a>
+              <div class="collapse" id="detalles">
+
               </div>
             </div>
           </div>
@@ -72,4 +73,9 @@
       </div>
     <div>
   </body>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      get_inspection();
+    })
+  </script>
 </html>
