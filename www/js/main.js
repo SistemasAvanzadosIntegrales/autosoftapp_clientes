@@ -42,7 +42,7 @@ function login(){
 					localStorage.setItem("token", token);
 					localStorage.setItem("color", JSON.stringify(data['conf']));
 					localStorage.setItem("id_cliente", JSON.stringify(data['user']['id']));
-                    localStorage.setItem("rol", JSON.stringify(data['user']['rol']));
+                    localStorage.setItem("rol",        JSON.stringify(data['user']['role']));
 
 					location.href = 'services.html';
 				}
@@ -54,7 +54,7 @@ function login(){
 			}
 		});
 	}
-}
+} 
 
 /**
  *  @author   : Andrea Luna
@@ -345,7 +345,7 @@ function rechazar(){
    function promptCallback(result) {
        if(result.buttonIndex==2){
             navigator.notification.alert('Rechazaste por '+result.input1);
-             madarResultado(4,0,result.input1);
+             madarResultado(3,0,result.input1);
         }      
    }
 }

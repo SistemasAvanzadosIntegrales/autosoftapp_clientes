@@ -1,6 +1,5 @@
 // Add to index.js or the first page that loads with your app.
-// For Intel XDK and please add this to your app.js.
-    
+// For Intel XDK and please add this to your app.js.    
 document.addEventListener('deviceready', function () {    
     // Enable to debug issues.
     // window.plugins.OneSignal.setLogLevel({logLevel: 4, visualLevel: 4});
@@ -17,8 +16,8 @@ document.addEventListener('deviceready', function () {
         })
         .endInit();         
           
-    window.plugins.OneSignal.sendTag("rol",localStorage.getItem("rol")+localStorage.setItem("token"));
-    window.plugins.OneSignal.sendTag("id", localStorage.setItem("id_cliente")+localStorage.setItem("token"));   
+    window.plugins.OneSignal.sendTag("rol",localStorage.getItem("rol")+localStorage.getItem("token"));
+    window.plugins.OneSignal.sendTag("id", localStorage.getItem("id_cliente")+localStorage.getItem("token"));   
 
    
 }, false); 
