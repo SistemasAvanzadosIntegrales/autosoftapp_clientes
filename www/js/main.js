@@ -42,7 +42,9 @@ function login(){
 					localStorage.setItem("token", token);
 					localStorage.setItem("color", JSON.stringify(data['conf']));
 					localStorage.setItem("id_cliente", JSON.stringify(data['user']['id']));
-                    localStorage.setItem("rol",        JSON.stringify(data['rol']));
+                    var rol=JSON.stringify(data['rol']);
+                    rol=rol.replace(/['"]+/g, '');
+                    localStorage.setItem("rol", rol);
 
 					location.href = 'services.html';
 				}

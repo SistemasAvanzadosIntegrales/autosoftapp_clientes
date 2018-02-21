@@ -10,7 +10,11 @@ document.addEventListener('deviceready', function () {
         .startInit("9279844e-0f7c-4469-a616-79df5e864a5a")
         .handleNotificationOpened(notificationOpenedCallback)     
         .handleNotificationReceived(function(jsonData) {
-            alert("Notification received:\n" + JSON.stringify(jsonData.payload.additionalData));
+            //alert("Notification received:\n" + JSON.stringify(jsonData.payload.additionalData));
+            if(jsonData.payload.additionalData.url!=""){
+               location.href=jsonData.payload.additionalData.url+"?inspection_id="+jsonData.payload.additionalData.inspection_id;
+               }
+               
           })
         .endInit();         
           
