@@ -2,8 +2,8 @@ $(document).ready(function(){
   $("#MainNavbar").load("navbar.html");
 });
 
-//var ruta_generica = "http://autosoft2.avansys.com.mx/api/v1/";
-var ruta_generica = "http://172.16.1.30:8000/api/v1/";
+var ruta_generica = "http://autosoft2.avansys.com.mx/api/v1/";
+//var ruta_generica = "http://172.16.1.30:8000/api/v1/";
 
 
 /**
