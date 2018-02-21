@@ -13,7 +13,7 @@ document.addEventListener('deviceready', function () {
         .handleNotificationReceived(function(jsonData) {
             alert("Notification received:\n" + JSON.stringify(jsonData));
             console.log('Did I receive a notification: ' + JSON.stringify(jsonData));
-        })
+          })
         .endInit();         
           
     window.plugins.OneSignal.sendTag("rol",localStorage.getItem("rol")+localStorage.getItem("token"));
