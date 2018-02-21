@@ -3,7 +3,6 @@
 document.addEventListener('deviceready', function () {    
     // Enable to debug issues.
     // window.plugins.OneSignal.setLogLevel({logLevel: 4, visualLevel: 4});
-    
     var notificationOpenedCallback = function(jsonData) {
         console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
     };   
@@ -12,7 +11,6 @@ document.addEventListener('deviceready', function () {
         .handleNotificationOpened(notificationOpenedCallback)     
         .handleNotificationReceived(function(jsonData) {
             alert("Notification received:\n" + JSON.stringify(jsonData.payload.additionalData));
-            console.log('Did I receive a notification: ' + jsonData.payload.additionalData);
           })
         .endInit();         
           
