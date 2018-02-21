@@ -11,8 +11,8 @@ document.addEventListener('deviceready', function () {
         .startInit("9279844e-0f7c-4469-a616-79df5e864a5a")
         .handleNotificationOpened(notificationOpenedCallback)     
         .handleNotificationReceived(function(jsonData) {
-            alert("Notification received:\n" + JSON.stringify(jsonData));
-            console.log('Did I receive a notification: ' + JSON.stringify(jsonData));
+            alert("Notification received:\n" + JSON.stringify(jsonData.payload.additionalData));
+            console.log('Did I receive a notification: ' + jsonData.payload.additionalData);
           })
         .endInit();         
           
