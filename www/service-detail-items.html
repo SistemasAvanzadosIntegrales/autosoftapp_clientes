@@ -4,40 +4,45 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-       <meta http-equiv="Content-Security-Policy" content="default-src *; media-src *;style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
     <title>Title</title>
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <!--  CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link href="css/main.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-    <!-- js-->
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/fontawesomeV5.js"></script>
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>    <link href="css/main.css" rel="stylesheet">
     <script src="cordova.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/push.js"></script>
+    <link href="css/main.css" rel="stylesheet">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
   </head>
+  <style type="text/css" id="apariencia" name="apariencia">
+
+  </style>
   <body>
     <!-- Fixed navbar -->
     <div id='MainNavbar'></div>
-    <div id="service-detail-items" class="container" >
-     
-    </div>
-    
-    <div class="text-center">
-        <div class="form-group">              
-         <button type="button" class="col-xs-4 btn-defaul" onclick="aceptar();">Aprobar</button> 
-         <button type="button" class="col-xs-4 btn-defaul" onclick="posponer();">Posponer</button> 
-         <button type="button" class="col-xs-4 btn-defaul" onclick="rechazar();">Rechazar</button> 
+    <div id="services" class="container">
+        <h2 class="text-muted sub-header tittle text-center" id="tittle">Mis Servicios</h2>
+        <div class="panel panel-default">
+
+            <div class="text-center">
+                <div class="form-group">
+                 <button type="button" class="col-xs-4 btn-defaul" onclick="aceptar();">Aprobar</button>
+                 <button type="button" class="col-xs-4 btn-defaul" onclick="posponer();">Posponer</button>
+                 <button type="button" class="col-xs-4 btn-defaul" onclick="rechazar();">Rechazar</button>
+                </div>
+            </div>
         </div>
     </div>
-  </body> 
+  </body>
 </html>
 
 <script type="text/javascript">
     $(document).ready(function() {
         gridDetalleInspeccionItem();
-    }); 
+    });
 </script>
