@@ -2,10 +2,31 @@ $(document).ready(function(){
   $("#MainNavbar").load("navbar.html");
 });
 
+//var ruta_generica = "http://localhost:8000/api/v1/";
 var ruta_generica = "http://autosoft2.avansys.com.mx/api/v1/";
-//var ruta_generica = "http://172.16.1.30:8000/api/v1/";
 
+function style()
+{
+  var app_settings = JSON.parse(localStorage.getItem('app_settings'));
+  app_settings = app_settings ? app_settings : {"config_company": {"contrast_color": "dddddd", "base_color": "012d4a"}};
+  $('.table thead tr th').css('background', '#'+app_settings.config_company.contrast_color);
+  $(document.body).css('background', '#'+app_settings.config_company.base_color);
+}
 
+function logo(){
+  var app_settings = JSON.parse(localStorage.getItem('app_settings'));
+  var logo = $('#logo');
+  if (logo && app_settings) {
+      if (app_settings.logo)
+      {
+          logo.attr('src', 'data:image/png;base64,'+app_settings.logo)
+      }
+      else {
+          logo.attr('src', 'img/logo.png')
+      }
+   logo.fadeIn();
+  }
+}
 /**
  *  @author   : Andrea Luna
  *  @Contact  : andrea_luna@avansys.com.mx
@@ -42,6 +63,8 @@ function login(){
 					localStorage.setItem("token", token);
 					localStorage.setItem("color", JSON.stringify(data['conf']));
 					localStorage.setItem("id_cliente", JSON.stringify(data['user']['id']));
+                    localStorage.setItem("app_settings", JSON.stringify(data));
+
                     var rol=JSON.stringify(data['rol']);
                     rol=rol.replace(/['"]+/g, '');
                     localStorage.setItem("rol", rol);
@@ -56,7 +79,7 @@ function login(){
 			}
 		});
 	}
-} 
+}
 
 /**
  *  @author   : Andrea Luna
@@ -65,10 +88,12 @@ function login(){
  *  @function : apariencia
  **/
 function apariencia(){
-	var colores = JSON.parse(localStorage.getItem('color'));
+	//var colores = JSON.parse(localStorage.getItem('color'));
 
-	$("#myTabs").css("background-color", "#"+colores['base_color']);
-	$("head").append( "<style> a.list-group-item:hover{ background-color: #"+colores['contrast_color']+" } </style>" );
+	//$("#myTabs").css("background-color", "#"+colores['base_color']);
+	//$("head").append( "<style> a.list-group-item:hover{ background-color: #"+colores['contrast_color']+" } </style>" );
+    logo();
+    style();
 }
 
 /**
@@ -145,10 +170,12 @@ function getservices(){
  *  @function : accion_services
  *  @description : De acuerdo al estado realiza la funcion correspondientes. 0 = historico 1 = progreso
  **/
-function accion_services(id, status){
+function accion_services(inspection_id, vehicle_id, status){
 
-	localStorage.removeItem("id_vehicle");
-	localStorage.setItem("id_vehicle", id);
+    localStorage.removeItem("inspection_id");
+	localStorage.setItem("inspection_id", inspection_id);
+	localStorage.removeItem("vehicle_id");
+	localStorage.setItem("vehicle_id", vehicle_id);
 
 	if(status) location.href = 'service-details.html';
 	else location.href = 'service-detail-history.html';
@@ -169,7 +196,7 @@ function detallehistorial(){
 			type: 'POST',
 			dataType: "JSON",
 			data: {
-				id : localStorage.getItem('id_vehicle'),
+				id : localStorage.getItem('vehicle_id'),
 				token : localStorage.getItem('token')
 			},
 			success:function(data){
@@ -237,34 +264,35 @@ function cambiar_contraseña(){
 }
 
 
-function gridDetalleInspeccion(){    
-		
+function gridDetalleInspeccion(){
+
     $("#table-clients-users").html("");
     var token = localStorage.getItem('token');
     var inspections_id=14;
-	
+
     $.ajax({
         url: ruta_generica+"inspection_detail",
         type: 'POST',
         dataType: 'JSON',
         data: {
             token:      token,
-            vehicle_id:    localStorage.getItem("id_vehicle")
+            inspection_id: localStorage.getItem("inspection_id"),
+            vehicle_id:    localStorage.getItem("vehicle_id"),
         },
         success:function(resp) {
-            
+
             if( resp.status == 'ok' ) {
-               $("#table-clients").append(resp.message);	
+               $("#table-clients").append(resp.message);
                $("#tittle").html(resp.vehicle);
                localStorage.setItem("vehicle_client", resp.vehicle);
             }
-            else {		
+            else {
                 $("#alertaLogin").html(resp.message).show();
             }
-        }, 
-        error: function(XMLHttpRequest, textStatus, errorThrown) { 
-            console.log("Status: " + textStatus); 
-            console.log("Error: " + errorThrown); 
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+            console.log("Status: " + textStatus);
+            console.log("Error: " + errorThrown);
         }
     });
 }
@@ -273,13 +301,13 @@ function detalle_inspeccion(id){
     location.href = 'service-detail-items.html?id='+id;
 }
 
-function gridDetalleInspeccionItem(){    
-		
+function gridDetalleInspeccionItem(){
+
     $("#items").html("");
     var token = localStorage.getItem('token');
     var inspections_id=14;
     let params =  (new URL(location)).searchParams;
-	
+
     $.ajax({
         url: ruta_generica+"inspection_detail_item",
         type: 'POST',
@@ -289,25 +317,25 @@ function gridDetalleInspeccionItem(){
             vehicle_inspection:     params.get('id')
         },
         success:function(resp) {
-            
+
             if( resp.status == 'ok' ) {
                $("#service-detail-items").html(resp.message);
                 localStorage.setItem("vehicle_inspection", resp.inspection);
             }
-            else {		
+            else {
                 $("#alertaLogin").html(resp.message).show();
             }
-        }, 
-        error: function(XMLHttpRequest, textStatus, errorThrown) { 
-            console.log("Status: " + textStatus); 
-            console.log("Error: " + errorThrown); 
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+            console.log("Status: " + textStatus);
+            console.log("Error: " + errorThrown);
         }
-    }); 
+    });
 }
 
 function posponer(){
-    var devicePlatform = device.platform;    
-    
+    var devicePlatform = device.platform;
+
     minDate =new Date();
 
     if(devicePlatform=="Android"){
@@ -327,7 +355,7 @@ function posponer(){
           titleText:"Posponer",
           okText:"Aceptar",
           cancelText:"Cancelar"
-        };        
+        };
     }
 
     datePicker.show(options, function(date){
@@ -340,22 +368,22 @@ function rechazar(){
    var message = "Ingrese motivo para rechazo:";
    var title = "Rechazar";
    var buttonLabels = ["Cancelar","Aceptar"];
-    
-   navigator.notification.prompt(message, promptCallback, 
+
+   navigator.notification.prompt(message, promptCallback,
       title, buttonLabels);
 
    function promptCallback(result) {
        if(result.buttonIndex==2){
             navigator.notification.alert('Rechazaste por '+result.input1);
              madarResultado(3,0,result.input1);
-        }      
+        }
    }
 }
 
 function aceptar(){
     function onConfirm(buttonIndex) {
-        if(buttonIndex==1){            
-             madarResultado(2,0,0); 
+        if(buttonIndex==1){
+             madarResultado(2,0,0);
         }
     }
     navigator.notification.confirm(
@@ -367,11 +395,11 @@ function aceptar(){
 }
 
 function madarResultado(status,fecha,motivo){
-    
-    	
+
+
     var token = localStorage.getItem('token');
     let params =  (new URL(location)).searchParams;
-	
+
     $.ajax({
         url: ruta_generica+"inspection_client_result",
         type: 'POST',
@@ -384,26 +412,26 @@ function madarResultado(status,fecha,motivo){
             status: status
         },
         success:function(resp) {
-            
-            if( resp.status == 'ok' ) {    
+
+            if( resp.status == 'ok' ) {
                push();
                location.href = 'service-details.html';
             }
-            else {		
+            else {
                 $("#alertaLogin").html(resp.message).show();
             }
-        }, 
-        error: function(XMLHttpRequest, textStatus, errorThrown) { 
-            console.log("Status: " + textStatus); 
-            console.log("Error: " + errorThrown); 
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+            console.log("Status: " + textStatus);
+            console.log("Error: " + errorThrown);
         }
-    }); 
-    
+    });
+
 }
 
-function push(){    
+function push(){
 
-        var token = localStorage.getItem('token');  
+        var token = localStorage.getItem('token');
         var mensaje = "El cliente revisó: "+localStorage.getItem('vehicle_client')+" el punto: "+localStorage.getItem('vehicle_inspection');
         $.ajax({
             url: ruta_generica+"send_notification",
