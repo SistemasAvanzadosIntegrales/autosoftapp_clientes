@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title</title>
+    <!--  CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link href="css/main.css" rel="stylesheet">
+
+    <!-- js-->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/fontawesomeV5.js"></script>
+    <script src="js/servicio-completo.js"></script>
+    <style media="screen">
+        panel-default{
+            text-align: center;
+        }
+    </style>
+  </head>
+  <body>
+      <!-- Fixed navbar -->
+      <div id='MainNavbar'></div>
+      <div id="services" class="container">
+          <h2 class="text-muted sub-header tittle text-center" id="tittle">Mis Servicios</h2>
+          <div class="panel panel-default">
+                <!-- Nav tabs -->
+                <div id="myTabs" name="myTabs" class=" btn-group btn-group-justified" data-toggle="buttons" role="group" aria-label="...">
+                  <div class="btn-group" role="group">
+                    <label data-target="#in-pgrogress" class="btn-lg btn tab-btn-custom active color_base" aria-controls="in-pgrogress" data-toggle="tab">
+                      <input type="radio" name="service-type" id="InProgress" autocomplete="off"> En progreso
+                    </label>
+                  </div>
+                  <div class="btn-group" role="group">
+                    <label data-target="#history" class="btn-lg btn tab-btn-custom color_base" aria-controls="history" data-toggle="tab">
+                       <input type="radio" name="service-type" id="History" autocomplete="off"> Historial
+                    </label>
+                  </div>
+                </div>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                  <div role="tabpanel" class="tab-pane fade in active" id="in-pgrogress">
+                    <div class="list-group" id="table-services-progress" name="table-services-progress">
+                        <h1 class="service-completed">100%</h1>
+                        <h3>Servicios concluidos.</h3>
+                        <h3>Ya puede pasar por su unidad</h3>
+                        <div class="row">
+                          <div class="col-xs-6 col-xs-offset-3">
+                            <form class="form-horizontal">
+                              <div class="form-group">
+                                <label  class="col-xs-12 text-center" for="inputUsuario">Fecha de ingreso</label>
+                                <div class="col-xs-12"
+                                  <p id="in-date" class="form-control-static">2018-12-12</p>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label  class="col-xs-12 text-center" for="inputUsuario">Fecha de termino</label>
+                                <div class="col-xs-12">
+                                  <p id="out-date" class="form-control-static">2018-12-12</p>
+                                </div>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-xs-12">
+                            <a class="btn btn-link" role="button" data-toggle="collapse" href="#detalles" aria-expanded="false" aria-controls="detalles">
+                              Ver detalles <i class="fas fa-angle-down"></i>
+                            </a>
+                            <div class="collapse" id="detalles">
+
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                  </div>
+                  <div role="tabpanel" class="tab-pane fade" id="history">
+                    <div class="list-group" id="table-services-history" name="table-services-history">
+                    </div>
+                  </div>
+                </div>
+          </div>
+      </div>
+  </body>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      get_inspection();
+    })
+  </script>
+</html>

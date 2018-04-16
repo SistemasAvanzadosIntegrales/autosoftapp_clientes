@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--  CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link href="css/main.css" rel="stylesheet">
+
+    <!-- js-->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/fontawesomeV5.js"></script>
+  </head>
+  <body>
+
+    <!-- navbar -->
+    <div id='MainNavbar'></div>
+    <div id="service-details" class="container">
+        <h2 class="text-muted sub-header tittle text-center" id="tittle"></h2>
+        <div class="panel panel-default">
+                <table class="table">
+                    <tbody id="table-clients"></tbody>
+                </table>
+        </div>
+
+
+    </div>
+  </body>
+  <script type="text/javascript">
+          $(document).ready(function() {
+              gridDetalleInspeccion();
+          });
+  </script>
+</html>
