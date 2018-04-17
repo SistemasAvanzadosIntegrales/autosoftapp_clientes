@@ -1,7 +1,34 @@
 $(document).ready(function(){
-  $("#MainNavbar").load("navbar.html");
+  var url = window.location.href;
+  var params = getParams(url);
+  var screen =  (new URL(location)).pathname;
+  screen = screen.split('/');
+  screen = screen[screen.length - 1];
+  if (screen!='index.html'){
+      $("#MainNavbar").load("navbar.html", function(){
+        apariencia();
+        $("#loading").addClass('hide');
+      });
+   }
 });
-
+/**
+ * Get the URL parameters
+ * source: https://css-tricks.com/snippets/javascript/get-url-variables/
+ * @param  {String} url The URL
+ * @return {Object}     The URL parameters
+ */
+var getParams = function (url) {
+	var params = {};
+	var parser = document.createElement('a');
+	parser.href = url;
+	var query = parser.search.substring(1);
+	var vars = query.split('&');
+	for (var i = 0; i < vars.length; i++) {
+		var pair = vars[i].split('=');
+		params[pair[0]] = decodeURIComponent(pair[1]);
+	}
+	return params;
+};
 //var ruta_generica = "http://localhost:8000/api/v1/";
 var ruta_generica = "http://autosoft2.avansys.com.mx/api/v1/";
 
@@ -10,7 +37,11 @@ function style()
   var app_settings = JSON.parse(localStorage.getItem('app_settings'));
   app_settings = app_settings ? app_settings : {"config_company": {"contrast_color": "dddddd", "base_color": "012d4a"}};
   $('.table thead tr th').css('background', '#'+app_settings.config_company.contrast_color);
+  $('.btn, a, h1.tittle, h2.tittle, h3.tittle, h4.tittle').css('color', app_settings.config_company.contrast_color);
+
   $(document.body).css('background', '#'+app_settings.config_company.base_color);
+  $('#loading').fadeOut();
+  console.log("style was aplicated");
 }
 
 function logo(){
@@ -25,6 +56,7 @@ function logo(){
           logo.attr('src', 'img/logo.png')
       }
    logo.fadeIn();
+   console.log("logo was put");
   }
 }
 /**
@@ -285,6 +317,11 @@ function gridDetalleInspeccion(){
                $("#table-clients").append(resp.message);
                $("#tittle").html(resp.vehicle);
                localStorage.setItem("vehicle_client", resp.vehicle);
+               if (resp.pdf)
+               {
+                   $("#price_quote").removeClass('hide');
+                   $("#price_quote").find('a').attr('href', ruta_generica + 'download_price_quote/'+resp.pdf);
+               }
             }
             else {
                 $("#alertaLogin").html(resp.message).show();

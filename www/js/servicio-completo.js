@@ -1,13 +1,15 @@
 var ruta_generica = "http://localhost:8000/";
 //var ruta_generica = "http://autosoft2.avansys.com.mx";
 function get_inspection(){
-  let urlParams =  (new URL(location)).searchParams;
+    var url = window.location.href;
+    params = getParams(url);
+
 	$.ajax({
 			url: ruta_generica+'servicio_completo',
 			type: 'POST',
 			dataType: "JSON",
 			data: {
-				inspection_id : urlParams.get('inspection_id'),
+				inspection_id : params.inspection_id,
 				token : localStorage.getItem('token')
 			},
 			success:function(data){

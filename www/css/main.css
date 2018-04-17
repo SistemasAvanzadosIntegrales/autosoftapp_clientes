@@ -14,11 +14,18 @@ body{
     background-size:cover;
     color: #FFF;
 }
-
+#myTabs label{
+    margin: 0px!important;
+}
+#myTabs .btn:active, #myTabs .btn:hover, #myTabs .btn:visited, #myTabs .btn:hover, #myTabs .btn:focus{
+    outline: none!important;
+}
 *:focus{
   outline-color: #666 !important;
 }
-
+.notice{
+    text-align: center;
+}
 #services, #service-details, #service-detail-items{
   margin-top: 50px;
 }
@@ -34,7 +41,6 @@ table, nav a, .panel-default{
     color:#090909!important;
 }
 .btn{
-    color:gray!important;
     margin-left: 10px!important;
     margin-right: 10px!important;
 }
@@ -47,7 +53,11 @@ table, nav a, .panel-default{
 h1{
   font-size: 2em;
 }
-
+.btn-round{
+  padding: 3px!important;
+  width: 30px;
+  border-radius: 14px;
+}
 .custom-big-link-grid{
   width: 100%;
   height: 200px;
@@ -58,9 +68,8 @@ h1{
   text-align: center;
   font-size: 5.75em;
   text-align: center;
-  background: #d5d5d5;
-}
 
+.btn
 .custom-big-link{
   width: 100%;
   background: #d4d4d4;
