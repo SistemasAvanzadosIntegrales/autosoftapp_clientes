@@ -105,7 +105,7 @@ function login(){
 				}
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown) {
-				console.log("Function: getPaymentData()");
+
 				console.log("Status: " + textStatus);
 				console.log("Error: " + errorThrown);
 			}
@@ -159,7 +159,7 @@ function avisoDePrivacidad(){
 
 		},
 		error: function(XMLHttpRequest, textStatus, errorThrown) {
-			console.log("Function: getPaymentData()");
+
 			console.log("Status: " + textStatus);
 			console.log("Error: " + errorThrown);
 		}
@@ -173,19 +173,57 @@ function avisoDePrivacidad(){
  *  @function : getservices
  *  @Description : Obtiene los autos con inspecciones en progreso y las que fueron atendidas.
  **/
-function getservices(){
+function getservices_active(take, skip, target = null){
 
 	$.ajax({
-		url: ruta_generica+'inspections_client',
+		url: ruta_generica+'inspections_client_active',
 		type: 'POST',
 		dataType: "JSON",
 		data: {
+            take: take,
+            skip: skip,
 			token : localStorage.getItem('token'),
-			id : localStorage.getItem('id_cliente')
+			id_cliente : localStorage.getItem('id_cliente')
 		},
 		success:function(data){
-			$("#table-services-progress").append(data['progress']).show();
-			$("#table-services-history").append(data['history']).show();
+			$("#table-services-progress").append(data['table']).show();
+            if (target)
+            {
+                $(target).remove();
+            }
+		},
+		error: function(XMLHttpRequest, textStatus, errorThrown) {
+			console.log("Status: " + textStatus);
+			console.log("Error: " + errorThrown);
+		}
+	});
+}
+
+/**
+ *  @author   : Andrea Luna
+ *  @Contact  : andrea_luna@avansys.com.mx
+ *  @date     : 12/02/2018
+ *  @function : getservices
+ *  @Description : Obtiene los autos con inspecciones en progreso y las que fueron atendidas.
+ **/
+function getservices_history(take, skip, target = null){
+
+	$.ajax({
+		url: ruta_generica+'inspections_client_history',
+		type: 'POST',
+		dataType: "JSON",
+		data: {
+            take: take,
+            skip: skip,
+			token : localStorage.getItem('token'),
+			id_cliente : localStorage.getItem('id_cliente')
+		},
+		success:function(data){
+			$("#table-services-history").append(data['table']).show();
+            if (target)
+            {
+                $(target).remove();
+            }
 		},
 		error: function(XMLHttpRequest, textStatus, errorThrown) {
 			console.log("Function: getPaymentData()" + JSON.stringify(XMLHttpRequest));
@@ -194,6 +232,7 @@ function getservices(){
 		}
 	});
 }
+
 
 /**
  *  @author   : Andrea Luna
@@ -238,7 +277,7 @@ function detallehistorial(){
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown) {
 
-				console.log("Function: getPaymentData()");
+
 				console.log("Status: " + textStatus);
 				console.log("Error: " + errorThrown);
 			}
@@ -287,7 +326,7 @@ function cambiar_contraseña(){
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown) {
 
-				console.log("Function: getPaymentData()");
+
 				console.log("Status: " + textStatus);
 				console.log("Error: " + errorThrown);
 			}
