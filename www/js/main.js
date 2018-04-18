@@ -7,7 +7,10 @@ $(document).ready(function(){
   if (screen!='index.html'){
       $("#MainNavbar").load("navbar.html", function(){
         apariencia();
-        $("#loading").addClass('hide');
+        setTimeout(function(){
+            $("#loading").addClass('hide');
+
+        }, 7000);
       });
    }
 });
@@ -35,11 +38,17 @@ var ruta_generica = "http://autosoft2.avansys.com.mx/api/v1/";
 function style()
 {
   var app_settings = JSON.parse(localStorage.getItem('app_settings'));
+  console.log(app_settings);
   app_settings = app_settings ? app_settings : {"config_company": {"contrast_color": "dddddd", "base_color": "012d4a"}};
-  $('.table thead tr th').css('background', '#'+app_settings.config_company.contrast_color);
-  $('.btn, a, h1.tittle, h2.tittle, h3.tittle, h4.tittle').css('color', app_settings.config_company.contrast_color);
+  var contrast_color = '#'+app_settings.config_company.contrast_color;
+  var base_color = '#'+app_settings.config_company.base_color;
 
-  $(document.body).css('background', '#'+app_settings.config_company.base_color);
+  $('.table thead tr th').css('background', contrast_color);
+  $("#myTabs").css('background', contrast_color).css('color', base_color);
+  $('label[data-target="#in-pgrogress"]').css('color', base_color);
+  $('label[data-target="#history"]').css('color', base_color);
+
+  $(document.body).css('background', base_color);
   $('#loading').fadeOut();
   console.log("style was aplicated");
 }
@@ -189,7 +198,7 @@ function getservices_active(take, skip, target = null){
 			$("#table-services-progress").append(data['table']).show();
             if (target)
             {
-                $(target).remove();
+                $(target).parent().remove();
             }
 		},
 		error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -222,7 +231,7 @@ function getservices_history(take, skip, target = null){
 			$("#table-services-history").append(data['table']).show();
             if (target)
             {
-                $(target).remove();
+                $(target).parent().remove();
             }
 		},
 		error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -252,37 +261,6 @@ function accion_services(inspection_id, vehicle_id, status){
 	else location.href = 'service-detail-history.html';
 }
 
-/**
- *  @author   : Andrea Luna
- *  @Contact  : andrea_luna@avansys.com.mx
- *  @date     : 15/02/2018
- *  @function : detallehistorial
- *  @description : De acuerdo al estado realiza la funcion correspondientes. 0 = historico 1 = progreso
- **/
-function detallehistorial(){
-
-
-	$.ajax({
-			url: ruta_generica+'detail_inspections_client',
-			type: 'POST',
-			dataType: "JSON",
-			data: {
-				id : localStorage.getItem('vehicle_id'),
-				token : localStorage.getItem('token')
-			},
-			success:function(data){
-				$("#table_inspections").append(data['table']).show();
-				$("#precio").val(data['price']);
-				$("#fechataller").val(data['fechaTaller']);
-			},
-			error: function(XMLHttpRequest, textStatus, errorThrown) {
-
-
-				console.log("Status: " + textStatus);
-				console.log("Error: " + errorThrown);
-			}
-		});
-}
 
 
 function info_perfil(){
@@ -356,6 +334,16 @@ function gridDetalleInspeccion(){
                $("#table-clients").append(resp.message);
                $("#tittle").html(resp.vehicle);
                localStorage.setItem("vehicle_client", resp.vehicle);
+               if($("#precio").length){
+
+                   for(var i = 0; i < resp.inspections.vehicle_inspections.length; i++){
+                         $("#precio").val((parseInt(resp.inspections.vehicle_inspections[i].price) + parseInt($("#precio").val())));
+                   }
+
+                   $("#fechataller").val(resp.inspections.created_at);
+                   $("#fechaatencion").val(resp.inspections.updated_at);
+               }
+
                if (resp.pdf)
                {
                    $("#price_quote").removeClass('hide');
