@@ -1,73 +1,68 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Login</title>
-        <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-        <!-- jQuery library -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-        <!-- Latest compiled JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>    <link href="css/main.css" rel="stylesheet">
-        <script src="js/main.js"></script>
-        <link href="css/main.css" rel="stylesheet">
-        <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <link rel="stylesheet" href="css/bootstrap.css" />
+      <link rel="stylesheet" href="css/main.css" />
+      <link rel="stylesheet" href="css/font-awesome.css" />
+      <link type="image/x-icon" href="/img/logo.ico" rel="icon" />
+      <link type="image/x-icon" href="/img/logo.ico" rel="shortcut icon" />
+      <title>Login</title>
     </head>
-    <body>
-        <div id="login" class="container-fluid">
+    <body style="background:#012d4a">
+      <div id="loading"><div id="loader"></div></div>
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-xs-12 text-left mt-4">
                     <img src="img/logo.png" width="70px">
                 </div>
             </div>
             <div class="row">
-                <h1 class="text-center">Acceso Clientes</h1>
+                <div class="col-xs-12 text-left mt-4" id="form-login">
+                    <form class="vertical-center" onsubmit="return ingresar()">
+                        <h2 class="text-center text-shadow text-white">Acceso Taller</h2>
+                        <div id="alertaLogin" class="text-center text-red"></div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-user"> </i></span>
+                                <input value="admin@lopezcars.com" type="email" id="email" class="form-control" placeholder="Usuario">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-lock"> </i></span>
+                                <input value="12345678" type="password" id="password" class="form-control" placeholder="Contraseña">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-key"> </i></span>
+                                <input value="uqqas" type="token" id="token" class="form-control" placeholder="Token">
+                            </div>
+                        </div>
+                        <button type="submit" class="pull-right btn btn-primary mt-4" ><i class="fa fa-sign-in"> </i> Ingresar</button>
+                    </form>
+                </div>
             </div>
+
             <div class="row">
-                <div class="form-horizontal col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2">
-                    <div class="form-group">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-user"> </i></span>
-                            <input type="email" id="user" name="user" class="form-control" placeholder="Usuario"  autofocus value="pedro@ramirez.com">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-lock"> </i>
-                            </span>
-                            <input type="password" id="password" name="password" class="form-control" placeholder="Contraseña" autofocus value="12345678">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-key"> </i>
-                            </span>
-                            <input type="Token" id="token" name="token" class="form-control" placeholder="Token" autofocus value="uqqas">
-                        </div>
-                    </div>
-                    <p class="alert alert-danger mt-4" id="alerta" style="display:none !important;"></p>
-                    <div class="text-center">
-                        <a class="text-muted" href="http://autosoft2.avansys.com.mx/password/reset">¿Olvidó su contraseña?</a>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-4 col-md-offset-8">
-                            <button onclick="login();" class="form-control btn-defaul">
-                                <i class="fa fa-sign-in-alt"></i>
-                                Entrar
-                            </button>
-                        </div>
-                    </div>
+                <div class="col-xs-12 text-center mt-5">
+                    <a onclick="resetPassword();" class="text-white">¿Olvidó su contraseña?</a>
                 </div>
             </div>
         </div>
     </body>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/localstorage.js"></script>
+    <script type="text/javascript" src="js/auth.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/auth.js"></script>
     <script type="text/javascript">
-    document.addEventListener("deviceready",function(){
-        localStorage.clear();
-    });
+      document.addEventListener("deviceready",function(){
+          localStorage.clear();
+          $('#loading').fadeOut();
+      });
+
     </script>
 </html>
