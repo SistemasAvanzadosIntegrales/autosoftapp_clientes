@@ -313,7 +313,7 @@ function cambiar_contraseña(){
 }
 
 
-function gridDetalleInspeccion(){
+function gridDetalleInspeccion(type){
 
     $("#table-clients-users").html("");
     var token = localStorage.getItem('token');
@@ -325,6 +325,7 @@ function gridDetalleInspeccion(){
         dataType: 'JSON',
         data: {
             token:      token,
+            type: type,
             inspection_id: localStorage.getItem("inspection_id"),
             vehicle_id:    localStorage.getItem("vehicle_id"),
         },
@@ -334,10 +335,14 @@ function gridDetalleInspeccion(){
                $("#table-clients").append(resp.message);
                $("#tittle").html(resp.vehicle);
                localStorage.setItem("vehicle_client", resp.vehicle);
+               if(resp.redirect){
+                   location.href = 'services.html';
+               }
                if($("#precio").length){
 
                    for(var i = 0; i < resp.inspections.vehicle_inspections.length; i++){
-                         $("#precio").val((parseInt(resp.inspections.vehicle_inspections[i].price) + parseInt($("#precio").val())));
+                       var inspection_point_price = resp.inspections.vehicle_inspections[i].price;
+                         $("#precio").val((parseInt(inspection_point_price ? inspection_point_price : 0) + parseInt($("#precio").val())));
                    }
 
                    $("#fechataller").val(resp.inspections.created_at);
