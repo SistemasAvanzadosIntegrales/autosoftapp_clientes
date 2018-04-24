@@ -1,5 +1,5 @@
-var ruta_generica = "http://localhost:8000/";
-//var ruta_generica = "http://autosoft2.avansys.com.mx";
+//var ruta_generica = "http://localhost:8000/";
+var ruta_generica = "http://autosoft2.avansys.com.mx/api/v1/";
 function get_inspection(){
     var url = window.location.href;
     params = getParams(url);
@@ -13,7 +13,6 @@ function get_inspection(){
 				token : localStorage.getItem('token')
 			},
 			success:function(data){
-        var color  = JSON.parse(localStorage.getItem('color'));
         if (data.status == 'ok')
         {
           $('#in-date').html(data.inspection.created_at);
@@ -39,13 +38,13 @@ function get_inspection(){
             if(inspections[i].catalogue.inspection.name != inspection)
             {
               inspection = inspections[i].catalogue.inspection.name;
-                detalles.append('<a class="list-group-item active" style="background:#'+ color.contrast_color +'">' + inspection + '</a>');
+                detalles.append('<a href="#" class="list-group-item" style="color:#000!important>' + inspection + '</a>');
             }
             var item = [
               inspections[i].catalogue.name,
               status[inspections[i].status],
             ];
-            detalles.append('<a href="#" class="list-group-item">' + item.join(' - ') + '</a>');
+            detalles.append('<a href="#" class="list-group-item" style="color:#000!important">' + item.join(' - ') + '</a>');
           }
           detalles.append('</div>');
         }

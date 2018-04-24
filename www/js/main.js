@@ -366,15 +366,11 @@ function gridDetalleInspeccion(type){
     });
 }
 
-function detalle_inspeccion(id){
-    location.href = 'service-detail-items.html?id='+id;
-}
 
 function gridDetalleInspeccionItem(){
 
     $("#items").html("");
     var token = localStorage.getItem('token');
-    var inspections_id=14;
     let params =  (new URL(location)).searchParams;
 
     $.ajax({
@@ -382,12 +378,25 @@ function gridDetalleInspeccionItem(){
         type: 'POST',
         dataType: 'JSON',
         data: {
-            token:      token,
-            vehicle_inspection:     params.get('id')
+            token: token,
+            vehicle_inspection: params.get('id')
         },
         success:function(resp) {
 
             if( resp.status == 'ok' ) {
+                if(params.get('type') == 'history')
+                {
+                    let status = resp.vehicle_inspection.status;
+                    let status_text;
+                    if(status == 2){
+                        status_text = 'Aprobado';
+                    }else if(status == 3){
+                        status_text = 'Pospuesto';
+                    }else if(status == 4){
+                        status_text = 'Rechazado';
+                    }
+                    $("#StatusInspectionPoint").html("<h4 class='text-center'>"+status_text+"</h4>");
+                }
                $("#service-detail-items").html(resp.message);
                 localStorage.setItem("vehicle_inspection", resp.inspection);
             }
