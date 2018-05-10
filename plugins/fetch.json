@@ -1,0 +1,10 @@
+{
+  "cordova-plugin-sqlite": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-sqlite"
+    },
+    "is_top_level": true,
+    "variables": {}
+  }
+}
