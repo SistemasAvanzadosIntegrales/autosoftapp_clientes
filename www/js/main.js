@@ -49,6 +49,10 @@ function style()
   $('label[data-target="#history"]').css('color', base_color);
 
   $(document.body).css('background', base_color);
+  $('.navbar-nav a').css('color', contrast_color);
+  $('.btn-primary').css('background', contrast_color).css('color', base_color);
+  $('a.btn-link').attr('style', 'color:' +  contrast_color+ '!important');
+  $('.sub-header').css('color', contrast_color);
   $('#loading').fadeOut();
   console.log("style was aplicated");
 }
@@ -74,68 +78,8 @@ function logo(){
  *  @date     : /01/2018
  *  @function : login
  **/
-function login(){
-	var user = $("#user").val();
-	var password = $("#password").val();
-	var token = $("#token").val();
 
-	if(user == '' || password == '' || token == '')
-		$("#alerta").html('<i class="fa fa-warning fa-lg"></i>&nbsp; Campos vacíos').show();
 
-	else
-	{
-		$.ajax({
-			url: ruta_generica+'login',
-			type: 'POST',
-			dataType: "JSON",
-			data: {
-				email : user,
-				password : password,
-				token : token,
-			},
-			success:function(data){
-
-				if(data.status == 'error'){
-					$("#alerta").html('<i class="fa fa-warning fa-lg"></i>&nbsp; '+data.message).show();
-				}else{
-					localStorage.setItem("id", JSON.stringify(data['user']['id']));
-					localStorage.setItem("user", user);
-					localStorage.setItem("password", password);
-					localStorage.setItem("token", token);
-					localStorage.setItem("color", JSON.stringify(data['conf']));
-					localStorage.setItem("id_cliente", JSON.stringify(data['user']['id']));
-                    localStorage.setItem("app_settings", JSON.stringify(data));
-
-                    var rol=JSON.stringify(data['rol']);
-                    rol=rol.replace(/['"]+/g, '');
-                    localStorage.setItem("rol", rol);
-
-					location.href = 'services.html';
-				}
-			},
-			error: function(XMLHttpRequest, textStatus, errorThrown) {
-
-				console.log("Status: " + textStatus);
-				console.log("Error: " + errorThrown);
-			}
-		});
-	}
-}
-
-/**
- *  @author   : Andrea Luna
- *  @Contact  : andrea_luna@avansys.com.mx
- *  @date     : /01/2018
- *  @function : apariencia
- **/
-function apariencia(){
-	//var colores = JSON.parse(localStorage.getItem('color'));
-
-	//$("#myTabs").css("background-color", "#"+colores['base_color']);
-	//$("head").append( "<style> a.list-group-item:hover{ background-color: #"+colores['contrast_color']+" } </style>" );
-    logo();
-    style();
-}
 
 /**
  *  @author   : Andrea Luna
@@ -147,33 +91,6 @@ function link(ruta){
 	cordova.InAppBrowser.open(ruta);
 }
 
-/**
- *  @author   : Andrea Luna
- *  @Contact  : andrea_luna@avansys.com.mx
- *  @date     : /01/2018
- *  @function : avisoDePrivacidad
- **/
-function avisoDePrivacidad(){
-
-	$.ajax({
-		url: ruta_generica+'notice',
-		type: 'POST',
-		dataType: "JSON",
-		data: {
-			token : localStorage.getItem('token')
-		},
-		success:function(data){
-
-			$("#notice").append(data['privacy']['notice_privacy']).show();
-
-		},
-		error: function(XMLHttpRequest, textStatus, errorThrown) {
-
-			console.log("Status: " + textStatus);
-			console.log("Error: " + errorThrown);
-		}
-	});
-}
 
 /**
  *  @author   : Andrea Luna
@@ -259,57 +176,6 @@ function accion_services(inspection_id, vehicle_id, status){
 
 	if(status) location.href = 'service-details.html';
 	else location.href = 'service-detail-history.html';
-}
-
-
-
-function info_perfil(){
-	$("#user").val(localStorage.getItem('user'));
-	$("#password").val(localStorage.getItem('password'));
-	$("#password2").val(localStorage.getItem('password'));
-	$("#token").val(localStorage.getItem('token'));
-}
-
-function cambiar_contraseña(){
-
-	var password = $("#password").val();
-	var password2 = $("#password2").val();
-
-	if(password2 == '' || password == '')
-		$("#alerta").html('<i class="fa fa-warning fa-lg"></i>&nbsp; Campos vacíos').show();
-
-	else if(password2 != password)
-		$("#alerta").html('<i class="fa fa-warning fa-lg"></i>&nbsp; Las contraseñas no coinciden ').show();
-
-	else if(password == localStorage.getItem('password'))
-		location.href = 'services.html';
-
-	else
-	{
-		$.ajax({
-			url: ruta_generica+'changepassword',
-			type: 'POST',
-			dataType: "JSON",
-			data: {
-				id : localStorage.getItem('id'),
-				password : password,
-				token : localStorage.getItem('token')
-			},
-			success:function(data){
-
-				alert(JSON.stringify(data));
-				localStorage['password'] = password;
-				location.href = 'services.html';
-
-			},
-			error: function(XMLHttpRequest, textStatus, errorThrown) {
-
-
-				console.log("Status: " + textStatus);
-				console.log("Error: " + errorThrown);
-			}
-		});
-	}
 }
 
 

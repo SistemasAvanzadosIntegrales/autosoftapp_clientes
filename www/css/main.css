@@ -12,6 +12,14 @@
 body{
     color: #FFF;
 }
+#netStatus, #dbRefresh{
+    color: #961696!important;
+    font-size: 1.5em;
+    margin-top: 8px;
+    float: right;
+    display: inline;
+    margin-right: 10px;
+}
 #myTabs p{
     margin: 0px!important;
 }
@@ -28,15 +36,15 @@ body{
   margin-top: 50px;
 }
 a.btn-link{
-    color:blue!important;
+    color:blue;
 }
 
 a, h1.tittle, h2.tittle, h3.tittle, h4.tittle{
-    color:white!important;
+    color:white;
     text-decoration: none!important;
 }
 table, nav a, .panel-default{
-    color:#090909!important;
+    color:#090909;
 }
 .btn{
     margin-left: 10px!important;
@@ -102,9 +110,7 @@ h1{
 	text-align: center;
 }
 
-p {
-	margin: 30px;
-}
+
 
 #loading{
   padding: 0;

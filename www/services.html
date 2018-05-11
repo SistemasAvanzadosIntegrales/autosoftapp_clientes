@@ -4,59 +4,115 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Title</title>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-    <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>    <link href="css/main.css" rel="stylesheet">
-    <script src="cordova.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/push.js"></script>
+    <title>My Services</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <link href="css/main.css" rel="stylesheet">
-    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
   </head>
-  <style type="text/css" id="apariencia" name="apariencia">
 
-  </style>
   <body>
+    <div id="loading"><div id="loader"></div></div>
     <!-- Fixed navbar -->
     <div id='MainNavbar'></div>
-    <div id="services" class="container">
-        <h2 class="text-muted sub-header tittle text-center" id="tittle">Mis Servicios</h2>
+    <div class="container">
+
+        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner" role="listbox">
+      <div style="padding-top:80px" class="item">
+        <h2 class="text-muted sub-header text-center" id="tittle">Ver servicio</h2>
         <div class="panel panel-default" style="    border: none;">
-              <!-- Nav tabs -->
-              <div id="myTabs" style="border-top-right-radius: 3px;border-top-left-radius: 3px;" name="myTabs" class=" btn-group btn-group-justified" data-toggle="buttons" role="group" aria-label="...">
-                <div class="btn-group" role="group">
-                  <h5  style="margin: 0!important; text-shadow: -4px -2px 30px rgba(255, 255, 255, 1);" data-target="#in-pgrogress" class="btn-lg btn tab-btn-custom active color_base" aria-controls="in-pgrogress" data-toggle="tab">
-                    <input type="radio" name="service-type" id="InProgress" autocomplete="off"> En progreso
+            <div class="myTabs" style="border-top-right-radius: 3px;border-top-left-radius: 3px;" name="myTabs" class=" btn-group btn-group-justified" data-toggle="buttons" role="group" aria-label="...">
+                <h5  style="width:100%;margin: 0!important; text-shadow: -4px -2px 30px rgba(255, 255, 255, 1);"  class="btn-lg btn tab-btn-custom active color_base">
+                    <a class="left" href="#carousel-example-generic" role="button" data-slide="prev">
+                        <span class=" label label-default"><i class="fa fa-chevron-left"></i></span>
+                    </a>
+                    #93837
                 </h5>
+            </div>
+
+            <div class="list-group">
+                <a class="left" href="#carousel-example-generic" role="button" data-slide="prev">
+                    regresar <span class=" label label-default"><i class="fa fa-chevron-left"></i></span>
+                </a>
+
+                <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
+                <a href="#" class="list-group-item">Morbi leo risus</a>
+                <a href="#" class="list-group-item">Porta ac consectetur ac</a>
+                <a href="#" class="list-group-item">Vestibulum at eros</a>
+              </div>
+        </div>
+      </div>
+        <div style="padding-top:80px" class="item active">
+            <h2 class="text-muted sub-header text-center" id="tittle">Mis Servicios</h2>
+            <div class="panel panel-default" style="    border: none;">
+                <!-- Nav tabs -->
+                <div id="myTabs" style="border-top-right-radius: 3px;border-top-left-radius: 3px;" name="myTabs" class=" btn-group btn-group-justified" data-toggle="buttons" role="group" aria-label="...">
+                <div class="btn-group" role="group">
+                    <h5  style="margin: 0!important; text-shadow: -4px -2px 30px rgba(255, 255, 255, 1);" data-target="#in-pgrogress" class="btn-lg btn tab-btn-custom active color_base" aria-controls="in-pgrogress" data-toggle="tab">
+                        <input type="radio" name="service-type" id="InProgress" autocomplete="off"> En progreso
+                    </h5>
                 </div>
                 <div class="btn-group" role="group">
-                  <h5   style="margin: 0!important; text-shadow: -4px -2px 30px rgba(255, 255, 255, 1);" data-target="#history" class="btn-lg btn tab-btn-custom color_base" aria-controls="history" data-toggle="tab">
-                     <input type="radio" name="service-type" id="History" autocomplete="off"> Historial
-                 </h5>
+                    <h5   style="margin: 0!important; text-shadow: -4px -2px 30px rgba(255, 255, 255, 1);" data-target="#history" class="btn-lg btn tab-btn-custom color_base" aria-controls="history" data-toggle="tab">
+                        <input type="radio" name="service-type" id="History" autocomplete="off"> Historial
+                    </h5>
                 </div>
-              </div>
-              <!-- Tab panes -->
-              <div class="tab-content">
+                </div>
+                <!-- Tab panes -->
+                <div class="tab-content">
                 <div role="tabpanel" class="tab-pane fade in active" id="in-pgrogress">
-                  <div class="list-group" id="table-services-progress" name="table-services-progress">
+                  <div class="list-group" id="progress_tab" name="progress_tab">
                   </div>
                 </div>
                 <div role="tabpanel" class="tab-pane fade" id="history">
-                  <div class="list-group" id="table-services-history" name="table-services-history">
+                  <div class="list-group" id="history_tab" name="history_tab">
                   </div>
                 </div>
-              </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    </div>
+    <div class="list-group">
+        <div id="clone" class="hide list-group-item">
+            <h4 class="list-group-item-heading ">
+                <i class="fa fa-hashtag"></i>
+                <span class="folio"></span>
+                <small class="inspection_status_1"><i class='fa fa-wrench'></i> En revisión</small>
+                <small class="inspection_status_2 hide"><i class='fa fa-stethoscope'></i> Verificación</small>
+                <small class="inspection_status_3 hide"><i class='fa fa-clock'></i> Espera cliente</small>
+                <small class="inspection_status_4 hide"><i class='fa fa-comments'></i> Respondido</small>
+                <small class="inspection_status_5 hide"><i class='fa fa-check-square'></i> Revisado</small>
+                <small class="inspection_status_6 hide"><i class='fa fa-power-off'></i> Cerrado</small>
+            </h4>
+            <a class="right pull-right" href="#carousel-example-generic" role="button" data-slide="next">
+             <span class=" badge"><i class="fa fa-chevron-right"></i></span>
+            </a>
+            <p class="list-group-item-text car "><i class="fa fa-car"></i></p>
+            <p class="list-group-item-text">
+                <span style="margin-right:2px;" class="hide videos"><i class='fa fa-images'></i> </span>
+                <span style="margin-right:2px;" class="hide photos"><i class='fa fa-video'></i> </span>
+                <span style="margin-right:2px;" class="hide audios"><i class='fa fa-headphones'></i> </span>
+                    <span style="margin-right:10px;" class="hide separator"></span>
+                <span style="margin-right:2px;" class="hide severity-ok"><i class='text-success fa fa-check-square'></i> </span>
+                <span style="margin-right:2px;" class="hide severity-warning"><i class='text-warning fa fa-exclamation-triangle'></i> </span>
+                <span style="margin-right:2px;" class="hide severity-danger"><i class='text-danger  fa fa-window-close'></i> </span>
+            </p>
         </div>
     </div>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/fontawesomeV5.js"></script>
+    <script src="js/commun.js"></script>
+    <script src="js/push.js"></script>
+    <script src="js/sync.js"></script>
+    <script src="js/services.js"></script>
+    <script src="cordova.js"></script>
 	<script>
-		getservices_active(10, 0);
-        getservices_history(10, 0);
+		services(10, 0);
 	</script>
   </body>
 </html>
