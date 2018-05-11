@@ -34,7 +34,7 @@
 <plugin name="cordova-plugin-audio-recorder" spec="1.0.5"/>
 <plugin name="cordova-plugin-network-information" spec="1.2.1"/>
 <plugin name="cordova-sqlite-storage" spec="1.2.0"/>
-<plugin name="onesignal-cordova-plugin" spec="^1.0" /> 
+<plugin name="onesignal-cordova-plugin" spec="^2.0" /> 
     
 <plugin name="cordova-plugin-whitelist" spec="1.2.2"/>
 <platform  name="ios">
@@ -64,7 +64,7 @@
 </platform>
 <preference  name="xwalkCommandLine" value="--disable-pull-to-refresh-effect --ignore-gpu-blacklist"/>
 <platform name="android" >
-<preference name="android-minSdkVersion" value="15"/>
+<preference name="android-minSdkVersion" value="16"/>
 <preference name="android-targetSdkVersion" value="21"/>
 <preference name="android-installLocation" value="auto"/>
 <preference name="Fullscreen" value="false"/>
