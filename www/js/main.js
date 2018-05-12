@@ -237,7 +237,7 @@ function gridDetalleInspeccionItem(){
 
     $("#items").html("");
     var token = localStorage.getItem('token');
-    let params =  (new URL(location)).searchParams;
+    var params =  (new URL(location)).searchParams;
 
     $.ajax({
         url: ruta_generica+"inspection_detail_item",
@@ -252,8 +252,8 @@ function gridDetalleInspeccionItem(){
             if( resp.status == 'ok' ) {
                 if(params.get('type') == 'history')
                 {
-                    let status = resp.vehicle_inspection.status;
-                    let status_text;
+                    var status = resp.vehicle_inspection.status;
+                    var status_text;
                     if(status == 2){
                         status_text = 'Aprobado';
                     }else if(status == 3){
@@ -342,7 +342,7 @@ function madarResultado(status,fecha,motivo){
 
 
     var token = localStorage.getItem('token');
-    let params =  (new URL(location)).searchParams;
+    var params =  (new URL(location)).searchParams;
 
     $.ajax({
         url: ruta_generica+"inspection_client_result",

@@ -3,7 +3,7 @@ var services = function(take, skip){
         var db;
         db = window.openDatabase("Database", "1.0", "Cordova Demo", 200000);
         db.transaction(function(tx) {
-            let sql = [
+            varsql = [
                 " SELECT ",
                 " substr('000000' || i.id, -4, 4) as folio,  i.id as link, i.*,v.brand, v.model, v.license_plate, v.vin,  group_concat(vi.files) as files, group_concat(vi.severity) as severities, group_concat(vi.status) as vi_status, sum(vi.price) as price ",
                 " FROM inspections AS i ",
@@ -104,7 +104,7 @@ function HtmlServices(data)
             var this_id = $(this).attr('id');
             console.log(this_id);
             db.transaction(function(tx) {
-                let sql = [
+                var sql = [
                     " SELECT * ",
                     " FROM  vehicle_inspections AS vi  ",
                     " WHERE vi.severity in (1,2,3) AND vi.inspection_id = "+this_id,
