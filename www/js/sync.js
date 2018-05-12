@@ -62,7 +62,8 @@ var first_sync = true;
 function sync_data(call_back_function = null){
     var app_settings = JSON.parse(localStorage.getItem('app_settings'));
     console.log(app_settings);
-    if(localStorage.getItem("network") == 'online'){
+    if(localStorage.getItem("network") == 'online'  || first_sync){
+        first_sync = false;
         $('#dbRefresh').removeClass('hide');
         var session = JSON.parse(localStorage.getItem('session'));
 
