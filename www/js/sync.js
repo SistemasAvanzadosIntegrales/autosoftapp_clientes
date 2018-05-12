@@ -1,3 +1,5 @@
+var ruta_generica = "http://autosoft2.avansys.com.mx/api/v1/";
+
 function __sync_data(data, call_back_function = null){
 
     var  db = window.openDatabase("Database", "1.0", "Cordova Demo", 200000);
