@@ -2,6 +2,7 @@
  *  @author   Ivan Vazquez
  **/
 function login(){
+	$('#loading').removeClass("hide");
 	var ruta_generica = "http://autosoft2.avansys.com.mx/api/v1/";
 	var email = $("#email").val().trim();
 	var password = $("#password").val().trim();
