@@ -32,12 +32,15 @@ function login(){
 				if(data.status == 'error'){
 					navigator.notification.alert(resp.message, null, 'Aviso', 'Aceptar');
 				}else{
+
 					localStorage.setItem("token", token);
                     localStorage.setItem("app_settings", JSON.stringify(data));
 					localStorage.setItem("email", email);
 					localStorage.setItem("password", password);
 					localStorage.setItem("token", token);
-					location.href = 'services.html';
+					sync_data(function(){
+						location.href = 'services.html'
+					})
 				}
 			}
 		});
