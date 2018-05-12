@@ -3,7 +3,7 @@ var services = function(take, skip){
         var db;
         db = window.openDatabase("Database", "1.0", "Cordova Demo", 200000);
         db.transaction(function(tx) {
-            varsql = [
+            var sql = [
                 " SELECT ",
                 " substr('000000' || i.id, -4, 4) as folio,  i.id as link, i.*,v.brand, v.model, v.license_plate, v.vin,  group_concat(vi.files) as files, group_concat(vi.severity) as severities, group_concat(vi.status) as vi_status, sum(vi.price) as price ",
                 " FROM inspections AS i ",
