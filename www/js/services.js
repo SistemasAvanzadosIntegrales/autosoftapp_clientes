@@ -9,6 +9,7 @@ var services = function(take, skip){
                 " FROM inspections AS i ",
                 " LEFT JOIN vehicles AS v ON v.id = i.vehicle_id ",
                 " LEFT JOIN vehicle_inspections AS vi ON i.id = vi.inspection_id ",
+                " WHERE i.status > 1 ",
                 " GROUP BY i.id ",
                 " ORDER BY i.id DESC "
             ].join('');
@@ -39,7 +40,18 @@ var services = function(take, skip){
         });
     });
 }
-
+var severity_icon = [
+    '',
+    "<i style='color: forestgreen ' class='fa fa-check-square'></i>",
+    "<i style='color: goldenrod' class='fa fa-exclamation-triangle'></i>",
+    "<i style='color: red' class='fa fa-window-close'></i>"
+];
+var status_icon = [
+    '',
+    "<span style='color: forestgreen '><i class='fa fa-check'></i> Aceptado </span>",
+    "<span style='color: red'><i class='fas fa-ban'></i>  Rechazado </span>",
+    "<span style='color: blue'><i class='far fa-calendar-alt'></i> 1212-12-12 </span>"
+];
 function HtmlServices(data)
 {
     for(i in data.inspections){
@@ -48,7 +60,8 @@ function HtmlServices(data)
         var status = parseInt(inspection.status);
         var progress_tab = $('#progress_tab');
         var history_tab = $('#history_tab');
-        console.log(inspection);
+
+
         if(!status)
             continue;
 
@@ -69,20 +82,18 @@ function HtmlServices(data)
         var severity_warning = inspection.severities.split("2").length - 1;
         var severity_danger = inspection.severities.split("3").length - 1;
         if (severity_ok > 0){
-            clone.find('.severity-ok').append(severity_ok).removeClass('hide');
+            clone.find('.severity-ok').append(severity_icon[1] + severity_ok).removeClass('hide');
         }
         if (severity_warning > 0){
-            clone.find('.severity-warning').append(severity_warning).removeClass('hide');
+            clone.find('.severity-warning').append(severity_icon[2] + severity_warning).removeClass('hide');
         }
         if (severity_danger > 0){
-            clone.find('.severity-danger').append(severity_danger).removeClass('hide');
+            clone.find('.severity-danger').append(severity_icon[3] + severity_danger).removeClass('hide');
         }
         if(severity_ok + severity_warning + severity_danger > 0){
             clone.find('.link').removeClass('hide');
         }
-        if((severity_ok + severity_warning + severity_danger) > 0 && (videos + audios + photos) > 0){
-            clone.find('.separator').removeClass('hide');
-        }
+
         var price = parseInt(inspection.price).toFixed(2);
         if (price > 0){
             clone.find('.price').append(price).removeClass('hide');
@@ -91,68 +102,116 @@ function HtmlServices(data)
         if (presupuesto){
             clone.find('.presupuesto').attr("href", ruta_generica + 'download_price_quote/'+presupuesto).removeClass('hide');
         }
-        clone.attr('id', 'clone'+i);
-        clone.find('.link').attr('id', inspection.link).click(function(){
-            var db;
-            var severity_icon = [
-                '',
-                "<i class='text-success fa fa-check-square'></i>",
-                "<i class='text-warning fa fa-exclamation-triangle'></i>",
-                "<i class='text-danger  fa fa-window-close'></i>"
-            ];
-            db = window.openDatabase("Database", "1.0", "Cordova Demo", 200000);
-            var this_id = $(this).attr('id');
-            console.log(this_id);
+        clone.attr('id', 'clone'+inspection.link);
+        clone.draggable({
+            revert:true,
+            axis: "x",
+            start: function(event, ui) {
+                start = ui.position.left;
+            },
+            drag: function(event, ui) {
+                stop = ui.position.left;
+                if(start - stop > 30 && start > stop){
+                    console.log(inspection);
+                    slide();
+                }
+            }
+        });
+        var slide = function(e){
+            var db = window.openDatabase("Database", "1.0", "Cordova Demo", 200000);;
+            $('.visited').removeClass('visited');
+            var inspection = this;
+            var inspection_id = inspection.id;
+            $("#clone" + inspection_id).addClass('visited');
+            $(".inspection_folio").html(inspection.folio);
+            $(".inspection_car").html(inspection.brand + ' ' + inspection.model+ ', ' + inspection.license_plate+ ', ' + inspection.vin);
             db.transaction(function(tx) {
                 var sql = [
                     " SELECT * ",
                     " FROM  vehicle_inspections AS vi  ",
-                    " WHERE vi.severity in (1,2,3) AND vi.inspection_id = "+this_id,
+                    " WHERE vi.severity in (1,2,3) AND vi.inspection_id = "+inspection_id,
                     " GROUP BY vi.point_id "
                 ].join('');
-                console.log(sql);
                 tx.executeSql(sql, [], function (tx, results){
 
-                    $('#points').html();
+                    $('#points').html("");
                     var rows = results.rows;console.log(rows);
                     for(var x = 0; x < rows.length; x++){
-                        var vpoint = rows[x]
+                        var point = rows[x];
                         var clone_point = $('#clone-point').clone();
                         clone_point.attr('id', 'clone-point'+x);
-                        clone_point.find('label[for="ok"]').attr('for', 'ok'+x);
-                        clone_point.find('label[for="posponer"]').attr('for', 'posponer'+x);
-                        clone_point.find('label[for="rechazar"]').attr('for', 'rechazar'+x);
-                        clone_point.find('input[id="ok"]').attr('id', 'ok'+x);
-                        clone_point.find('input[id="posponer"]').attr('id', 'posponer'+x);
-                        clone_point.find('input[id="rechazar"]').attr('id', 'rechazar'+x);
-                        clone_point.find('input[name="response"]').attr('name', 'response'+x);
-                        clone_point.find('input[data-severity="'+rows[x].severity+'"]').attr('checked', true);
-                        clone_point.find('.severity').prepend(severity_icon[rows[x].severity]+ ' '+rows[x].cataloge);
-                        console.log(rows[x]);
-                        var videos = rows[x].files.split("mp4").length - 1;
-                        var audios = rows[x].files.split("m4a").length - 1;
-                        var photos = rows[x].files.split("jpg").length - 1;
+                        clone_point.find('.severity').prepend(severity_icon[point.severity] + ' '+point.cataloge + ' <small>' + point.category  + '</small>');
+                        clone_point.find('.status').prepend(status_icon[point.status]);
+
+                        var videos = point.files.split("mp4").length - 1;
+                        var audios = point.files.split("m4a").length - 1;
+                        var photos = point.files.split("jpg").length - 1
+
+                        var price = parseInt(point.price).toFixed(2);
+
                         if (videos > 0){
                             clone_point.find('.videos').append(videos).removeClass('hide');
                         }
+
                         if (audios > 0){
                             clone_point.find('.audios').append(audios).removeClass('hide');
                         }
+
                         if (photos > 0){
                             clone_point.find('.photos').append(photos).removeClass('hide');
                         }
-                        var price = parseInt(rows[x].price).toFixed(2);
+
                         if (price > 0){
                             clone_point.find('.price').append(price).removeClass('hide');
                         }
+                        clone_point.attr('data-point')
+                        clone_point.draggable({
+                            revert:true,
+                            axis: "x",
+                            start: function(event, ui) {
+                                start = ui.position.left;
+                            },
+                            drag: function(event, ui) {
+                                stop = ui.position.left;
+                                if(start - stop > 10 ||  start - stop < -10){
+                                    if(start > stop)
+                                    {
+                                        $("#carousel-example-generic").carousel(2);
+                                        load_media(point)
+                                        $('#carousel-gallery-generic').carousel();
+                                    }
+                                    else {
+                                        $("#carousel-example-generic").carousel(0);
+                                    }
+                                }
+                            }
+                        });
                         $('#points').append(clone_point)
                     }
-                    $("#carousel-example-generic").carousel('next');
+                    $("#carousel-example-generic").carousel(1);
                 });
+                $('.list-group').css('height', screen.availHeight);
+                var height_panel = screen.availHeight - 30;
+                $('.panel-default').css('height', height_panel);
             });
 
-        }.bind(inspection));
+        }.bind(inspection);
 
+        var load_media = function(point) {
+            $('.severity-point').html("");
+            $('.severity-point').prepend(severity_icon[point.severity] + ' '+point.cataloge + ' <small>' + point.category  + '</small>');
+            $('input[data-severity="'+point.severity+'"]').attr('checked', true);
+            var files = JSON.decode(point.files);
+            for(var r = 0; r < files.length; r++)
+            {
+                console.log(files[r]);
+            }
+
+        }
+
+/*
+
+*/
         clone.removeClass('hide');
         clone.find('.inspection_status_1').addClass('hide');
         clone.find('.inspection_status_2').addClass('hide');
@@ -162,7 +221,7 @@ function HtmlServices(data)
         clone.find('.inspection_status_5').addClass('hide');
         clone.find('.inspection_status_'+status).removeClass('hide');
         clone.find('.folio').append(inspection.folio);
-        clone.find('.car').append(' '+ inspection.brand + ' ' + inspection.model+ ' ' + inspection.license_plate+ ' ' + inspection.vin);
+        clone.find('.car').append(' '+ inspection.brand + ' ' + inspection.model+ ', ' + inspection.license_plate+ ', ' + inspection.vin);
 
         if (status <= 4)
         {
@@ -172,3 +231,7 @@ function HtmlServices(data)
         }
     }
 }
+$( window ).on( "orientationchange", function( event ) {
+    var height_panel = screen.availHeight - 30;
+    $('.panel-default').css('height', height_panel);
+});

@@ -1,142 +1,163 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>My Services</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link href="css/main.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/toggle-switch.css" />
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>My Services</title>
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link href="css/main.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="css/toggle-switch.css" />
+    </head>
 
-  </head>
+    <body>
+        <div id="loading"><div id="loader"></div></div>
+        <div id='MainNavbar'></div>
+        <div class="container">
+            <div id="carousel-example-generic" class="carousel slide"  data-interval="false">
+                <div class="carousel-inner" role="listbox">
+                    <div style="padding-top:50px" class="item active">
+                        <h2 class="sub-header text-center" id="tittle">Mis Servicios</h2>
+                        <div class="panel panel-default" style="    border: none;">
+                            <!-- Nav tabs -->
+                            <div id="myTabs" style="border-top-right-radius: 3px;border-top-left-radius: 3px;" name="myTabs" class="focus btn-group btn-group-justified" data-toggle="buttons" role="group" aria-label="...">
+                                <div class="btn-group active" role="group">
+                                    <h5 style="margin: 0!important; text-shadow: -4px -2px 30px rgba(255, 255, 255, 1);" data-target="#in-pgrogress" class="btn-lg btn tab-btn-custom color_base active" aria-controls="in-pgrogress" data-toggle="tab">
+                                        <input type="radio" name="service-type" id="InProgress" autocomplete="off"> En progreso
+                                    </h5>
+                                </div>
+                                <div class="btn-group" role="group">
+                                    <h5  style="margin: 0!important; text-shadow: -4px -2px 30px rgba(255, 255, 255, 1);" data-target="#history" class="btn-lg btn tab-btn-custom color_base" aria-controls="history" data-toggle="tab">
+                                        <input type="radio" name="service-type" id="History" autocomplete="off"> Historial
+                                    </h5>
+                                </div>
+                            </div>
+                            <!-- Tab panes -->
+                            <div class="tab-content" >
+                                <div role="tabpanel" class="tab-pane fade in active" id="in-pgrogress">
+                                  <div class="list-group" style="max-height:400px; overflow-y:scroll; overflow-x:hide" id="progress_tab" name="progress_tab"></div>
+                                </div>
+                                <div role="tabpanel" class="tab-pane fade" id="history">
+                                  <div class="list-group" style="max-height:400px; overflow-y:scroll; overflow-x:hide6" id="history_tab" name="history_tab"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="padding-top:50px" class="item">
+                        <h2 class="sub-header text-center" >Inspección <i class="fa fa-hashtag"></i> <span class="inspection_folio"></span></h2>
+                        <div class="panel panel-default" style="border: none;">
+                            <div class="myTabs" style="border-top-right-radius: 3px;border-top-left-radius: 3px;" name="myTabs" class=" btn-group btn-group-justified" data-toggle="buttons" role="group" aria-label="...">
+                                <h5  style="width:100%;margin: 0!important; text-shadow: -4px -2px 30px rgba(255, 255, 255, 1);"  class="btn-lg btn tab-btn-custom active color_base">
 
-  <body>
-    <div id="loading"><div id="loader"></div></div>
-    <!-- Fixed navbar -->
-    <div id='MainNavbar'></div>
-    <div class="container">
+                                    <i class="fa fa-car"></i> <span class="inspection_car"></span>
+                                </h5>
+                            </div>
+                            <div class="list-group"  style="max-height:400px; overflow-y:scroll; overflow-x:hide" id="points" name="points"></div>
+                        </div>
+                    </div>
+                    <div style="padding-top:50px" class="item">
+                        <h2 class="sub-header text-center" id="media-point">Inspección <i class="fa fa-hashtag"></i> <span class="inspection_folio"></span></h2>
+                        <div class="panel panel-default" style="border: none;">
+                            <div class="myTabs" style="border-top-right-radius: 3px;border-top-left-radius: 3px;" name="myTabs" class=" btn-group btn-group-justified" data-toggle="buttons" role="group" aria-label="...">
+                                <h5  style="width:100%;margin: 0!important; text-shadow: -4px -2px 30px rgba(255, 255, 255, 1);"  class="btn-lg btn tab-btn-custom active color_base">
+                                    <i class="fa fa-car"></i> <span class="inspection_car"></span>
+                                </h5>
+                            </div>
+                            <div class="list-group"  style="max-height:400px; overflow-y:scroll; overflow-x:hide" id="gallery" name="gallery">
+                                <h3 class="severity-point"></h3>
+                                <div class="w3-content w3-section" style="max-heigth:250px">
+                                    <img class="img-responsive img-thumbnail mySlides w3-animate-fading" src="https://www.w3schools.com/w3css/img_rr_01.jpg" style="width:100%">
+                                    <img class="img-responsive img-thumbnail mySlides w3-animate-fading" src="https://www.w3schools.com/w3css/img_rr_02.jpg" style="width:100%">
+                                    <img class="img-responsive img-thumbnail mySlides w3-animate-fading" src="https://www.w3schools.com/w3css/img_rr_03.jpg" style="width:100%">
+                                    <img class="img-responsive img-thumbnail mySlides w3-animate-fading" src="https://www.w3schools.com/w3css/img_rr_04.jpg" style="width:100%">
+                                </div>
+                                <div class="switch-toggle switch-candy">
+                                    <input data-severity="1" id="ok" name="view" type="radio" checked>
+                                    <label for="ok" onclick="">Aceptar</label>
 
-    <div id="carousel-example-generic" class="carousel slide"  data-interval="false">
+                                    <input data-severity="2" id="posponer" name="view" type="radio">
+                                    <label for="posponer" onclick="">Posponer</label>
 
-      <!-- Wrapper for slides -->
-      <div class="carousel-inner" role="listbox">
-      <div style="padding-top:80px" class="item">
-        <h2 class="text-muted sub-header text-center" id="tittle">Servicio</h2>
-        <div class="panel panel-default" style="    border: none;">
-            <div class="myTabs" style="border-top-right-radius: 3px;border-top-left-radius: 3px;" name="myTabs" class=" btn-group btn-group-justified" data-toggle="buttons" role="group" aria-label="...">
-                <h5  style="width:100%;margin: 0!important; text-shadow: -4px -2px 30px rgba(255, 255, 255, 1);"  class="btn-lg btn tab-btn-custom active color_base">
-                    <a class="left" href="#carousel-example-generic" role="button" data-slide="prev">
-                        <i class="fa fa-chevron-left"></i>
-                            Regresar
-                    </a>
-                </h5>
+                                    <input data-severity="1" id="rechazar" name="view" type="radio">
+                                    <label for="rechazar" onclick="">Rechazar</label>
+
+                                    <a></a>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- ITEMS TO CLONING, POPPULATE ROW DATA AND APPEND -->
+        <div class="list-group hide">
+            <div id="clone-point" class="list-group-item">
+                <h3 class="severity"></h3>
+                <p class="list-group-item-text">
+                    <span class="hide price"><i class='fa fa-dollar-sign'></i> </span>
+                    <span class="hide videos"><i class='fa fa-images'></i> </span>
+                    <span class="hide photos"><i class='fa fa-video'></i> </span>
+                    <span class="hide audios"><i class='fa fa-headphones'></i> </span>
+                    <span class="status"></span>
+                </p>
             </div>
 
-            <div class="list-group" id="points" name="points">
+            <div id="clone" class=" list-group-item">
+                <h3 class="list-group-item-heading ">
+                    <i class="fa fa-hashtag"></i>
+                    <span class="folio"></span>
+                    <small class="inspection_status_1"><i class='fa fa-wrench'></i> En revisión</small>
+                    <small class="inspection_status_2 hide"><i class='fa fa-stethoscope'></i> Verificación</small>
+                    <small class="inspection_status_3 hide"><i class='fa fa-clock'></i> Espera cliente</small>
+                    <small class="inspection_status_4 hide"><i class='fa fa-comments'></i> Respondido</small>
+                    <small class="inspection_status_5 hide"><i class='fa fa-check-square'></i> Revisado</small>
+                    <small class="inspection_status_6 hide"><i class='fa fa-power-off'></i> Cerrado</small>
+                </h3>
+
+                <p class="list-group-item-text car "><i class="fa fa-car"></i></p>
+                <p class="list-group-item-text">
+                    <span style="margin-right:2px;" class="hide videos"><i class='fa fa-images'></i> </span>
+                    <span style="margin-right:2px;" class="hide photos"><i class='fa fa-video'></i> </span>
+                    <span style="margin-right:2px;" class="hide audios"><i class='fa fa-headphones'></i> </span>
+                    <span style="margin-right:2px;" class="hide severity-ok"></span>
+                    <span style="margin-right:2px;" class="hide severity-warning"></span>
+                    <span style="margin-right:2px;" class="hide severity-danger"></span>
+                    <span style="margin-right:2px;" class="hide price"><i class='fa fa-dollar-sign'></i> </span>
+                    <a style="margin-right:2px; color:#000;" class="hide btn-link presupuesto"><i class='fa fa-file-alt'></i> PDF</a>
+                </p>
             </div>
         </div>
-      </div>
-        <div style="padding-top:80px" class="item active">
-            <h2 class="text-muted sub-header text-center" id="tittle">Mis Servicios</h2>
-            <div class="panel panel-default" style="    border: none;">
-                <!-- Nav tabs -->
-                <div id="myTabs" style="border-top-right-radius: 3px;border-top-left-radius: 3px;" name="myTabs" class=" btn-group btn-group-justified" data-toggle="buttons" role="group" aria-label="...">
-                <div class="btn-group" role="group">
-                    <h5  style="margin: 0!important; text-shadow: -4px -2px 30px rgba(255, 255, 255, 1);" data-target="#in-pgrogress" class="btn-lg btn tab-btn-custom active color_base" aria-controls="in-pgrogress" data-toggle="tab">
-                        <input type="radio" name="service-type" id="InProgress" autocomplete="off"> En progreso
-                    </h5>
-                </div>
-                <div class="btn-group" role="group">
-                    <h5   style="margin: 0!important; text-shadow: -4px -2px 30px rgba(255, 255, 255, 1);" data-target="#history" class="btn-lg btn tab-btn-custom color_base" aria-controls="history" data-toggle="tab">
-                        <input type="radio" name="service-type" id="History" autocomplete="off"> Historial
-                    </h5>
-                </div>
-                </div>
-                <!-- Tab panes -->
-                <div class="tab-content">
-                <div role="tabpanel" class="tab-pane fade in active" id="in-pgrogress">
-                  <div class="list-group" id="progress_tab" name="progress_tab">
-                  </div>
-                </div>
-                <div role="tabpanel" class="tab-pane fade" id="history">
-                  <div class="list-group" id="history_tab" name="history_tab">
-                  </div>
-                </div>
-                </div>
-            </div>
-        </div>
-      </div>
-    </div>
 
-    </div>
-    <div class="list-group hide">
-        <div id="clone-point" class="list-group-item row">
-            <h3 class="severity col-sm-12">
-                <small class="pull-right">
-                    <span style="margin-left:10px" class="hide btn-link price"><i class='fa fa-dollar-sign'></i> </span>
-                    <span style="margin-left:10px" class="hide btn-link videos"><i class='fa fa-images'></i> </span>
-                    <span style="margin-left:10px" class="hide btn-link photos"><i class='fa fa-video'></i> </span>
-                    <span style="margin-left:10px" class="hide btn-link audios"><i class='fa fa-headphones'></i> </span>
-                </small>
-            </h3>
-            <fieldset class=" col-sm-12">
 
-              <div class="switch-toggle switch-candy">
-                <input data-severity="1" id="ok" name="response" type="radio">
-                <label for="ok" onclick="">Aceptar</label>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js" type="text/javascript"></script>
+        <script src="js/jquery.ui.touch-punch.min.js"></script>
 
-                <input data-severity="2" id="posponer" name="response" type="radio">
-                <label for="posponer" onclick="">Posponer</label>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/fontawesomeV5.js"></script>
+        <script src="js/commun.js"></script>
+        <script src="js/push.js"></script>
+        <script src="js/sync.js"></script>
+        <script src="js/services.js"></script>
+        <script src="cordova.js"></script>
+    	<script>
+    		services();
+            var myIndex = 0;
+            myCarousel();
 
-                <input data-severity="3" id="rechazar" name="response" type="radio">
-                <label for="rechazar" onclick="">Rechazar</label>
-
-                <a></a>
-              </div>
-            </fieldset>
-        </div>
-
-        <div id="clone" class=" list-group-item">
-            <h4 class="list-group-item-heading ">
-                <i class="fa fa-hashtag"></i>
-                <span class="folio"></span>
-                <small class="inspection_status_1"><i class='fa fa-wrench'></i> En revisión</small>
-                <small class="inspection_status_2 hide"><i class='fa fa-stethoscope'></i> Verificación</small>
-                <small class="inspection_status_3 hide"><i class='fa fa-clock'></i> Espera cliente</small>
-                <small class="inspection_status_4 hide"><i class='fa fa-comments'></i> Respondido</small>
-                <small class="inspection_status_5 hide"><i class='fa fa-check-square'></i> Revisado</small>
-                <small class="inspection_status_6 hide"><i class='fa fa-power-off'></i> Cerrado</small>
-            </h4>
-            <a class="link hide pull-right">
-             <span class=" badge"><i class="fa fa-chevron-right"></i></span>
-            </a>
-            <p class="list-group-item-text car "><i class="fa fa-car"></i></p>
-            <p class="list-group-item-text">
-
-                <span style="margin-right:2px;" class="hide videos"><i class='fa fa-images'></i> </span>
-                <span style="margin-right:2px;" class="hide photos"><i class='fa fa-video'></i> </span>
-                <span style="margin-right:2px;" class="hide audios"><i class='fa fa-headphones'></i> </span>
-                    <span style="margin-right:10px;" class="hide separator"></span>
-                <span style="margin-right:2px;" class="hide severity-ok"><i class='text-success fa fa-check-square'></i> </span>
-                <span style="margin-right:2px;" class="hide severity-warning"><i class='text-warning fa fa-exclamation-triangle'></i> </span>
-                <span style="margin-right:2px;" class="hide severity-danger"><i class='text-danger  fa fa-window-close'></i> </span>
-                <span style="margin-right:2px;" class="hide price"><i class='fa fa-dollar-sign'></i> </span>
-                <a style="margin-right:2px; color:#000;" class="hide presupuesto"><i class='fa fa-file-alt'></i> Presupuesto</a>
-
-            </p>
-        </div>
-    </div>
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/fontawesomeV5.js"></script>
-    <script src="js/commun.js"></script>
-    <script src="js/push.js"></script>
-    <script src="js/sync.js"></script>
-    <script src="js/services.js"></script>
-    <script src="cordova.js"></script>
-	<script>
-		services();
-	</script>
-  </body>
+            function myCarousel() {
+                var i;
+                var x = document.getElementsByClassName("mySlides");
+                for (i = 0; i < x.length; i++) {
+                    x[i].style.display = "none";
+                }
+                myIndex++;
+                if (myIndex > x.length) {myIndex = 1}
+                    x[myIndex-1].style.display = "block";
+                    setTimeout(myCarousel, 9000);
+                }
+    	</script>
+    </body>
 </html>

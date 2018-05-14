@@ -1,3 +1,5 @@
+var ruta_generica = "http://autosoft2.avansys.com.mx/api/v1/";
+
 function __sync_data(data, call_back_function = null){
 
     var  db = window.openDatabase("Database", "1.0", "Cordova Demo", 200000);
@@ -43,7 +45,7 @@ function __sync_data(data, call_back_function = null){
             {
                 var point = vehicle_inspections[x];
                 var files = JSON.stringify(point.files);
-                var sql2 = "INSERT INTO vehicle_inspections (id, inspection_id, point_id, price, severity, status, cataloge, category, origen, files) VALUES ("+point.id+", "+point.inspections_id+", "+point.inspection_id+", '"+point.price+"', "+point.severity+", '"+point.status+"', '"+point.catalogue.name+"', '"+point.catalogue.inspection.name+"', 'server', '"+files+"' )";
+                var sql2 = "INSERT INTO vehicle_inspections (id, inspection_id, point_id, price, severity, status, cataloge, category, origen, files) VALUES ("+point.id+", "+point.inspections_id+", "+point.inspection_id+", '"+point.price+"', "+point.severity+", "+point.status+", '"+point.catalogue.name+"', '"+point.catalogue.inspection.name+"', 'server', '"+files+"' )";
                 tx.executeSql(sql2);
             }
         }
