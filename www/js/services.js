@@ -51,7 +51,7 @@ var status_icon = [
     '',
     "<span style='color: forestgreen '><i class='fa fa-check'></i> Aprobado </span>",
     "<span style='color: red'><i class='fas fa-ban'></i>  Rechazado </span>",
-    "<span style='color: blue'><i class='far fa-calendar-alt'></i>Pospuesto</span>"
+    "<span style='color: blue'><i class='far fa-calendar-alt'></i> Pospuesto </span>"
 ];
 function HtmlServices(data)
 {
@@ -160,7 +160,7 @@ function HtmlServices(data)
                         var clone_point = $('#clone-point').clone();
                         clone_point.attr('id', 'clone-point'+x);
                         clone_point.find('.severity').prepend(severity_icon[point.severity] + ' '+point.cataloge + ' <small>' + point.category  + '</small>');
-                        clone_point.find('.status').prepend(status_icon[point.status]);
+                        clone_point.find('.status').html(status_icon[point.status]);
                         console.log(point.file);
                         var videos = point.files.split("mp4").length - 1;
                         var audios = point.files.split("m4a").length - 1;
@@ -228,7 +228,8 @@ function HtmlServices(data)
             $('.w3-section').html('')
             $('.severity-point').html("");
             $('.severity-point').prepend(severity_icon[$('.point-visited').attr('data-severity')] + ' '+$('.point-visited').attr('data-cataloge') + ' <small>' + $('.point-visited').attr('data-category')  + '</small>');
-            $('button[data-status="'+$('.point-visited').attr('data-status')+'"]').css('background', 'gray');
+            $('.btn-status').css('background', 'rgb(102, 102, 102)');
+            $('button[data-status="'+$('.point-visited').attr('data-status')+'"]').css('background', 'green');
             $('#statusPoint').val($('.point-visited').attr('data-point-id'));
             var files = JSON.parse($('.point-visited').attr('data-point-files'));
             var files_length =  files.length;
