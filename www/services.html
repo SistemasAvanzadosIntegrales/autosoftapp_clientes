@@ -48,7 +48,6 @@
                         <div class="panel panel-default" style="border: none;">
                             <div class="myTabs" style="border-top-right-radius: 3px;border-top-left-radius: 3px;" name="myTabs" class=" btn-group btn-group-justified" data-toggle="buttons" role="group" aria-label="...">
                                 <h5  style="width:100%;margin: 0!important; text-shadow: -4px -2px 30px rgba(255, 255, 255, 1);"  class="btn-lg btn tab-btn-custom active color_base">
-
                                     <i class="fa fa-car"></i> <span class="inspection_car"></span>
                                 </h5>
                             </div>
@@ -57,32 +56,32 @@
                     </div>
                     <div style="padding-top:50px" class="item">
                         <h2 class="sub-header text-center" id="media-point">Inspección <i class="fa fa-hashtag"></i> <span class="inspection_folio"></span></h2>
-                        <div class="panel panel-default" style="border: none;">
+                        <div class="panel panel-default" id="GalleryPanel" style="border: none;">
                             <div class="myTabs" style="border-top-right-radius: 3px;border-top-left-radius: 3px;" name="myTabs" class=" btn-group btn-group-justified" data-toggle="buttons" role="group" aria-label="...">
                                 <h5  style="width:100%;margin: 0!important; text-shadow: -4px -2px 30px rgba(255, 255, 255, 1);"  class="btn-lg btn tab-btn-custom active color_base">
                                     <i class="fa fa-car"></i> <span class="inspection_car"></span>
                                 </h5>
                             </div>
                             <div class="list-group"  style="max-height:400px; overflow-y:scroll; overflow-x:hide" id="gallery" name="gallery">
-                                <h3 class="severity-point"></h3>
-                                <div class="w3-content w3-section" style="max-heigth:250px">
-                                    <img class="img-responsive img-thumbnail mySlides w3-animate-fading" src="https://www.w3schools.com/w3css/img_rr_01.jpg" style="width:100%">
-                                    <img class="img-responsive img-thumbnail mySlides w3-animate-fading" src="https://www.w3schools.com/w3css/img_rr_02.jpg" style="width:100%">
-                                    <img class="img-responsive img-thumbnail mySlides w3-animate-fading" src="https://www.w3schools.com/w3css/img_rr_03.jpg" style="width:100%">
-                                    <img class="img-responsive img-thumbnail mySlides w3-animate-fading" src="https://www.w3schools.com/w3css/img_rr_04.jpg" style="width:100%">
+                                <div class="list-group-item ">
+                                    <h3 class="severity-point"></h3>
+
+                                    <button class="pull-left w3-button w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+                                    <button class="pull-right w3-button w3-display-right" onclick="plusDivs(+1)">&#10095;</button>
+                                    <div class="w3-content w3-section" style="max-heigth:250px">
+
+                                    </div>
+                                    <div class="switch-toggle switch-candy">
+                                        <input data-status="1" id="ok" name="view" type="radio" checked>
+                                        <label for="ok" onclick="">Aceptar</label>
+                                        <input data-status="2" id="posponer" name="view" type="radio">
+                                        <label for="posponer" onclick="">Posponer</label>
+                                        <input data-status="1" id="rechazar" name="view" type="radio">
+                                        <label for="rechazar" onclick="">Rechazar</label>
+
+                                        <a></a>
+                                    </div>
                                 </div>
-                                <div class="switch-toggle switch-candy">
-                                    <input data-severity="1" id="ok" name="view" type="radio" checked>
-                                    <label for="ok" onclick="">Aceptar</label>
-
-                                    <input data-severity="2" id="posponer" name="view" type="radio">
-                                    <label for="posponer" onclick="">Posponer</label>
-
-                                    <input data-severity="1" id="rechazar" name="view" type="radio">
-                                    <label for="rechazar" onclick="">Rechazar</label>
-
-                                    <a></a>
-                                  </div>
                               </div>
                           </div>
                       </div>
@@ -144,20 +143,6 @@
         <script src="cordova.js"></script>
     	<script>
     		services();
-            var myIndex = 0;
-            myCarousel();
-
-            function myCarousel() {
-                var i;
-                var x = document.getElementsByClassName("mySlides");
-                for (i = 0; i < x.length; i++) {
-                    x[i].style.display = "none";
-                }
-                myIndex++;
-                if (myIndex > x.length) {myIndex = 1}
-                    x[myIndex-1].style.display = "block";
-                    setTimeout(myCarousel, 9000);
-                }
     	</script>
     </body>
 </html>

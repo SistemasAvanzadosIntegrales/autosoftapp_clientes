@@ -12,9 +12,12 @@
 body{
     color: #FFF;
 }
-.w3-animate-fading{animation:fading 10s infinite}@keyframes fading{0%{opacity:0}50%{opacity:1}100%{opacity:0}}
+.mySlides
+{
+    width: 100%;
+}
 
-.visited{
+.visited, .point-visited{
     background: linear-gradient(90deg, #ddd  20%, #eee 80%);
 }
 #netStatus, #dbRefresh{

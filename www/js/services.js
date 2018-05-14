@@ -64,7 +64,7 @@ function HtmlServices(data)
 
         if(!status)
             continue;
-
+        console.log(inspection.files);
         var videos = inspection.files.split("mp4").length - 1;
         var audios = inspection.files.split("m4a").length - 1;
         var photos = inspection.files.split("jpg").length - 1;
@@ -102,29 +102,47 @@ function HtmlServices(data)
         if (presupuesto){
             clone.find('.presupuesto').attr("href", ruta_generica + 'download_price_quote/'+presupuesto).removeClass('hide');
         }
+        var _title = ' '+ inspection.brand + ' ' + inspection.model+ ', ' + inspection.license_plate+ ', ' + inspection.vin;
         clone.attr('id', 'clone'+inspection.link);
+        clone.attr('data-id', inspection.link);
+        clone.attr('data-folio', inspection.folio);
+        clone.attr('data-title', _title);
+        clone.find('.car').append(_title);
+
+        clone.find('.inspection_status_1').addClass('hide');
+        clone.find('.inspection_status_2').addClass('hide');
+        clone.find('.inspection_status_3').addClass('hide');
+        clone.find('.inspection_status_4').addClass('hide');
+        clone.find('.inspection_status_5').addClass('hide');
+        clone.find('.inspection_status_5').addClass('hide');
+        clone.find('.inspection_status_'+status).removeClass('hide');
+        clone.find('.folio').append(inspection.folio);
+
+
         clone.draggable({
             revert:true,
             axis: "x",
             start: function(event, ui) {
                 start = ui.position.left;
+                if ($('.visited').length)
+                {
+                    $('.visited').removeClass('visited')
+                }
+                $(this).addClass('visited');
             },
             drag: function(event, ui) {
-                stop = ui.position.left;
+                stop = ui.position.left;''
                 if(start - stop > 30 && start > stop){
-                    console.log(inspection);
-                    slide();
+                    slide(inspection);
+
                 }
             }
         });
         var slide = function(e){
             var db = window.openDatabase("Database", "1.0", "Cordova Demo", 200000);;
-            $('.visited').removeClass('visited');
-            var inspection = this;
-            var inspection_id = inspection.id;
-            $("#clone" + inspection_id).addClass('visited');
-            $(".inspection_folio").html(inspection.folio);
-            $(".inspection_car").html(inspection.brand + ' ' + inspection.model+ ', ' + inspection.license_plate+ ', ' + inspection.vin);
+            var inspection_id = $('.visited').attr('data-id');
+            $(".inspection_folio").html($('.visited').attr('data-folio'));
+            $(".inspection_car").html($('.visited').attr('data-title'));
             db.transaction(function(tx) {
                 var sql = [
                     " SELECT * ",
@@ -135,14 +153,14 @@ function HtmlServices(data)
                 tx.executeSql(sql, [], function (tx, results){
 
                     $('#points').html("");
-                    var rows = results.rows;console.log(rows);
+                    var rows = results.rows;
                     for(var x = 0; x < rows.length; x++){
                         var point = rows[x];
                         var clone_point = $('#clone-point').clone();
                         clone_point.attr('id', 'clone-point'+x);
                         clone_point.find('.severity').prepend(severity_icon[point.severity] + ' '+point.cataloge + ' <small>' + point.category  + '</small>');
                         clone_point.find('.status').prepend(status_icon[point.status]);
-
+                        console.log(point.file);
                         var videos = point.files.split("mp4").length - 1;
                         var audios = point.files.split("m4a").length - 1;
                         var photos = point.files.split("jpg").length - 1
@@ -164,21 +182,30 @@ function HtmlServices(data)
                         if (price > 0){
                             clone_point.find('.price').append(price).removeClass('hide');
                         }
-                        clone_point.attr('data-point')
+                        clone_point.attr('data-severity', point.severity);
+                        clone_point.attr('data-cataloge', point.cataloge);
+                        clone_point.attr('data-category', point.category);
+                        clone_point.attr('data-status', point.status);
+                        clone_point.attr('data-point-id', point.id);
+                        clone_point.attr('data-point-files', point.files);
                         clone_point.draggable({
                             revert:true,
                             axis: "x",
                             start: function(event, ui) {
                                 start = ui.position.left;
+                                if ($('.point-visited').length)
+                                {
+                                    $('.point-visited').removeClass('point-visited')
+                                }
+                                $(this).addClass('point-visited');
                             },
                             drag: function(event, ui) {
                                 stop = ui.position.left;
-                                if(start - stop > 10 ||  start - stop < -10){
+                                if(start - stop > 30 || start - stop < -30){
                                     if(start > stop)
                                     {
-                                        $("#carousel-example-generic").carousel(2);
                                         load_media(point)
-                                        $('#carousel-gallery-generic').carousel();
+                                        $("#carousel-example-generic").carousel(2);
                                     }
                                     else {
                                         $("#carousel-example-generic").carousel(0);
@@ -196,32 +223,42 @@ function HtmlServices(data)
             });
 
         }.bind(inspection);
-
-        var load_media = function(point) {
+        var load_media = function(e) {
+            $('.w3-section').html('')
             $('.severity-point').html("");
-            $('.severity-point').prepend(severity_icon[point.severity] + ' '+point.cataloge + ' <small>' + point.category  + '</small>');
-            $('input[data-severity="'+point.severity+'"]').attr('checked', true);
-            var files = JSON.decode(point.files);
-            for(var r = 0; r < files.length; r++)
-            {
-                console.log(files[r]);
+            $('.severity-point').prepend(severity_icon[$('.point-visited').attr('data-severity')] + ' '+$('.point-visited').attr('data-cataloge') + ' <small>' + $('.point-visited').attr('data-category')  + '</small>');
+            $('input[data-severity="'+$('.point-visited').attr('data-severity')+'"]').attr('checked', true);
+
+            var files = JSON.parse($('.point-visited').attr('data-point-files'));
+            var files_length =  files.length;
+            var uri = 'http://autosoft2.avansys.com.mx/files/';
+            for (var w = 0; w < files_length; w++){
+
+
+                var __file_name = files[w].name;
+                var item = false;
+                if (__file_name.indexOf('.mp4') > 0){
+                    item = "<div class='mySlides'><video style='width:100%; margin:auto; display: inherit; 'controls><source src='"+uri + __file_name +"' type='video/mp4'></video></div>";
+                }
+                else if (__file_name.indexOf('.m4a') > 0){
+                    item  = "<div class='mySlides'>"+
+                    "<i class='fa fa-volume-up'></i><audio style='width:100%; margin:auto; display: inherit;' controls>"+
+                    "<source src='"+uri + __file_name+"'></audio></div>";
+                }
+                else if (__file_name.indexOf('.jpg') > 0){
+                    item = '<div class="mySlides"><img style="width:100%; margin:auto; display: inherit;" src="'+uri + __file_name +'"></div>';
+                }
+
+                $('.w3-content').append(item);
+
+            }
+            if($('.mySlides').length){
+                showDivs(1);
             }
 
         }
 
-/*
-
-*/
         clone.removeClass('hide');
-        clone.find('.inspection_status_1').addClass('hide');
-        clone.find('.inspection_status_2').addClass('hide');
-        clone.find('.inspection_status_3').addClass('hide');
-        clone.find('.inspection_status_4').addClass('hide');
-        clone.find('.inspection_status_5').addClass('hide');
-        clone.find('.inspection_status_5').addClass('hide');
-        clone.find('.inspection_status_'+status).removeClass('hide');
-        clone.find('.folio').append(inspection.folio);
-        clone.find('.car').append(' '+ inspection.brand + ' ' + inspection.model+ ', ' + inspection.license_plate+ ', ' + inspection.vin);
 
         if (status <= 4)
         {
@@ -231,6 +268,41 @@ function HtmlServices(data)
         }
     }
 }
+$("#GalleryPanel").draggable({
+    revert:true,
+    axis: "x",
+    start: function(event, ui) {
+        start = ui.position.left;
+        if ($('.visited').length)
+        {
+            $('.visited').removeClass('visited')
+        }
+        $(this).addClass('visited');
+    },
+    drag: function(event, ui) {
+        stop = ui.position.left;
+        if(stop - start > 30 && start < stop){
+            $("#carousel-example-generic").carousel(1);
+        }
+    }
+});
+
+var slideIndex = 1;
+function plusDivs(n) {
+  showDivs(slideIndex += n);
+}
+
+function showDivs(n) {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  if (n > x.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = x.length}
+  for (i = 0; i < x.length; i++) {
+     x[i].style.display = "none";
+  }
+  x[slideIndex-1].style.display = "block";
+}
+
 $( window ).on( "orientationchange", function( event ) {
     var height_panel = screen.availHeight - 30;
     $('.panel-default').css('height', height_panel);
