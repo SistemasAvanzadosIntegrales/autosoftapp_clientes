@@ -48,6 +48,7 @@ var severity_icon = [
 ];
 var status_icon = [
     '',
+    '',
     "<span style='color: forestgreen '><i class='fa fa-check'></i> Aceptado </span>",
     "<span style='color: red'><i class='fas fa-ban'></i>  Rechazado </span>",
     "<span style='color: blue'><i class='far fa-calendar-alt'></i> 1212-12-12 </span>"
@@ -217,9 +218,9 @@ function HtmlServices(data)
                     }
                     $("#carousel-example-generic").carousel(1);
                 });
-                $('.list-group').css('height', screen.availHeight);
-                var height_panel = screen.availHeight - 30;
-                $('.panel-default').css('height', height_panel);
+            //    $('.list-group').css('height', screen.availHeight);
+            //    var height_panel = screen.availHeight - 30;
+            //    $('.panel-default').css('height', height_panel);
             });
 
         }.bind(inspection);
@@ -227,8 +228,8 @@ function HtmlServices(data)
             $('.w3-section').html('')
             $('.severity-point').html("");
             $('.severity-point').prepend(severity_icon[$('.point-visited').attr('data-severity')] + ' '+$('.point-visited').attr('data-cataloge') + ' <small>' + $('.point-visited').attr('data-category')  + '</small>');
-            $('input[data-severity="'+$('.point-visited').attr('data-severity')+'"]').attr('checked', true);
-
+            $('button[data-status="'+$('.point-visited').attr('data-status')+'"]').css('background', 'gray');
+            $('#statusPoint').val($('.point-visited').attr('data-point-id'));
             var files = JSON.parse($('.point-visited').attr('data-point-files'));
             var files_length =  files.length;
             var uri = 'http://autosoft2.avansys.com.mx/files/';
@@ -238,7 +239,7 @@ function HtmlServices(data)
                 var __file_name = files[w].name;
                 var item = false;
                 if (__file_name.indexOf('.mp4') > 0){
-                    item = "<div class='mySlides'><video style='width:100%; margin:auto; display: inherit; 'controls><source src='"+uri + __file_name +"' type='video/mp4'></video></div>";
+                    item = "<div class='mySlides'><video style='height:250px; margin:auto; display: inherit; 'controls><source src='"+uri + __file_name +"' type='video/mp4'></video></div>";
                 }
                 else if (__file_name.indexOf('.m4a') > 0){
                     item  = "<div class='mySlides'>"+
@@ -253,7 +254,10 @@ function HtmlServices(data)
 
             }
             if($('.mySlides').length){
+                $('.sliders-button').removeClass('hide');
                 showDivs(1);
+            }else {
+                $('.sliders-button').addClass('hide');
             }
 
         }
@@ -304,6 +308,6 @@ function showDivs(n) {
 }
 
 $( window ).on( "orientationchange", function( event ) {
-    var height_panel = screen.availHeight - 30;
-    $('.panel-default').css('height', height_panel);
+    //var height_panel = screen.availHeight - 30;
+    //$('.panel-default').css('height', height_panel);
 });

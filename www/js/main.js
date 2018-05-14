@@ -279,7 +279,6 @@ function gridDetalleInspeccionItem(){
 
 function posponer(){
     var devicePlatform = device.platform;
-
     minDate =new Date();
 
     if(devicePlatform=="Android"){
@@ -304,11 +303,12 @@ function posponer(){
 
     datePicker.show(options, function(date){
     navigator.notification.alert("Postpuesto para " +date.getFullYear()+"/"+(date.getMonth()+1)+"/"+date.getDate());
-      madarResultado(4,date.getFullYear()+"/"+(date.getMonth()+1)+"/"+date.getDate(),0);
+      madarResultado(3,date.getFullYear()+"/"+(date.getMonth()+1)+"/"+date.getDate(),0);
     });
 }
 
 function rechazar(){
+
    var message = "Ingrese motivo para rechazo:";
    var title = "Rechazar";
    var buttonLabels = ["Cancelar","Aceptar"];
@@ -319,7 +319,7 @@ function rechazar(){
    function promptCallback(result) {
        if(result.buttonIndex==2){
             navigator.notification.alert('Rechazaste por '+result.input1);
-             madarResultado(3,0,result.input1);
+             madarResultado(4, 0, result.input1);
         }
    }
 }
@@ -338,7 +338,7 @@ function aceptar(){
     );
 }
 
-function madarResultado(status,fecha,motivo){
+function madarResultado(status, fecha, motivo){
 
 
     var token = localStorage.getItem('token');
@@ -349,8 +349,8 @@ function madarResultado(status,fecha,motivo){
         type: 'POST',
         dataType: 'JSON',
         data: {
-            token:      token,
-            id:     params.get('id'),
+            token: token,
+            id: $('#statusPoint').val(),
             pospuesto: fecha,
             motivo: motivo,
             status: status
@@ -359,7 +359,7 @@ function madarResultado(status,fecha,motivo){
 
             if( resp.status == 'ok' ) {
                push();
-               location.href = 'service-details.html';
+               location.href = 'services.html';
             }
             else {
                 $("#alertaLogin").html(resp.message).show();
