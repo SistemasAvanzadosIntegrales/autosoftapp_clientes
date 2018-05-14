@@ -49,9 +49,9 @@ var severity_icon = [
 var status_icon = [
     '',
     '',
-    "<span style='color: forestgreen '><i class='fa fa-check'></i> Aceptado </span>",
+    "<span style='color: forestgreen '><i class='fa fa-check'></i> Aprobado </span>",
     "<span style='color: red'><i class='fas fa-ban'></i>  Rechazado </span>",
-    "<span style='color: blue'><i class='far fa-calendar-alt'></i> 1212-12-12 </span>"
+    "<span style='color: blue'><i class='far fa-calendar-alt'></i>Pospuesto</span>"
 ];
 function HtmlServices(data)
 {
