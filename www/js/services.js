@@ -253,7 +253,7 @@ function HtmlServices(data)
                 $('.w3-content').append(item);
 
             }
-            if($('.mySlides').length){
+            if($('.mySlides').length > 1){
                 $('.sliders-button').removeClass('hide');
                 showDivs(1);
             }else {
