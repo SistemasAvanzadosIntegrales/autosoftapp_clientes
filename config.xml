@@ -3,7 +3,7 @@
     <name>Autosoft Clientes</name>
     <description>Intel XDK template</description>
     <author>Intel XDK</author>
-   
+
 <content src="index.html"/>
 <preference name="android-build-tool" value="gradle" />
 <allow-intent href="http://*/*"/>
@@ -34,8 +34,7 @@
 <plugin name="cordova-plugin-audio-recorder" spec="1.0.5"/>
 <plugin name="cordova-plugin-network-information" spec="1.2.1"/>
 <plugin name="cordova-sqlite-storage" spec="1.2.0"/>
-<plugin name="onesignal-cordova-plugin" spec="^2.0" /> 
-    
+<plugin name="onesignal-cordova-plugin" spec="^2.0" />
 <plugin name="cordova-plugin-whitelist" spec="1.2.2"/>
 <platform  name="ios">
     <!-- below requires the splash screen plugin -->
@@ -72,7 +71,7 @@
 <preference name="android-signed" value="false"/>
 <preference name="AndroidLaunchMode" value="singleTop"/>
 </platform>
-<config-file platform="android" parent="/manifest/application" mode="merge"> 
+<config-file platform="android" parent="/manifest/application" mode="merge">
     <activity android:launchMode="singleTop" />
 </config-file>
 </widget>
