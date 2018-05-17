@@ -21,8 +21,8 @@ function get_inspection(){
           var inspections = data.inspection_points.vehicle_inspections;
           var detalles = $('#detalles');
           var status = [
-            '<i class="fa fa-trash-o"> </i>',
-            '<i class="fa fa-trash"> </i>',
+            '',
+            '',
             '<p class="text-success">Aceptado</p>',
             '<p class="text-danger">Rechazado</p>',
             '<p class="text-info">Pospuesto</p>'

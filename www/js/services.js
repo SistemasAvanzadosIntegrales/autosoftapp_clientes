@@ -109,6 +109,9 @@ function HtmlServices(data)
         clone.attr('data-folio', inspection.folio);
         clone.attr('data-title', _title);
         clone.attr('data-status',inspection.status);
+        clone.attr('data-created-at', inspection.created_at);
+        clone.attr('data-price', inspection.price);
+        clone.attr('data-updated-at',inspection.updated_at);
 
         clone.find('.car').append(_title);
 
@@ -146,6 +149,31 @@ function HtmlServices(data)
             var inspection_id = $('.visited').attr('data-id');
             $(".inspection_folio").html($('.visited').attr('data-folio'));
             $(".inspection_car").html($('.visited').attr('data-title'));
+            var presupuesto_href = $('.visited').find('.presupuesto').attr('href');
+            $(".presupuesto-display").addClass('hide');
+            if(presupuesto_href){
+                $(".presupuesto-display").attr("href", presupuesto_href);
+                $(".presupuesto-display").removeClass('hide');
+            }
+            if( $('.visited').attr('data-status') >= 5 )
+            {
+                $('.created_at').html($('.visited').attr('data-created-at'));
+                $('.updated_at').html($('.visited').attr('data-updated-at'));
+                $('.updated_at').parent().removeClass('hide');
+            } else
+            {
+                $('.created_at').html("");
+                $('.updated_at').html("");
+                $('.updated_at').parent().addClass('hide');
+            }
+            if( $('.visited').attr('data-price') > 0 )
+            {
+                $('.price-display').html(parseInt($('.visited').attr('data-price')).toFixed(2));
+                $('.price-display').parent().removeClass('hide');
+            }else {
+                $('.price-display').html("");
+                $('.price-display').parent().addClass('hide');
+            }
             db.transaction(function(tx) {
                 var sql = [
                     " SELECT * ",
@@ -239,7 +267,14 @@ function HtmlServices(data)
                 $('button[data-status="'+$('.point-visited').attr('data-status')+'"]').css('width', '100%').css('font-size', '1em').css('border-radius', 0);
                 $('button[data-status="'+$('.point-visited').attr('data-status')+'"]').html(["","", "Aprobado", "Rechazado", "Pospuesto"][$('.point-visited').attr('data-status')]);
             }
-
+            if( $('.point-visited').find('.price').html() )
+            {
+                $('.price-point').html($('.point-visited').find('.price').html());
+                $('.price-point').removeClass('hide');
+            }else {
+                $('.price-point').html("<br><br>");
+                $('.price-point').addClass('hide');
+            }
             $('#statusPoint').val($('.point-visited').attr('data-point-id'));
             var files = JSON.parse($('.point-visited').attr('data-point-files'));
             var files_length =  files.length;

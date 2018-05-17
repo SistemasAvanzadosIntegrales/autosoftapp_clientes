@@ -9,9 +9,7 @@
   line-height: 3em;
   border-radius: 75px;
 }
-body{
-    color: #FFF;
-}
+
 .mySlides
 {
     width: 100%;
@@ -47,8 +45,8 @@ a.btn-link{
     color:blue;
 }
 
-a, h1.tittle, h2.tittle, h3.tittle, h4.tittle{
-    color:white;
+.text-white, h1.tittle, h2.tittle, h3.tittle, h4.tittle{
+    color:white!important;
     text-decoration: none!important;
 }
 table, nav a, .panel-default{
