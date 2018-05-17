@@ -1,6 +1,10 @@
 document.addEventListener('deviceready', function () {
     var session = JSON.parse(localStorage.getItem('session'));
+<<<<<<< HEAD
     var app_settings = JSON.parse(localStorage.getItem('app_settings'));
+=======
+    var app_settings = JSON.parse(localStorage.getItem('app_settings')); 
+>>>>>>> d62ece4c00401e0992531b0381bc16f34ed81423
     // Enable to debug issues.
     // window.plugins.OneSignal.setLogLevel({logLevel: 4, visualLevel: 4});
     try {
