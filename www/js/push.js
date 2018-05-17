@@ -12,10 +12,10 @@ document.addEventListener('deviceready', function () {
             .handleNotificationOpened(notificationOpenedCallback)
             .endInit();
         var session=JSON.parse(localStorage.getItem('session'));
-        window.plugins.OneSignal.sendTag("rol",app_settings.rol+localStorage.getItem(token));
-        window.plugins.OneSignal.sendTag("id", app_settings.user.id+localStorage.getItem(token));
-        console.log(app_settings.rol+localStorage.getItem(token));
-        console.log(app_settings.user.id+localStorage.getItem(token));
+        window.plugins.OneSignal.sendTag("rol",app_settings.rol+localStorage.getItem('token'));
+        window.plugins.OneSignal.sendTag("id", app_settings.user.id+localStorage.getItem('token'));
+        console.log(app_settings.rol+localStorage.getItem('token'));
+        console.log(app_settings.user.id+localStorage.getItem('token'));
     } catch (e) {
         console.log(e);
     }
