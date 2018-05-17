@@ -2,24 +2,15 @@
  *  @author   Ivan Vazquez
  **/
 function avisoDePrivacidad(){
-
-	$.ajax({
-		url: ruta_generica+'notice',
-		type: 'POST',
-		dataType: "JSON",
-		data: {
-			token : localStorage.getItem('token')
-		},
-		success:function(data){
-
-
-			$("#notice").append(data['privacy']['notice_privacy']).show();
-
-		},
-		error: function(XMLHttpRequest, textStatus, errorThrown) {
-
-			console.log("Status: " + textStatus);
-			console.log("Error: " + errorThrown);
-		}
-	});
+	var notice = JSON.parse(localStorage.getItem("app_settings"))
+	console.log(notice);
+	if(notice.config_company && notice.config_company.notice_privacy){
+		$("#notice").append(notice.config_company.notice_privacy).show()
+	}
+	else if(localStorage.getItem('network') == 'online') {
+		sync_data(function(){
+			notice = localStorage.getItem("app_settings").config_company.notice_privacy;
+			$("#notice").append(notice.config_company.notice_privacy).show()
+		})
+	}
 }

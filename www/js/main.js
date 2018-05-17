@@ -105,6 +105,10 @@ function madarResultado(status, fecha, motivo){
 
             if( resp.status == 'ok' ) {
 				$('div[data-point-id="'+point_id+'"]').find('.status').html(status_icon[status]);
+				var db = window.openDatabase("Database", "1.0", "Cordova Demo", 200000);
+				db.transaction(function(tx) {
+					tx.executeSql( "UPDATE vehicle_inspections set status = "+status+" where id = ? ", [point_id]);
+				});
                	$("#carousel-example-generic").carousel(1);
             }
             else {

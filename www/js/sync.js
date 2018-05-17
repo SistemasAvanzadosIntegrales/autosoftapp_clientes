@@ -1,7 +1,17 @@
 var ruta_generica = "http://autosoft2.avansys.com.mx/api/v1/";
 
 function __sync_data(data, call_back_function = null){
+    var app_settings = {
+        config_company: data.config_company,
+        license: data.license,
+        licensing_access: data.licensing_access,
+        logo: data.logo,
+        rol: data.rol,
+        user: data.user,
+        user_permissions: data.user_permissions,
+    }
 
+    localStorage.setItem("app_settings", JSON.stringify(app_settings));
     var  db = window.openDatabase("Database", "1.0", "Cordova Demo", 200000);
 
 
@@ -59,12 +69,10 @@ function __sync_data(data, call_back_function = null){
     });
 }
 
-var first_sync = true;
-
 function sync_data(call_back_function = null){
     var app_settings = JSON.parse(localStorage.getItem('app_settings'));
     console.log(app_settings);
-    if(localStorage.getItem("network") == 'online'  || first_sync){
+    if(localStorage.getItem("network") == 'online'){
         first_sync = false;
         $('#dbRefresh').removeClass('hide');
         var session = JSON.parse(localStorage.getItem('session'));

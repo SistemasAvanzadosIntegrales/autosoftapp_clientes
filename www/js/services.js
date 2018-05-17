@@ -9,7 +9,7 @@ var services = function(take, skip){
                 " FROM inspections AS i ",
                 " LEFT JOIN vehicles AS v ON v.id = i.vehicle_id ",
                 " LEFT JOIN vehicle_inspections AS vi ON i.id = vi.inspection_id ",
-                " WHERE i.status > 1 ",
+                " WHERE i.status > 2 ",
                 " GROUP BY i.id ",
                 " ORDER BY i.id DESC "
             ].join('');
@@ -108,6 +108,8 @@ function HtmlServices(data)
         clone.attr('data-id', inspection.link);
         clone.attr('data-folio', inspection.folio);
         clone.attr('data-title', _title);
+        clone.attr('data-status',inspection.status);
+
         clone.find('.car').append(_title);
 
         clone.find('.inspection_status_1').addClass('hide');
@@ -188,6 +190,7 @@ function HtmlServices(data)
                         clone_point.attr('data-category', point.category);
                         clone_point.attr('data-status', point.status);
                         clone_point.attr('data-point-id', point.id);
+                        clone_point.attr('data-point-inspection-id', point.inspection_id);
                         clone_point.attr('data-point-files', point.files);
                         clone_point.draggable({
                             revert:true,
@@ -218,18 +221,25 @@ function HtmlServices(data)
                     }
                     $("#carousel-example-generic").carousel(1);
                 });
-            //    $('.list-group').css('height', screen.availHeight);
-            //    var height_panel = screen.availHeight - 30;
-            //    $('.panel-default').css('height', height_panel);
             });
-
         }.bind(inspection);
+
         var load_media = function(e) {
             $('.w3-section').html('')
             $('.severity-point').html("");
             $('.severity-point').prepend(severity_icon[$('.point-visited').attr('data-severity')] + ' '+$('.point-visited').attr('data-cataloge') + ' <small>' + $('.point-visited').attr('data-category')  + '</small>');
             $('.btn-status').css('background', 'rgb(102, 102, 102)');
+            $('.btn-status').removeClass('hide');
             $('button[data-status="'+$('.point-visited').attr('data-status')+'"]').css('background', 'green');
+            if($('.visited').attr('data-status') != 3)
+            {
+                $('button[data-status="'+$('.point-visited').attr('data-status')+'"]').css('background', 'lightgray');
+                $('button[data-status="'+$('.point-visited').attr('data-status')+'"]').removeAttr('onclick');
+                $('.btn-status:not(button[data-status="'+$('.point-visited').attr('data-status')+'"])').addClass('hide');
+                $('button[data-status="'+$('.point-visited').attr('data-status')+'"]').css('width', '100%').css('font-size', '1em').css('border-radius', 0);
+                $('button[data-status="'+$('.point-visited').attr('data-status')+'"]').html(["","", "Aprobado", "Rechazado", "Pospuesto"][$('.point-visited').attr('data-status')]);
+            }
+
             $('#statusPoint').val($('.point-visited').attr('data-point-id'));
             var files = JSON.parse($('.point-visited').attr('data-point-files'));
             var files_length =  files.length;

@@ -16,13 +16,30 @@ $(document).ready(function(){
 });
 
 document.addEventListener("online", function() {
-    $('#netStatus').attr('class', 'text-success');
+    var app_settings = JSON.parse(localStorage.getItem('app_settings'));
+    app_settings = app_settings ? app_settings : {"config_company": {"contrast_color": "dddddd", "base_color": "012d4a"}};
+    var contrast_color = '#'+app_settings.config_company.contrast_color;
+    var base_color = '#'+app_settings.config_company.base_color;
+    $('#netStatus').attr('style', 'color:' +  contrast_color+ '!important');
      localStorage.setItem("network", 'online');
+
+     if($('.online').length)
+     {
+         $('.online').removeAttr('disabled')
+         $('.online').removeAttr('readonly');
+     }
+
+
 }, false);
 
 document.addEventListener("offline", function(){
-    $('#netStatus').attr('class', 'text-danger');
+    $('#netStatus').attr('style', 'color: red!important');
     localStorage.setItem("network", 'offline');
+    if($('.online').length){
+        $('.online').attr('disabled', true);
+        $('.online').attr('readonly', true);
+    }
+
 }, false);
 
 /**
@@ -62,9 +79,9 @@ var apariencia = function()
   logo.fadeIn();
 
   $('.table thead tr th').css('background', contrast_color);
-  $("#myTabs").css('background', contrast_color).css('color', base_color);
+  $("#myTabs").css('background', contrast_color).css('color', base_color)
   $(".myTabs").css('background', contrast_color).css('color', base_color);
-
+  $("#myTabs").removeClass('hide');
   $('label[data-target="#in-pgrogress"]').css('color', base_color);
   $('label[data-target="#history"]').css('color', base_color);
 
