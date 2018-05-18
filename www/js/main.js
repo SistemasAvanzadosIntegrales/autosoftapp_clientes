@@ -82,7 +82,7 @@ function aceptar(){
 
 function madarResultado(status, fecha, motivo){
     var token = localStorage.getItem('token');
-	var point_id = $('#statusPoint').val();
+	var point_id = $('#statusPointId').val();
 	var status_icon = [
 	    '',
 	    '',
@@ -107,9 +107,10 @@ function madarResultado(status, fecha, motivo){
 				$('div[data-point-id="'+point_id+'"]').find('.status').html(status_icon[status]);
 				var db = window.openDatabase("Database", "1.0", "Cordova Demo", 200000);
 				db.transaction(function(tx) {
-					tx.executeSql( "UPDATE vehicle_inspections set status = "+status+" where id = ? ", [point_id]);
+					tx.executeSql( "UPDATE vehicle_inspections set status = "+status+"  origen = 'modified' where id = ? ", [point_id]);
 				});
                	$("#carousel-example-generic").carousel(1);
+				$('div[data-point-id="'+point_id+'"]').attr('data-status', status);
             }
             else {
                 $("#alertaLogin").html(resp.message).show();

@@ -52,13 +52,13 @@
                     <div style="padding-top:50px; width:100%" class="item">
                         <h2 class="sub-header text-center" >Inspección <i class="fa fa-hashtag"></i> <span class="inspection_folio"></span><br>
                             <small style="font-size:  0.5em; color:blue">
-                                <a class="btn-link presupuesto-display hide"><i class='fa fa-download'></i> Presuouesto</a>
+                                <a class="btn-link presupuesto-display hide"><i class='fa fa-download'></i> Presupuesto</a>
                                 <a class="btn-link hide"><i class=' fa fa-dollar-sign'></i> <span class="price-display"></span></a>
                                 <a class="btn-link" href="#"><i class="fa fa-calendar-check"></i> <label class="created_at"></label> al <label class="updated_at"> </label></a>
                             </small>
                         </h2>
                         <div class="panel panel-default"width:100%; style="border: none;">
-                            <div class="myTabs" style="border-top-right-radius: 3px;border-top-left-radius: 3px;" name="myTabs" class=" btn-group btn-group-justified" data-toggle="buttons" role="group" aria-label="...">
+                            <div class="myTabs" style="border-top-right-radius: 3px;border-top-left-radius: 3px; width:100%" name="myTabs" class=" btn-group btn-group-justified" data-toggle="buttons" role="group" aria-label="...">
                                 <h5  style="width:100%;margin: 0!important; text-shadow: -4px -2px 30px rgba(255, 255, 255, 1);"  class="btn-lg btn tab-btn-custom active color_base">
                                     <i class="fa fa-car"></i> <span class="inspection_car"></span>
                                 </h5>
@@ -69,12 +69,13 @@
                     <div style="padding-top:50px; width:100%" class="item">
                         <h2 class="sub-header text-center" id="media-point">Inspección <i class="fa fa-hashtag"></i> <span class="inspection_folio"></span><br>
                             <small style="font-size:  0.5em; color:blue">
+                                <a class="btn-link presupuesto-display hide"><i class='fa fa-download'></i> Presupuesto</a>
                                 <a class="btn-link price-point"></a>
                                 <a class="btn-link" href="#"><i class="fa fa-calendar-check"></i> <label class="created_at"></label> al <label class="updated_at"> </label></a>
                             </small>
                         </h2>
                         <div class="panel panel-default" style="width:100%; border: none;">
-                            <div class="myTabs" id="GalleryPanel" style="border-top-right-radius: 3px;border-top-left-radius: 3px;" name="myTabs" class=" btn-group btn-group-justified" data-toggle="buttons" role="group" aria-label="...">
+                            <div class="myTabs" id="GalleryPanel" style="border-top-right-radius: 3px;border-top-left-radius: 3px; width:100%" name="myTabs" class=" btn-group btn-group-justified" data-toggle="buttons" role="group" aria-label="...">
                                 <h5  style="width:100%;margin: 0!important; text-shadow: -4px -2px 30px rgba(255, 255, 255, 1);"  class="btn-lg btn tab-btn-custom active color_base">
                                     <i class="fa fa-car"></i> <span class="inspection_car"></span>
                                 </h5>
@@ -89,7 +90,7 @@
                                     <p class="list-group-item-text">
                                         <div class="w3-content w3-section" style="max-heigth:250px"></div>
                                     </p>
-                                    <input type="hidden" id="statusPoint">
+                                    <input type="hidden" id="statusPointId">
                                     <p class="text-center">
                                         <button type="button" data-status="2" style="-webkit-appearance: button-bevel; border-bottom-left-radius: 5px;border-top-left-radius: 5px;" class="col-xs-4 btn-status btn-defaul" onclick="aceptar();">Aprobar</button>
                                         <button type="button" data-status="4" style="-webkit-appearance: button-bevel; " class="col-xs-4 btn-status btn-defaul" onclick="posponer();">Posponer</button>
@@ -139,7 +140,7 @@
                     <span style="margin-right:2px;" class="hide severity-warning"></span>
                     <span style="margin-right:2px;" class="hide severity-danger"></span>
                     <span style="margin-right:2px;" class="hide price"><i class='fa fa-dollar-sign'></i> </span>
-                    <a style="margin-right:2px; color:#000;" class="hide btn-link presupuesto"><i class='fa fa-download'></i> Preupuesto</a>
+                    <a style="margin-right:2px; color:#000;" class="hide btn-link presupuesto"><i class='fa fa-download'></i> Presupuesto</a>
                 </p>
             </div>
         </div>

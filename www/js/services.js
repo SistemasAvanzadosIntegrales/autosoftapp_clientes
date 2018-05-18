@@ -218,6 +218,7 @@ function HtmlServices(data)
                         clone_point.attr('data-category', point.category);
                         clone_point.attr('data-status', point.status);
                         clone_point.attr('data-point-id', point.id);
+                        clone_point.attr('data-point-price', point.price);
                         clone_point.attr('data-point-inspection-id', point.inspection_id);
                         clone_point.attr('data-point-files', point.files);
                         clone_point.draggable({
@@ -257,25 +258,29 @@ function HtmlServices(data)
             $('.severity-point').html("");
             $('.severity-point').prepend(severity_icon[$('.point-visited').attr('data-severity')] + ' '+$('.point-visited').attr('data-cataloge') + ' <small>' + $('.point-visited').attr('data-category')  + '</small>');
             $('.btn-status').css('background', 'rgb(102, 102, 102)');
-            $('.btn-status').removeClass('hide');
+            $('.btn-status').removeClass('hide').removeAttr('disabled').removeAttr('readonly');
             $('button[data-status="'+$('.point-visited').attr('data-status')+'"]').css('background', 'green');
+            console.log($('.visited'));
+            console.log($('.point-visited'));
             if($('.visited').attr('data-status') != 3)
             {
                 $('button[data-status="'+$('.point-visited').attr('data-status')+'"]').css('background', 'lightgray');
-                $('button[data-status="'+$('.point-visited').attr('data-status')+'"]').removeAttr('onclick');
+                $('button[data-status="'+$('.point-visited').attr('data-status')+'"]').attr('disabled', true).attr('readonly', true);
                 $('.btn-status:not(button[data-status="'+$('.point-visited').attr('data-status')+'"])').addClass('hide');
                 $('button[data-status="'+$('.point-visited').attr('data-status')+'"]').css('width', '100%').css('font-size', '1em').css('border-radius', 0);
                 $('button[data-status="'+$('.point-visited').attr('data-status')+'"]').html(["","", "Aprobado", "Rechazado", "Pospuesto"][$('.point-visited').attr('data-status')]);
             }
-            if( $('.point-visited').find('.price').html() )
+            if( parseInt($('.point-visited').attr('data-point-price')) > 0 )
             {
                 $('.price-point').html($('.point-visited').find('.price').html());
                 $('.price-point').removeClass('hide');
-            }else {
+            }
+            else
+            {
                 $('.price-point').html("<br><br>");
                 $('.price-point').addClass('hide');
             }
-            $('#statusPoint').val($('.point-visited').attr('data-point-id'));
+            $('#statusPointId').val($('.point-visited').attr('data-point-id'));
             var files = JSON.parse($('.point-visited').attr('data-point-files'));
             var files_length =  files.length;
             var uri = 'http://autosoft2.avansys.com.mx/files/';
@@ -323,11 +328,6 @@ $("#GalleryPanel").draggable({
     axis: "x",
     start: function(event, ui) {
         start = ui.position.left;
-        if ($('.visited').length)
-        {
-            $('.visited').removeClass('visited')
-        }
-        $(this).addClass('visited');
     },
     drag: function(event, ui) {
         stop = ui.position.left;
