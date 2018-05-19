@@ -17,34 +17,35 @@ function get_inspection(){
         {
           $('#in-date').html(data.inspection.created_at);
           $('#out-date').html(data.inspection.updated_at);
-
+          $('#unidad').html(data.inspection.vehicle.brand + " " + data.inspection.vehicle.model)
           var inspections = data.inspection_points.vehicle_inspections;
           var detalles = $('#detalles');
-          var status = [
-            '',
-            '',
-            '<p class="text-success">Aceptado</p>',
-            '<p class="text-danger">Rechazado</p>',
-            '<p class="text-info">Pospuesto</p>'
+
+          var severity_icon = [
+              '',
+              "<i style='color: forestgreen ' class='fa fa-check-square'></i>",
+              "<i style='color: goldenrod' class='fa fa-exclamation-triangle'></i>",
+              "<i style='color: red' class='fa fa-window-close'></i>"
           ];
+
+          var status_icon = [
+              '',
+              '',
+              "<span style='color: forestgreen '><i class='fa fa-check'></i> Aprobado </span>",
+              "<span style='color: red'><i class='fas fa-ban'></i>  Rechazado </span>",
+              "<span style='color: blue'><i class='far fa-calendar-alt'></i> Pospuesto </span>"
+          ];
+
           var inspection = '';
           detalles.append('<div class="list-group">');
           for(var i = 0; i < inspections.length; i++){
-            if (inspections[i].status < 3)
-            {
-              console.log('continue');
-            }
-
-            if(inspections[i].catalogue.inspection.name != inspection)
-            {
-              inspection = inspections[i].catalogue.inspection.name;
-                detalles.append('<a href="#" class="list-group-item" style="color:#000!important>' + inspection + '</a>');
-            }
-            var item = [
+             var item = [
+              severity_icon[inspections[i].status],
               inspections[i].catalogue.name,
-              status[inspections[i].status],
+              "<small>" + inspections[i].catalogue.inspection.name + "<small>",
+              status_icon[inspections[i].status],
             ];
-            detalles.append('<a href="#" class="list-group-item" style="color:#000!important">' + item.join(' - ') + '</a>');
+            detalles.append('<p class="list-group-item" style="color:#000!important">' + item.join(' - ') + '</p>');
           }
           detalles.append('</div>');
         }

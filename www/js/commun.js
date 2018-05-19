@@ -13,6 +13,11 @@ $(document).ready(function(){
         apariencia();
       });
    }
+   var app_settings = JSON.parse(localStorage.getItem('app_settings'));
+   if (!app_settings && screen != "index.html")
+   {
+     location.href="index.html";
+   }
 });
 
 document.addEventListener("online", function() {
@@ -57,7 +62,10 @@ var getParams = function (url) {
 	}
 	return params;
 };
-
+function salir(){
+    localStorage.clear();
+    location.href="index.html";
+}
 /**
  *  @author   Ivan Vazquez
  **/

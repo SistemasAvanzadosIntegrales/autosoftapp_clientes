@@ -102,7 +102,10 @@ function madarResultado(status, fecha, motivo){
             status: status
         },
         success:function(resp) {
-
+			console.log(resp.count[0].total);
+			if (resp.count[0].total == 0) {
+				location.href = "services.html";
+			}
             if( resp.status == 'ok' ) {
 				$('div[data-point-id="'+point_id+'"]').find('.status').html(status_icon[status]);
 				var db = window.openDatabase("Database", "1.0", "Cordova Demo", 200000);

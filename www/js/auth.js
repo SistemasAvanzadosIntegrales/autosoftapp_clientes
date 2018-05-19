@@ -1,3 +1,16 @@
+document.addEventListener("online", function() {
+	var app_settings = JSON.parse(localStorage.getItem('app_settings'));
+	var url = window.location.href;
+	var params = getParams(url);
+	var screen =  (new URL(location)).pathname;
+
+	screen = screen.split('/');
+	screen = screen[screen.length - 1];
+	if (app_settings)
+	{
+	  location.href="services.html";
+	}
+});
 /**
  *  @author   Ivan Vazquez
  **/

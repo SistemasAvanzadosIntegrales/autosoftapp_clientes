@@ -53,7 +53,7 @@ var status_icon = [
     "<span style='color: red'><i class='fas fa-ban'></i>  Rechazado </span>",
     "<span style='color: blue'><i class='far fa-calendar-alt'></i> Pospuesto </span>"
 ];
-function HtmlServices(data)
+var HtmlServices = function HtmlServices(data)
 {
     for(i in data.inspections){
         var clone = $('#clone').clone();
@@ -242,6 +242,10 @@ function HtmlServices(data)
                                     }
                                     else {
                                         $("#carousel-example-generic").carousel(0);
+                                        setTimeout(function(){
+                                            location.href = "services.html";
+                                        }, 1000)
+
                                     }
                                 }
                             }
@@ -260,15 +264,13 @@ function HtmlServices(data)
             $('.btn-status').css('background', 'rgb(102, 102, 102)');
             $('.btn-status').removeClass('hide').removeAttr('disabled').removeAttr('readonly');
             $('button[data-status="'+$('.point-visited').attr('data-status')+'"]').css('background', 'green');
-            console.log($('.visited'));
-            console.log($('.point-visited'));
-            if($('.visited').attr('data-status') != 3)
+            if($('.visited').attr('data-status') != 3 || $('.point-visited').attr('data-severity') == 1)
             {
                 $('button[data-status="'+$('.point-visited').attr('data-status')+'"]').css('background', 'lightgray');
                 $('button[data-status="'+$('.point-visited').attr('data-status')+'"]').attr('disabled', true).attr('readonly', true);
                 $('.btn-status:not(button[data-status="'+$('.point-visited').attr('data-status')+'"])').addClass('hide');
                 $('button[data-status="'+$('.point-visited').attr('data-status')+'"]').css('width', '100%').css('font-size', '1em').css('border-radius', 0);
-                $('button[data-status="'+$('.point-visited').attr('data-status')+'"]').html(["","", "Aprobado", "Rechazado", "Pospuesto"][$('.point-visited').attr('data-status')]);
+                $('button[data-status="'+$('.point-visited').attr('data-status')+'"]').html(status_icon[$('.point-visited').attr('data-status')]);
             }
             if( parseInt($('.point-visited').attr('data-point-price')) > 0 )
             {
@@ -322,6 +324,14 @@ function HtmlServices(data)
             history_tab.append(clone);
         }
     }
+    if(progress_tab.html() == "")
+    {
+        progress_tab.append("<p class='text-center'>Por el momento no tienes servicios registrados.</p>");
+    };
+    if(history_tab.html() == "")
+    {
+        history_tab.append("<p class='text-center'>Por el momento no tienes servicios registrados.</p>");
+    };
 }
 $("#GalleryPanel").draggable({
     revert:true,
