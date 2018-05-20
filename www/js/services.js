@@ -146,11 +146,6 @@ var HtmlServices = function HtmlServices(data)
                 if(start - stop > 10 && start > stop){
                     slide(inspection);
                 }
-                if(stop - start > 30 && start < stop){
-                    progress_tab.html("");
-                    history_tab.html("");
-                    services();
-                }
             }
         });
         clone.removeClass('hide');
@@ -344,9 +339,6 @@ var slide = function(e){
                             }
                             else {
                                 $("#carousel-example-generic").carousel(0);
-                                progress_tab.html("");
-                                history_tab.html("");
-                                services();
                             }
                         }
                     }

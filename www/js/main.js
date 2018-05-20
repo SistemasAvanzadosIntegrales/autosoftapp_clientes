@@ -102,9 +102,16 @@ function madarResultado(status, fecha, motivo){
             status: status
         },
         success:function(resp) {
-			console.log(resp.count[0].total);
 			if (resp.count[0].total == 0) {
-				location.href = "services.html";
+				navigator.notification.alert(
+					'A finalizado de revisar todos los puntos de inspección',
+					function(result){
+						location.href = "services.html";
+					},
+					'Aviso',
+					'Aceptar'
+				);
+
 			}
             if( resp.status == 'ok' ) {
 				$('div[data-point-id="'+point_id+'"]').find('.status').html(status_icon[status]);
