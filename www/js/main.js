@@ -114,6 +114,9 @@ function madarResultado(status, fecha, motivo){
 				});
                	$("#carousel-example-generic").carousel(1);
 				$('div[data-point-id="'+point_id+'"]').attr('data-status', status);
+                progress_tab.html("");
+                history_tab.html("");
+                services();
             }
             else {
                 $("#alertaLogin").html(resp.message).show();

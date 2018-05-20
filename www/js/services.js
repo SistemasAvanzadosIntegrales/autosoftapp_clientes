@@ -53,6 +53,10 @@ var status_icon = [
     "<span style='color: red'><i class='fas fa-ban'></i>  Rechazado </span>",
     "<span style='color: blue'><i class='far fa-calendar-alt'></i> Pospuesto </span>"
 ];
+
+var progress_tab = $('#progress_tab');
+var history_tab = $('#history_tab');
+
 var HtmlServices = function HtmlServices(data)
 {
     for(i in data.inspections){
@@ -125,196 +129,30 @@ var HtmlServices = function HtmlServices(data)
         clone.find('.folio').append(inspection.folio);
 
 
-        clone.draggable({
+        clone.find('h3').draggable({
             revert:true,
-            axis: "x",
+            scroll:false,
             start: function(event, ui) {
                 start = ui.position.left;
                 if ($('.visited').length)
                 {
                     $('.visited').removeClass('visited')
                 }
-                $(this).addClass('visited');
+                $(this).parent().addClass('visited');
             },
             drag: function(event, ui) {
                 stop = ui.position.left;''
-                if(start - stop > 30 && start > stop){
+                        console.log(ui.position);
+                if(start - stop > 10 && start > stop){
                     slide(inspection);
-
+                }
+                if(stop - start > 30 && start < stop){
+                    progress_tab.html("");
+                    history_tab.html("");
+                    services();
                 }
             }
         });
-        var slide = function(e){
-            var db = window.openDatabase("Database", "1.0", "Cordova Demo", 200000);;
-            var inspection_id = $('.visited').attr('data-id');
-            $(".inspection_folio").html($('.visited').attr('data-folio'));
-            $(".inspection_car").html($('.visited').attr('data-title'));
-            var presupuesto_href = $('.visited').find('.presupuesto').attr('href');
-            $(".presupuesto-display").addClass('hide');
-            if(presupuesto_href){
-                $(".presupuesto-display").attr("href", presupuesto_href);
-                $(".presupuesto-display").removeClass('hide');
-            }
-            if( $('.visited').attr('data-status') >= 5 )
-            {
-                $('.created_at').html($('.visited').attr('data-created-at'));
-                $('.updated_at').html($('.visited').attr('data-updated-at'));
-                $('.updated_at').parent().removeClass('hide');
-            } else
-            {
-                $('.created_at').html("");
-                $('.updated_at').html("");
-                $('.updated_at').parent().addClass('hide');
-            }
-            if( $('.visited').attr('data-price') > 0 )
-            {
-                $('.price-display').html(parseInt($('.visited').attr('data-price')).toFixed(2));
-                $('.price-display').parent().removeClass('hide');
-            }else {
-                $('.price-display').html("");
-                $('.price-display').parent().addClass('hide');
-            }
-            db.transaction(function(tx) {
-                var sql = [
-                    " SELECT * ",
-                    " FROM  vehicle_inspections AS vi  ",
-                    " WHERE vi.severity in (1,2,3) AND vi.inspection_id = "+inspection_id,
-                    " GROUP BY vi.point_id "
-                ].join('');
-                tx.executeSql(sql, [], function (tx, results){
-
-                    $('#points').html("");
-                    var rows = results.rows;
-                    for(var x = 0; x < rows.length; x++){
-                        var point = rows[x];
-                        var clone_point = $('#clone-point').clone();
-                        clone_point.attr('id', 'clone-point'+x);
-                        clone_point.find('.severity').prepend(severity_icon[point.severity] + ' '+point.cataloge + ' <small>' + point.category  + '</small>');
-                        clone_point.find('.status').html(status_icon[point.status]);
-                        console.log(point.file);
-                        var videos = point.files.split("mp4").length - 1;
-                        var audios = point.files.split("m4a").length - 1;
-                        var photos = point.files.split("jpg").length - 1
-
-                        var price = parseInt(point.price).toFixed(2);
-
-                        if (videos > 0){
-                            clone_point.find('.videos').append(videos).removeClass('hide');
-                        }
-
-                        if (audios > 0){
-                            clone_point.find('.audios').append(audios).removeClass('hide');
-                        }
-
-                        if (photos > 0){
-                            clone_point.find('.photos').append(photos).removeClass('hide');
-                        }
-
-                        if (price > 0){
-                            clone_point.find('.price').append(price).removeClass('hide');
-                        }
-                        clone_point.attr('data-severity', point.severity);
-                        clone_point.attr('data-cataloge', point.cataloge);
-                        clone_point.attr('data-category', point.category);
-                        clone_point.attr('data-status', point.status);
-                        clone_point.attr('data-point-id', point.id);
-                        clone_point.attr('data-point-price', point.price);
-                        clone_point.attr('data-point-inspection-id', point.inspection_id);
-                        clone_point.attr('data-point-files', point.files);
-                        clone_point.draggable({
-                            revert:true,
-                            axis: "x",
-                            start: function(event, ui) {
-                                start = ui.position.left;
-                                if ($('.point-visited').length)
-                                {
-                                    $('.point-visited').removeClass('point-visited')
-                                }
-                                $(this).addClass('point-visited');
-                            },
-                            drag: function(event, ui) {
-                                stop = ui.position.left;
-                                if(start - stop > 30 || start - stop < -30){
-                                    if(start > stop)
-                                    {
-                                        load_media(point)
-                                        $("#carousel-example-generic").carousel(2);
-                                    }
-                                    else {
-                                        $("#carousel-example-generic").carousel(0);
-                                        setTimeout(function(){
-                                            location.href = "services.html";
-                                        }, 1000)
-
-                                    }
-                                }
-                            }
-                        });
-                        $('#points').append(clone_point)
-                    }
-                    $("#carousel-example-generic").carousel(1);
-                });
-            });
-        }.bind(inspection);
-
-        var load_media = function(e) {
-            $('.w3-section').html('')
-            $('.severity-point').html("");
-            $('.severity-point').prepend(severity_icon[$('.point-visited').attr('data-severity')] + ' '+$('.point-visited').attr('data-cataloge') + ' <small>' + $('.point-visited').attr('data-category')  + '</small>');
-            $('.btn-status').css('background', 'rgb(102, 102, 102)');
-            $('.btn-status').removeClass('hide').removeAttr('disabled').removeAttr('readonly');
-            $('button[data-status="'+$('.point-visited').attr('data-status')+'"]').css('background', 'green');
-            if($('.visited').attr('data-status') != 3 || $('.point-visited').attr('data-severity') == 1)
-            {
-                $('button[data-status="'+$('.point-visited').attr('data-status')+'"]').css('background', 'lightgray');
-                $('button[data-status="'+$('.point-visited').attr('data-status')+'"]').attr('disabled', true).attr('readonly', true);
-                $('.btn-status:not(button[data-status="'+$('.point-visited').attr('data-status')+'"])').addClass('hide');
-                $('button[data-status="'+$('.point-visited').attr('data-status')+'"]').css('width', '100%').css('font-size', '1em').css('border-radius', 0);
-                $('button[data-status="'+$('.point-visited').attr('data-status')+'"]').html(status_icon[$('.point-visited').attr('data-status')]);
-            }
-            if( parseInt($('.point-visited').attr('data-point-price')) > 0 )
-            {
-                $('.price-point').html($('.point-visited').find('.price').html());
-                $('.price-point').removeClass('hide');
-            }
-            else
-            {
-                $('.price-point').html("<br><br>");
-                $('.price-point').addClass('hide');
-            }
-            $('#statusPointId').val($('.point-visited').attr('data-point-id'));
-            var files = JSON.parse($('.point-visited').attr('data-point-files'));
-            var files_length =  files.length;
-            var uri = 'http://autosoft2.avansys.com.mx/files/';
-            for (var w = 0; w < files_length; w++){
-
-
-                var __file_name = files[w].name;
-                var item = false;
-                if (__file_name.indexOf('.mp4') > 0){
-                    item = "<div class='mySlides'><video style='height:250px; margin:auto; display: inherit; 'controls><source src='"+uri + __file_name +"' type='video/mp4'></video></div>";
-                }
-                else if (__file_name.indexOf('.m4a') > 0){
-                    item  = "<div class='mySlides'>"+
-                    "<i class='fa fa-volume-up'></i><audio style='width:100%; margin:auto; display: inherit;' controls>"+
-                    "<source src='"+uri + __file_name+"'></audio></div>";
-                }
-                else if (__file_name.indexOf('.jpg') > 0){
-                    item = '<div class="mySlides"><img style="width:100%; margin:auto; display: inherit;" src="'+uri + __file_name +'"></div>';
-                }
-
-                $('.w3-content').append(item);
-
-            }
-            if($('.mySlides').length > 1){
-                $('.sliders-button').removeClass('hide');
-                showDivs(1);
-            }else {
-                $('.sliders-button').addClass('hide');
-            }
-
-        }
-
         clone.removeClass('hide');
 
         if (status <= 4)
@@ -333,9 +171,68 @@ var HtmlServices = function HtmlServices(data)
         history_tab.append("<p class='text-center'>Por el momento no tienes servicios registrados.</p>");
     };
 }
+
+var load_media = function(e) {
+    $('.w3-section').html('')
+    $('.severity-point').html("");
+    $('.severity-point').prepend(severity_icon[$('.point-visited').attr('data-severity')] + ' '+$('.point-visited').attr('data-cataloge') + ' <small>' + $('.point-visited').attr('data-category')  + '</small>');
+    $('.btn-status').css('background', 'rgb(102, 102, 102)');
+    $('.btn-status').removeClass('hide').removeAttr('disabled').removeAttr('readonly');
+    $('button[data-status="'+$('.point-visited').attr('data-status')+'"]').css('background', 'green');
+    if($('.visited').attr('data-status') != 3 || $('.point-visited').attr('data-severity') == 1)
+    {
+        $('button[data-status="'+$('.point-visited').attr('data-status')+'"]').css('background', 'lightgray');
+        $('button[data-status="'+$('.point-visited').attr('data-status')+'"]').attr('disabled', true).attr('readonly', true);
+        $('.btn-status:not(button[data-status="'+$('.point-visited').attr('data-status')+'"])').addClass('hide');
+        $('button[data-status="'+$('.point-visited').attr('data-status')+'"]').css('width', '100%').css('font-size', '1em').css('border-radius', 0);
+        $('button[data-status="'+$('.point-visited').attr('data-status')+'"]').html(status_icon[$('.point-visited').attr('data-status')]);
+    }
+    if( parseInt($('.point-visited').attr('data-point-price')) > 0 )
+    {
+        $('.price-point').html($('.point-visited').find('.price').html());
+        $('.price-point').removeClass('hide');
+    }
+    else
+    {
+        $('.price-point').html("<br><br>");
+        $('.price-point').addClass('hide');
+    }
+    $('#statusPointId').val($('.point-visited').attr('data-point-id'));
+    var files = JSON.parse($('.point-visited').attr('data-point-files'));
+    var files_length =  files.length;
+    var uri = 'http://autosoft2.avansys.com.mx/files/';
+    for (var w = 0; w < files_length; w++){
+
+
+        var __file_name = files[w].name;
+        var item = false;
+        if (__file_name.indexOf('.mp4') > 0){
+            item = "<div class='mySlides'><video style='height:250px; margin:auto; display: inherit; 'controls><source src='"+uri + __file_name +"' type='video/mp4'></video></div>";
+        }
+        else if (__file_name.indexOf('.m4a') > 0){
+            item  = "<div class='mySlides'>"+
+            "<i class='fa fa-volume-up'></i><audio style='width:100%; margin:auto; display: inherit;' controls>"+
+            "<source src='"+uri + __file_name+"'></audio></div>";
+        }
+        else if (__file_name.indexOf('.jpg') > 0){
+            item = '<div class="mySlides"><img style="width:100%; margin:auto; display: inherit;" src="'+uri + __file_name +'"></div>';
+        }
+
+        $('.w3-content').append(item);
+
+    }
+    if($('.mySlides').length > 1){
+        $('.sliders-button').removeClass('hide');
+        showDivs(1);
+    }else {
+        $('.sliders-button').addClass('hide');
+    }
+
+}
+
 $("#GalleryPanel").draggable({
     revert:true,
-    axis: "x",
+    scroll:false,
     start: function(event, ui) {
         start = ui.position.left;
     },
@@ -346,6 +243,120 @@ $("#GalleryPanel").draggable({
         }
     }
 });
+
+var slide = function(e){
+    var db = window.openDatabase("Database", "1.0", "Cordova Demo", 200000);;
+    var inspection_id = $('.visited').attr('data-id');
+    $(".inspection_folio").html($('.visited').attr('data-folio'));
+    $(".inspection_car").html($('.visited').attr('data-title'));
+    var presupuesto_href = $('.visited').find('.presupuesto').attr('href');
+    $(".presupuesto-display").addClass('hide');
+    if(presupuesto_href){
+        $(".presupuesto-display").attr("href", presupuesto_href);
+        $(".presupuesto-display").removeClass('hide');
+    }
+    if( $('.visited').attr('data-status') >= 5 )
+    {
+        $('.created_at').html($('.visited').attr('data-created-at'));
+        $('.updated_at').html($('.visited').attr('data-updated-at'));
+        $('.updated_at').parent().removeClass('hide');
+    } else
+    {
+        $('.created_at').html("");
+        $('.updated_at').html("");
+        $('.updated_at').parent().addClass('hide');
+    }
+    if( $('.visited').attr('data-price') > 0 )
+    {
+        $('.price-display').html(parseInt($('.visited').attr('data-price')).toFixed(2));
+        $('.price-display').parent().removeClass('hide');
+    }else {
+        $('.price-display').html("");
+        $('.price-display').parent().addClass('hide');
+    }
+    db.transaction(function(tx) {
+        var sql = [
+            " SELECT * ",
+            " FROM  vehicle_inspections AS vi  ",
+            " WHERE vi.severity in (1,2,3) AND vi.inspection_id = "+inspection_id,
+            " GROUP BY vi.point_id "
+        ].join('');
+        tx.executeSql(sql, [], function (tx, results){
+
+            $('#points').html("");
+            var rows = results.rows;
+            for(var x = 0; x < rows.length; x++){
+                var point = rows[x];
+                var clone_point = $('#clone-point').clone();
+                clone_point.attr('id', 'clone-point'+x);
+                clone_point.find('.severity').prepend(severity_icon[point.severity] + ' '+point.cataloge + ' <small>' + point.category  + '</small>');
+                clone_point.find('.status').html(status_icon[point.status]);
+                console.log(point.file);
+                var videos = point.files.split("mp4").length - 1;
+                var audios = point.files.split("m4a").length - 1;
+                var photos = point.files.split("jpg").length - 1
+
+                var price = parseInt(point.price).toFixed(2);
+
+                if (videos > 0){
+                    clone_point.find('.videos').append(videos).removeClass('hide');
+                }
+
+                if (audios > 0){
+                    clone_point.find('.audios').append(audios).removeClass('hide');
+                }
+
+                if (photos > 0){
+                    clone_point.find('.photos').append(photos).removeClass('hide');
+                }
+
+                if (price > 0){
+                    clone_point.find('.price').append(price).removeClass('hide');
+                }
+                clone_point.attr('data-severity', point.severity);
+                clone_point.attr('data-cataloge', point.cataloge);
+                clone_point.attr('data-category', point.category);
+                clone_point.attr('data-status', point.status);
+                clone_point.attr('data-point-id', point.id);
+                clone_point.attr('data-point-price', point.price);
+                clone_point.attr('data-point-inspection-id', point.inspection_id);
+                clone_point.attr('data-point-files', point.files);
+                clone_point.find('h3').draggable({
+                    revert:true,
+                    helper: "clone",
+                    axis: "x",
+                    start: function(event, ui) {
+                        console.log(ui.position);
+                        start = ui.position.left;
+                        if ($('.point-visited').length)
+                        {
+                            $('.point-visited').removeClass('point-visited')
+                        }
+                        $(this).parent().addClass('point-visited');
+                    },
+                    drag: function(event, ui) {
+                        stop = ui.position.left;
+                        if(start - stop > 10 || start - stop < -10){
+                            if(start > stop)
+                            {
+                                load_media(point)
+                                $("#carousel-example-generic").carousel(2);
+                            }
+                            else {
+                                $("#carousel-example-generic").carousel(0);
+                                progress_tab.html("");
+                                history_tab.html("");
+                                services();
+                            }
+                        }
+                    }
+                });
+                $('#points').append(clone_point)
+            }
+            $("#carousel-example-generic").carousel(1);
+        });
+    });
+}
 
 var slideIndex = 1;
 function plusDivs(n) {

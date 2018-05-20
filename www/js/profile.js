@@ -1,4 +1,3 @@
-
 function info_perfil(){
 	$("#email").val(localStorage.getItem('email'));
 	$("#password").val(localStorage.getItem('password'));
@@ -12,14 +11,18 @@ function cambiar_contraseña(){
 	var password2 = $("#password2").val();
 
 	if(password2 == '' || password == '')
-		$("#alerta").html('<i class="fa fa-warning fa-lg"></i>&nbsp; Campos vacíos').show();
-
+	{
+		navigator.notification.alert('Campos vacíos', null, 'Aviso', 'Aceptar');
+	}
 	else if(password2 != password)
-		$("#alerta").html('<i class="fa fa-warning fa-lg"></i>&nbsp; Las contraseñas no coinciden ').show();
+	{
+		navigator.notification.alert('Las contraseñas no coinciden ', null, 'Aviso', 'Aceptar');
+	}
 
 	else if(password == localStorage.getItem('password'))
-		location.href = 'services.html';
-
+	{
+		navigator.notification.alert('No se ha detectado ningun cambio ', function(){location.href = 'services.html';}, 'Aviso', 'Aceptar');
+	}
 	else
 	{
 		var app_settings = JSON.parse(localStorage.getItem('app_settings'));
@@ -33,17 +36,9 @@ function cambiar_contraseña(){
 				token : localStorage.getItem('token')
 			},
 			success:function(data){
-
-				alert(JSON.stringify(data));
-				localStorage['password'] = password;
-				location.href = 'services.html';
-
-			},
-			error: function(XMLHttpRequest, textStatus, errorThrown) {
-
-
-				console.log("Status: " + textStatus);
-				console.log("Error: " + errorThrown);
+				navigator.notification.alert(resp.message, function(){
+					location.href = 'services.html';
+				}, 'Aviso', 'Aceptar');
 			}
 		});
 	}
