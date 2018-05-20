@@ -1,8 +1,12 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget android-versionCode="1" id="xdk.intel.template" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:gap="http://phonegap.com/ns/1.0">
-    <name>Autosoft Clientes</name>
-    <description>Intel XDK template</description>
-    <author>Intel XDK</author>
+    <name>Easier service</name>
+    <description>
+      App to clients
+  </description>
+    <author email="idvazquezrivera@gmail.com" href="http://ivanvazquez.top">
+     Ivan Vazquez
+  </author>
 
 <content src="index.html"/>
 <preference name="android-build-tool" value="gradle" />
