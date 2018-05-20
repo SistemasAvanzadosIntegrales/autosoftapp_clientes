@@ -5,6 +5,9 @@ var ruta_generica = "http://autosoft2.avansys.com.mx/api/v1/";
 $(document).ready(function(){
   var url = window.location.href;
   var params = getParams(url);
+  if(params.url != ""){
+      location.href = params.url
+  }
   var screen =  (new URL(location)).pathname;
   screen = screen.split('/');
   screen = screen[screen.length - 1];

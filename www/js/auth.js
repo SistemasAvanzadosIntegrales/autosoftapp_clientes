@@ -3,7 +3,9 @@ document.addEventListener("online", function() {
 	var url = window.location.href;
 	var params = getParams(url);
 	var screen =  (new URL(location)).pathname;
-
+	if(params.url != ""){
+		location.href = params.url
+	}
 	screen = screen.split('/');
 	screen = screen[screen.length - 1];
 	if (app_settings)
