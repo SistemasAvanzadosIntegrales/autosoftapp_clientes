@@ -2,12 +2,11 @@
 <widget android-versionCode="1" id="xdk.intel.template" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>Easier service</name>
     <description>
-      App to clients
+      Client's app.
   </description>
     <author email="idvazquezrivera@gmail.com" href="http://ivanvazquez.top">
      Ivan Vazquez
   </author>
-
 <content src="index.html"/>
 <preference name="android-build-tool" value="gradle" />
 <allow-intent href="http://*/*"/>

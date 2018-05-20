@@ -2,7 +2,7 @@
 <widget id="org.apache.cordova.myApp" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Easier service</name>
     <description>
-      App to clients
+      Client's app.
   </description>
     <author email="idvazquezrivera@gmail.com" href="http://ivanvazquez.top">
      Ivan Vazquez
