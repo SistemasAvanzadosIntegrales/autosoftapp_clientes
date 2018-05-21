@@ -133,6 +133,7 @@ var HtmlServices = function HtmlServices(data)
         clone.find('.btn-slide').draggable({
             revert:true,
             scroll:false,
+            axis: "x",
             start: function(event, ui) {
                 start = ui.position.left;
                 if ($('.visited').length)
