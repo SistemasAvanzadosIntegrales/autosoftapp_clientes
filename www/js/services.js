@@ -69,10 +69,11 @@ var HtmlServices = function HtmlServices(data)
 
         if(!status)
             continue;
-        console.log(inspection.files);
+
         var videos = inspection.files.split("mp4").length - 1;
         var audios = inspection.files.split("m4a").length - 1;
         var photos = inspection.files.split("jpg").length - 1;
+      
         if (videos > 0){
             clone.find('.videos').append(videos).removeClass('hide');
         }
@@ -129,7 +130,7 @@ var HtmlServices = function HtmlServices(data)
         clone.find('.folio').append(inspection.folio);
 
 
-        clone.find('h3').draggable({
+        clone.find('.btn-slide').draggable({
             revert:true,
             scroll:false,
             start: function(event, ui) {
@@ -317,7 +318,7 @@ var slide = function(e){
                 clone_point.attr('data-point-price', point.price);
                 clone_point.attr('data-point-inspection-id', point.inspection_id);
                 clone_point.attr('data-point-files', point.files);
-                clone_point.find('h3').draggable({
+                clone_point.find('.btn-slide').draggable({
                     revert:true,
                     helper: "clone",
                     axis: "x",
