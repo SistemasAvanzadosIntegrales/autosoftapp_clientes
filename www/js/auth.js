@@ -1,4 +1,5 @@
 document.addEventListener("online", function() {
+/*
 	var app_settings = JSON.parse(localStorage.getItem('app_settings'));
 	var url = window.location.href;
 	var params = getParams(url);
