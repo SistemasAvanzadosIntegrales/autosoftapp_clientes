@@ -36,7 +36,7 @@ function cambiar_contraseña(){
 				token : localStorage.getItem('token')
 			},
 			success:function(data){
-				navigator.notification.alert(resp.message, function(){
+				navigator.notification.alert(data.message, function(){
 					location.href = 'services.html';
 				}, 'Aviso', 'Aceptar');
 			}
