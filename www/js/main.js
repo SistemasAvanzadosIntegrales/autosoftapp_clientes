@@ -123,7 +123,7 @@ function madarResultado(status, fecha, motivo){
 				$('div[data-point-id="'+point_id+'"]').attr('data-status', status);
                 progress_tab.html("");
                 history_tab.html("");
-                services();
+               // services();
             }
             else {
                 $("#alertaLogin").html(resp.message).show();
