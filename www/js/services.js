@@ -227,13 +227,14 @@ var load_media = function(e) {
 
 $("#GalleryPanel").draggable({
     revert:true,
+    axis: 'x',
     scroll:false,
     start: function(event, ui) {
         start = ui.position.left;
     },
     drag: function(event, ui) {
         stop = ui.position.left;
-        if(stop - start > 30 && start < stop){
+        if(stop - start > 10 && start < stop){
             $("#carousel-example-generic").carousel(1);
         }
     }
