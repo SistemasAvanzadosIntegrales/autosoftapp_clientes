@@ -120,10 +120,6 @@ function madarResultado(status, fecha, motivo){
 					tx.executeSql( "UPDATE vehicle_inspections set status = "+status+"  origen = 'modified' where id = ? ", [point_id]);
 				});
                	$("#carousel-example-generic").carousel(1);
-				$('div[data-point-id="'+point_id+'"]').attr('data-status', status);
-                progress_tab.html("");
-                history_tab.html("");
-               // services();
             }
             else {
                 $("#alertaLogin").html(resp.message).show();
