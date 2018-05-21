@@ -46,7 +46,7 @@ function login(){
 			success:function(data){
 
 				if(data.status == 'error'){
-					navigator.notification.alert(resp.message, null, 'Aviso', 'Aceptar');
+					navigator.notification.alert(data.message, null, 'Aviso', 'Aceptar');
 				}else{
 
 					localStorage.setItem("token", token);
