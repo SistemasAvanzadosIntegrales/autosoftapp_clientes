@@ -104,7 +104,7 @@ function madarResultado(status, fecha, motivo){
         success:function(resp) {
 			if (resp.count[0].total == 0) {
 				navigator.notification.alert(
-					'A finalizado de revisar todos los puntos de inspección',
+					'Ha finalizado de revisar todos los puntos de inspección',
 					function(result){
 						location.href = "services.html";
 					},
