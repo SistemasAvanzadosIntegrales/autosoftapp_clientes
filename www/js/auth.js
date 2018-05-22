@@ -1,4 +1,4 @@
-/*document.addEventListener("online", function() {
+document.addEventListener("online", function() {
 
 	var app_settings = JSON.parse(localStorage.getItem('app_settings'));
 	var url = window.location.href;
@@ -11,7 +11,7 @@
 	screen = screen[screen.length - 1];
 	if (app_settings)
 	{
-	  location.href="services.html";
+	  //location.href="services.html";
 	}
 });
 /**
