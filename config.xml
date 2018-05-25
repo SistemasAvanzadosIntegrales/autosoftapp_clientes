@@ -15,27 +15,15 @@
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
-    <preference name="SplashScreen" value="/img/loading.gif" />
-    <preference name="SplashScreenDelay" value="1000" />
-    <preference name="SplashScreenBackgroundColor" value="#e5eff1" />
-    <platform name="android">
-        <preference name="AutoHideSplashScreen" value="true" />
-        <preference name="SplashScreenDelay" value="0" />
-    </platform>
     <preference name="xwalkCommandLine" value="--disable-pull-to-refresh-effect --ignore-gpu-blacklist" />
     <preference name="AndroidPersistentFileLocation" value="Internal" />
     <preference name="AndroidPersistentFileLocation" value="Compatibility" />
     <preference name="iosExtraFilesystems" value="library,library-nosync,documents,documents-nosync,cache,bundle,root" />
     <preference name="AndroidExtraFilesystems" value="files,files-external,documents,documents-nosync,cache,bundle,root" />
-    <plugin name="cordova-plugin-media" />
-    <plugin name="cordova-plugin-media-capture"  />
-    <plugin name="cordova-plugin-camera"   />
-    <plugin name="cordova-plugin-whitelist"   />
-    <plugin name="cordova-plugin-device"  />
-    <plugin name="cordova-plugin-statusbar" />
-    <plugin name="cordova-plugin-dialogs"   />
-    <plugin name="cordova-plugin-file-transfer" />
-    <plugin name="cordova-plugin-inappbrowser" />
+    <plugin name="cordova-plugin-dialogs"   spec="1.3.3" />
+    <plugin name="cordova-plugin-network-information" spec="1.2.1" />
+    <plugin name="cordova-sqlite-storage" spec="1.2.0" />
+    <plugin name="onesignal-cordova-plugin" spec="^2.0" />
     <plugin name="cordova-plugin-datepicker" spec="https://github.com/VitaliiBlagodir/cordova-plugin-datepicker" />
     <engine name="ios" spec="^4.5.4" />
     <engine name="browser" spec="^5.0.3" />
