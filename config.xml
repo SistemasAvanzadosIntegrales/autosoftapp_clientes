@@ -8,7 +8,6 @@
      Ivan Vazquez
   </author>
 <content src="index.html"/>
-<preference name="android-build-tool" value="gradle" />
 <allow-intent href="http://*/*"/>
 <allow-intent href="https://*/*"/>
 <allow-intent href="tel:*"/>
