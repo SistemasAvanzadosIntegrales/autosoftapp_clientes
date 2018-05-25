@@ -24,5 +24,6 @@
     <plugin name="cordova-sqlite-storage" spec="1.2.0" />
     <plugin name="cordova-plugin-file" spec="4.2.0" />
     <plugin name="cordova-plugin-file-transfer" spec="1.6.3" />
+    <plugin name="onesignal-cordova-plugin" spec="^2.0" />
     <engine name="android" spec="^7.1.0" />
 </widget>
