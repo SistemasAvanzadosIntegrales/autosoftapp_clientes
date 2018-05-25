@@ -34,6 +34,5 @@
     <plugin name="cordova-plugin-statusbar" spec="^2.4.1" />
     <plugin name="cordova-plugin-dialogs" spec="^2.0.1" />
     <plugin name="cordova-plugin-file-transfer" spec="^1.7.1" />
-    <plugin name="cordova-plugin-inappbrowser" spec="^2.0.2" />
     <engine name="android" spec="^7.1.0" />
 </widget>
