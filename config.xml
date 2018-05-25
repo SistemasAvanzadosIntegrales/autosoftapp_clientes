@@ -20,5 +20,6 @@
     <preference name="AndroidPersistentFileLocation" value="Compatibility" />
     <preference name="iosExtraFilesystems" value="library,library-nosync,documents,documents-nosync,cache,bundle,root" />
     <preference name="AndroidExtraFilesystems" value="files,files-external,documents,documents-nosync,cache,bundle,root" />
+    <plugin name="cordova-plugin-network-information" spec="1.2.1" />
     <engine name="android" spec="^7.1.0" />
 </widget>
