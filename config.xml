@@ -20,12 +20,5 @@
     <preference name="AndroidPersistentFileLocation" value="Compatibility" />
     <preference name="iosExtraFilesystems" value="library,library-nosync,documents,documents-nosync,cache,bundle,root" />
     <preference name="AndroidExtraFilesystems" value="files,files-external,documents,documents-nosync,cache,bundle,root" />
-    <plugin name="cordova-plugin-dialogs"   spec="1.3.3" />
-    <plugin name="cordova-plugin-network-information" spec="1.2.1" />
-    <plugin name="cordova-sqlite-storage" spec="1.2.0" />
-    <plugin name="onesignal-cordova-plugin" spec="^2.0" />
-    <plugin name="cordova-plugin-datepicker" spec="https://github.com/VitaliiBlagodir/cordova-plugin-datepicker" />
-    <engine name="ios" spec="^4.5.4" />
-    <engine name="browser" spec="^5.0.3" />
     <engine name="android" spec="^7.1.0" />
 </widget>
