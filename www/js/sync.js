@@ -89,7 +89,7 @@ function sync_data(call_back_function = null){
                 token:localStorage.getItem('token')
             },
             success:function(data) {
-                alert(JSON.stringify(message));
+                alert(JSON.stringify(data));
                 __sync_data(data, call_back_function);
             }
         });
