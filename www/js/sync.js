@@ -67,6 +67,7 @@ function __sync_data(data, call_back_function = null){
                 alert("cat cat "+JSON.stringify(point.catalogue));
                 alert("cat insp "+JSON.stringify(point.catalogue.inspection));
                 if(JSON.stringify(point.catalogue.inspection) != 'null' && JSON.stringify(point.catalogue.inspection)!=null){
+                    alert("hola");
                     alert("cat ins name "+point.catalogue.inspection.name);
                 }else{
                     alert("files "+file);
