@@ -65,6 +65,7 @@ function __sync_data(data, call_back_function = null){
                 alert("severity "+point.severity);
                 alert("status "+point.status);
                 alert("cat name "+point.catalogue.name);
+                alert("cat insp "+JSON.stringify(point.catalogue));
                 alert("cat name "+point.catalogue.inspection.name);
                 alert("files "+file);                
                 //var sql2 = "INSERT INTO vehicle_inspections (id, inspection_id, point_id, price, severity, status, cataloge, category, origen, files) VALUES ("+point.id+", "+point.inspections_id+", "+point.inspection_id+", '"+point.price+"', "+point.severity+", "+point.status+", '"+point.catalogue.name+"', '"+point.catalogue.inspection.name+"', 'server', '"+files+"' )";
