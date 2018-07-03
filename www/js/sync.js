@@ -57,7 +57,16 @@ function __sync_data(data, call_back_function = null){
                 var point = vehicle_inspections[x];
                 alert(point);
                 var files = point.files;
-                alert(files);
+                alert("ponit "+point.id);
+                alert("insps "+point.inspections_id);
+                alert("insp "+point.inspection_id);
+                alert("price "+point.price);
+                alert("severity "+point.severity);
+                alert("severity "+point.severity);
+                alert("status "+point.status);
+                alert("cat name "+point.catalogue.name);
+                alert("cat name "+point.catalogue.inspection.name);
+                alert("files "+file);                
                 //var sql2 = "INSERT INTO vehicle_inspections (id, inspection_id, point_id, price, severity, status, cataloge, category, origen, files) VALUES ("+point.id+", "+point.inspections_id+", "+point.inspection_id+", '"+point.price+"', "+point.severity+", "+point.status+", '"+point.catalogue.name+"', '"+point.catalogue.inspection.name+"', 'server', '"+files+"' )";
                 //alert(sql2);
                 //tx.executeSql(sql2);
