@@ -23,7 +23,7 @@ function __sync_data(data, call_back_function = null){
         for(var i = 0; i < data.vehicles.length; i++)
         {
             var vehicle = data.vehicles[i];
-            var sql = "INSERT INTO vehicles (id, brand, model, license_plate, user_id, vin) VALUES ("+vehicle.id+", '"+vehicle.brand+"', '"+vehicle.model+"', '"+vehicle.license_plate+"', "+vehicle.user_id+", '"+vehicle.vin+"')";
+            var sql = "INSERT INTO vehicles (id, brand, moel, license_plate, user_id, vin) VALUES ("+vehicle.id+", '"+vehicle.brand+"', '"+vehicle.model+"', '"+vehicle.license_plate+"', "+vehicle.user_id+", '"+vehicle.vin+"')";
             tx.executeSql(sql);
         }
     });
