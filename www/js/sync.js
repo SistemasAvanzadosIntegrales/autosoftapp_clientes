@@ -89,6 +89,7 @@ function sync_data(call_back_function = null){
                 token:localStorage.getItem('token')
             },
             success:function(data) {
+                alert(JSON.stringify(message));
                 __sync_data(data, call_back_function);
             }
         });
