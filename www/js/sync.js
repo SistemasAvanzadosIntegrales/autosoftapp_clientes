@@ -52,14 +52,14 @@ function __sync_data(data, call_back_function = null){
             alert(sql);
             tx.executeSql(sql);*/
             var vehicle_inspections = inspection.vehicle_inspections;
-            for(var x = 0; x < vehicle_inspections.length; x++)
+           /* for(var x = 0; x < vehicle_inspections.length; x++)
             {
                 var point = vehicle_inspections[x];
                 var files = JSON.stringify(point.files);
                 var sql2 = "INSERT INTO vehicle_inspections (id, inspection_id, point_id, price, severity, status, cataloge, category, origen, files) VALUES ("+point.id+", "+point.inspections_id+", "+point.inspection_id+", '"+point.price+"', "+point.severity+", "+point.status+", '"+point.catalogue.name+"', '"+point.catalogue.inspection.name+"', 'server', '"+files+"' )";
                 alert(sql2);
                 tx.executeSql(sql2);
-            }
+            }*/
         }
     }, function(error) {
         debug('algo fallo', true);
