@@ -12,7 +12,7 @@ function __sync_data(data, call_back_function = null){
     }
 
     localStorage.setItem("app_settings", JSON.stringify(app_settings));
-    var  db = window.openDatabase("Database", "1.0", "Cordova Demo", 20000000);
+    var  db = window.openDatabase("Database", "1.0", "Cordova Demo", 200000);
 
 
     db.transaction(function(tx) {
@@ -23,7 +23,7 @@ function __sync_data(data, call_back_function = null){
         for(var i = 0; i < data.vehicles.length; i++)
         {
             var vehicle = data.vehicles[i];
-            var sql = "INSERT INTO vehicles (id, brand, moel, license_plate, user_id, vin) VALUES ("+vehicle.id+", '"+vehicle.brand+"', '"+vehicle.model+"', '"+vehicle.license_plate+"', "+vehicle.user_id+", '"+vehicle.vin+"')";
+            var sql = "INSERT INTO vehicles (id, brand, model, license_plate, user_id, vin) VALUES ("+vehicle.id+", '"+vehicle.brand+"', '"+vehicle.model+"', '"+vehicle.license_plate+"', "+vehicle.user_id+", '"+vehicle.vin+"')";
             tx.executeSql(sql);
         }
     });
@@ -48,7 +48,7 @@ function __sync_data(data, call_back_function = null){
             var inspection =  data.inspections[i];
 
             var presupuesto = data.presupuestos[inspection.id] ? data.presupuestos[inspection.id] : '';
-            var sql = "INSERT INTO inspections (id, vehicle_id, user_id, origen, status, presupuesto, created_at, updated_at) VALUES ("+inspection.id+", "+inspection.vehicle_id+", "+inspection.user_id+", 'server', "+inspection.status+", '"+ presupuesto +"', '"+inspection.created_at+"', '"+inspection.updated_at+"')";            
+            var sql = "INSERT INTO inspections (id, vehicleid, user_id, origen, status, presupuesto, created_at, updated_at) VALUES ("+inspection.id+", "+inspection.vehicle_id+", "+inspection.user_id+", 'server', "+inspection.status+", '"+ presupuesto +"', '"+inspection.created_at+"', '"+inspection.updated_at+"')";
             alert(sql);
             tx.executeSql(sql);
             var vehicle_inspections = inspection.vehicle_inspections;
@@ -59,7 +59,6 @@ function __sync_data(data, call_back_function = null){
                 var sql2 = "INSERT INTO vehicle_inspections (id, inspection_id, point_id, price, severity, status, cataloge, category, origen, files) VALUES ("+point.id+", "+point.inspections_id+", "+point.inspection_id+", '"+point.price+"', "+point.severity+", "+point.status+", '"+point.catalogue.name+"', '"+point.catalogue.inspection.name+"', 'server', '"+files+"' )";
                 alert(sql2);
                 tx.executeSql(sql2);
-                
             }
         }
     }, function(error) {
@@ -92,7 +91,7 @@ function sync_data(call_back_function = null){
                 user_id: app_settings.user.id,
                 token:localStorage.getItem('token')
             },
-            success:function(data) {                
+            success:function(data) {
                 __sync_data(data, call_back_function);
             }
         });
