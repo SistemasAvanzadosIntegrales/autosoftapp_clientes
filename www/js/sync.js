@@ -61,7 +61,7 @@ function __sync_data(data, call_back_function = null){
         }
     }, function(error) {
         debug('algo fallo', true);
-        debug(error, true);
+        alert(error);
     }, function() {
         $('#dbRefresh').addClass('hide');
         debug('Data base has been saved');
@@ -88,8 +88,7 @@ function sync_data(call_back_function = null){
                 user_id: app_settings.user.id,
                 token:localStorage.getItem('token')
             },
-            success:function(data) {
-                alert(JSON.stringify(data));
+            success:function(data) {                
                 __sync_data(data, call_back_function);
             }
         });
