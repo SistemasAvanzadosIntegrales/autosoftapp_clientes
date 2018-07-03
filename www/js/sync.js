@@ -47,7 +47,7 @@ function __sync_data(data, call_back_function = null){
         {
             var inspection =  data.inspections[i];
 
-            var presupuesto = data.presupuestos[inspection.id] ? data.presupuestos[inspection.id] : '';
+            /*var presupuesto = data.presupuestos[inspection.id] ? data.presupuestos[inspection.id] : '';
             var sql = "INSERT INTO inspections (id, vehicle_id, user_id, origen, status, presupuesto, created_at, updated_at) VALUES ("+inspection.id+", "+inspection.vehicle_id+", "+inspection.user_id+", 'server', "+inspection.status+", '"+ presupuesto +"', '"+inspection.created_at+"', '"+inspection.updated_at+"')";
             tx.executeSql(sql);
             var vehicle_inspections = inspection.vehicle_inspections;
