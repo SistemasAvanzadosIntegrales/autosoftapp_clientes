@@ -12,7 +12,7 @@ function __sync_data(data, call_back_function = null){
     }
 
     localStorage.setItem("app_settings", JSON.stringify(app_settings));
-    var  db = window.openDatabase("Database", "1.0", "Cordova Demo", 200000);
+    var  db = window.openDatabase("Database", "1.0", "Cordova Demo", 20000000);
 
 
     db.transaction(function(tx) {
