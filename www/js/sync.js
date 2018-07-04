@@ -65,7 +65,7 @@ function __sync_data(data, call_back_function = null){
             }
         }
     }, function(error) {
-        debug('algo fallo', true);        
+        debug('Error al Sincronizar', true);        
     }, function() {
         $('#dbRefresh').addClass('hide');
         debug('Data base has been saved');
