@@ -48,39 +48,24 @@ function __sync_data(data, call_back_function = null){
             var inspection =  data.inspections[i];
 
             var presupuesto = data.presupuestos[inspection.id] ? data.presupuestos[inspection.id] : '';
-            /*var sql = "INSERT INTO inspections (id, vehicle_id, user_id, origen, status, presupuesto, created_at, updated_at) VALUES ("+inspection.id+", "+inspection.vehicle_id+", "+inspection.user_id+", 'server', "+inspection.status+", '"+ presupuesto +"', '"+inspection.created_at+"', '"+inspection.updated_at+"')";
-            alert(sql);
-            tx.executeSql(sql);*/
+            var sql = "INSERT INTO inspections (id, vehicle_id, user_id, origen, status, presupuesto, created_at, updated_at) VALUES ("+inspection.id+", "+inspection.vehicle_id+", "+inspection.user_id+", 'server', "+inspection.status+", '"+ presupuesto +"', '"+inspection.created_at+"', '"+inspection.updated_at+"')";            
+            tx.executeSql(sql);
             var vehicle_inspections = inspection.vehicle_inspections;
             for(var x = 0; x < vehicle_inspections.length; x++)
             {
-                var point = vehicle_inspections[x];
-                alert(point);
+                var point = vehicle_inspections[x];                
                 var files = point.files;
-                alert("ponit "+point.id);
-                alert("insps "+point.inspections_id);
-                alert("insp "+point.inspection_id);
-                alert("price "+point.price);
-                alert("severity "+point.severity);                
-                alert("status "+point.status);
-                alert("cat name "+point.catalogue.name);
-                alert("cat cat "+JSON.stringify(point.catalogue));
-                alert("cat insp "+JSON.stringify(point.catalogue.inspection));
                 if(JSON.stringify(point.catalogue.inspection) != 'null' && JSON.stringify(point.catalogue.inspection)!=null){
-                    alert("hola");
-                    alert("cat ins name "+point.catalogue.inspection.name);
+                    inspection_name = point.catalogue.inspection.name;
                 }else{
-                    alert("files "+files);
+                    inspection_name = "";
                 }
-                //var sql2 = "INSERT INTO vehicle_inspections (id, inspection_id, point_id, price, severity, status, cataloge, category, origen, files) VALUES ("+point.id+", "+point.inspections_id+", "+point.inspection_id+", '"+point.price+"', "+point.severity+", "+point.status+", '"+point.catalogue.name+"', '"+point.catalogue.inspection.name+"', 'server', '"+files+"' )";
-                //alert(sql2);
-                //tx.executeSql(sql2);
+                var sql2 = "INSERT INTO vehicle_inspections (id, inspection_id, point_id, price, severity, status, cataloge, category, origen, files) VALUES ("+point.id+", "+point.inspections_id+", "+point.inspection_id+", '"+point.price+"', "+point.severity+", "+point.status+", '"+point.catalogue.name+"', '"+inspection_name+"', 'server', '"+files+"' )";                
+                tx.executeSql(sql2);
             }
         }
     }, function(error) {
-        debug('algo fallo', true);
-        alert(error.code);
-        alert(error.message);
+        debug('algo fallo', true);        
     }, function() {
         $('#dbRefresh').addClass('hide');
         debug('Data base has been saved');
