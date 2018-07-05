@@ -22,6 +22,7 @@ function login(){
 	var email = $("#email").val().trim();
 	var password = $("#password").val().trim();
 	var token = $("#token").val().trim();
+	token = token.toLowerCase();
 
 	if( email == '' ) {
         navigator.notification.alert('Debes escribir tu email', null, 'Aviso', 'Aceptar');
