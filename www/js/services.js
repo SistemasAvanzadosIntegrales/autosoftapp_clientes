@@ -195,7 +195,7 @@ var load_media = function(e) {
         $('.price-point').addClass('hide');
     }
     $('#statusPointId').val($('.point-visited').attr('data-point-id'));
-    if($('.point-visited').attr('data-point-files') == undefined || $('.point-visited').attr('data-point-files') =""){
+    if($('.point-visited').attr('data-point-files') == undefined || $('.point-visited').attr('data-point-files') == ""){
         return;
     }
     var files = JSON.parse($('.point-visited').attr('data-point-files'));
