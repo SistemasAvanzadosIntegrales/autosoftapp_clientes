@@ -54,7 +54,7 @@ function __sync_data(data, call_back_function = null){
             for(var x = 0; x < vehicle_inspections.length; x++)
             {
                 var point = vehicle_inspections[x];                
-                var files = point.files;
+                var files = JSON.stringify(point.files);
                 if(JSON.stringify(point.catalogue.inspection) != 'null' && JSON.stringify(point.catalogue.inspection)!=null){
                     inspection_name = point.catalogue.inspection.name;
                 }else{
