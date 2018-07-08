@@ -199,6 +199,7 @@ var load_media = function(e) {
         return;
     }
     var files = /*JSON.parse(*/$('.point-visited').attr('data-point-files')/*)*/;
+    alert(files);
     var files_length =  files.length;
     var uri = 'http://autosoft2.avansys.com.mx/files/';
     for (var w = 0; w < files_length; w++){
