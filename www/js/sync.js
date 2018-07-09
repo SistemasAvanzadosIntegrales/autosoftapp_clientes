@@ -5,7 +5,7 @@ function __sync_data(data, call_back_function = null){
         config_company: data.config_company,
         license: data.license,
         licensing_access: data.licensing_access,
-        logo: data.config_company.logo,
+        logo: data.logo,
         rol: data.rol,
         user: data.user,
         user_permissions: data.user_permissions,

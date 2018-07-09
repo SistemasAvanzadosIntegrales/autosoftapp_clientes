@@ -82,7 +82,7 @@ var apariencia = function()
 
   if (app_settings.logo)
   {
-      logo.attr('src', 'data:image/png;base64,img/company/'+app_settings.logo)
+      logo.attr('src', 'data:image/png;base64,'+app_settings.logo)
   }
   else {
       logo.attr('src', 'img/logo.png')
