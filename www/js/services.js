@@ -9,7 +9,7 @@ var services = function(take, skip){
                 " FROM inspections AS i ",
                 " LEFT JOIN vehicles AS v ON v.id = i.vehicle_id ",
                 " LEFT JOIN vehicle_inspections AS vi ON i.id = vi.inspection_id ",
-                " WHERE i.status => 2 ",
+                " WHERE i.status >= 2 ",
                 " GROUP BY i.id ",
                 " ORDER BY i.id DESC "
             ].join('');
