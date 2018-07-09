@@ -72,6 +72,7 @@ function __sync_data(data, call_back_function = null){
         if(call_back_function)
             call_back_function.call();
     });
+    apariencia();
 }
 
 function sync_data(call_back_function = null){
