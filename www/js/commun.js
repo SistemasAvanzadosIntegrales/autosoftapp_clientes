@@ -79,7 +79,6 @@ var apariencia = function()
   var contrast_color = '#'+app_settings.config_company.contrast_color;
   var base_color = '#'+app_settings.config_company.base_color;
   var logo = $('#logo');
-  alert(JSON.stringify(app_settings));
 
   if (app_settings.logo)
   {
