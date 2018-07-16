@@ -57,11 +57,15 @@ function __sync_data(data, call_back_function = null){
                 var files = JSON.stringify(point.files);
                 if(JSON.stringify(point.catalogue.inspection) != 'null' && JSON.stringify(point.catalogue.inspection)!=null){
                     inspection_name = point.catalogue.inspection.name;
+                    inspection_status = point.catalogue.inspection.status;
                 }else{
                     inspection_name = "";
+                    inspection_status = "";
                 }
-                var sql2 = "INSERT INTO vehicle_inspections (id, inspection_id, point_id, price, severity, status, cataloge, category, origen, files) VALUES ("+point.id+", "+point.inspections_id+", "+point.inspection_id+", '"+point.price+"', "+point.severity+", "+point.status+", '"+point.catalogue.name+"', '"+inspection_name+"', 'server', '"+files+"' )";                
-                tx.executeSql(sql2);
+                if(point.catalogue.status == "Activo" || inspection_status == "Activo" ){
+                    var sql2 = "INSERT INTO vehicle_inspections (id, inspection_id, point_id, price, severity, status, cataloge, category, origen, files) VALUES ("+point.id+", "+point.inspections_id+", "+point.inspection_id+", '"+point.price+"', "+point.severity+", "+point.status+", '"+point.catalogue.name+"', '"+inspection_name+"', 'server', '"+files+"' )";                
+                    tx.executeSql(sql2);
+                }
             }
         }
     }, function(error) {
