@@ -62,7 +62,7 @@ function __sync_data(data, call_back_function = null){
                     inspection_name = "";
                     inspection_status = "";
                 }
-                if(point.catalogue.status == "Activo" || inspection_status == "Activo" ){
+                if(point.catalogue.status == "Activo" && inspection_status == "Activo" ){
                     var sql2 = "INSERT INTO vehicle_inspections (id, inspection_id, point_id, price, severity, status, cataloge, category, origen, files) VALUES ("+point.id+", "+point.inspections_id+", "+point.inspection_id+", '"+point.price+"', "+point.severity+", "+point.status+", '"+point.catalogue.name+"', '"+inspection_name+"', 'server', '"+files+"' )";                
                     tx.executeSql(sql2);
                 }
